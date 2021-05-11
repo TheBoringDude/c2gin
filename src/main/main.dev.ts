@@ -61,7 +61,7 @@ const createWindow = async () => {
 
   const RESOURCES_PATH = app.isPackaged
     ? path.join(process.resourcesPath, 'assets')
-    : path.join(__dirname, '../assets');
+    : path.join(__dirname, '../../assets');
 
   const getAssetPath = (...paths: string[]): string => {
     return path.join(RESOURCES_PATH, ...paths);
@@ -77,7 +77,8 @@ const createWindow = async () => {
     },
   });
 
-  mainWindow.loadURL(`file://${__dirname}/index.html`);
+  const newRendererUrl = `${__dirname}`.replace('main', 'renderer'); // dunno if there are better solutions with this
+  mainWindow.loadURL(`file://${newRendererUrl}/index.html`);
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event

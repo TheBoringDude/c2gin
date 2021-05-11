@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './App.global.css';
 
-const Hello = () => {
-  return <div className="p-4 text-center">hello</div>;
-};
+import Home from './pages/home';
 
 export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={Hello} />
+        <Route path="/">
+          <Home />
+        </Route>
       </Switch>
     </Router>
   );
