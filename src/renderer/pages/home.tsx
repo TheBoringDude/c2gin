@@ -1,12 +1,8 @@
 import React from 'react';
-import HomeHeader from '../components/home-header';
+import Container from '../components/container';
 
 const Home = () => {
-  return (
-    <div>
-      <HomeHeader />
-    </div>
-  );
+  return <Container>this is homer page</Container>;
 };
 
 export default Home;

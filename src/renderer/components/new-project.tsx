@@ -16,7 +16,7 @@ const NewProjectHandler = () => {
       <button
         type="button"
         onClick={openModal}
-        className="py-2 px-6 rounded-lg bg-indigo-400 hover:bg-indigo-500 text-white"
+        className="py-1 px-4 text-sm rounded-lg bg-indigo-400 hover:bg-indigo-500 text-white"
       >
         New Project
       </button>

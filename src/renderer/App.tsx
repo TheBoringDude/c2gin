@@ -14,7 +14,7 @@ import Home from './pages/home';
 
 export default function App() {
   return (
-    <main className="w-11/12 mx-auto">
+    <main className="antialiased">
       <Router>
         <Switch>
           <Route path="/">
