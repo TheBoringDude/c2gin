@@ -11,17 +11,20 @@ import '@fontsource/catamaran/900.css';
 import './App.global.css';
 
 import Home from './pages/home';
+import C2GinProvider from './c2gin/provider';
 
 export default function App() {
   return (
-    <main className="antialiased">
-      <Router>
-        <Switch>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
-    </main>
+    <C2GinProvider>
+      <main className="antialiased">
+        <Router>
+          <Switch>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </main>
+    </C2GinProvider>
   );
 }
