@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from '../components/container';
+import ContainerHeader from '../components/container/header';
 import useCurrentProject from '../hooks/useCurrentProject';
 
 const HomeWelcome = () => {
@@ -19,7 +20,7 @@ const Home = () => {
 
   return (
     <Container>
-      <p className="">{JSON.stringify(selected)}</p>
+      <ContainerHeader name={selected.name} />
     </Container>
   );
 };
