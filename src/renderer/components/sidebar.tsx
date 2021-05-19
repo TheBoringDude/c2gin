@@ -25,7 +25,12 @@ const SideBar = () => {
     if (!projectName) return;
 
     db.get('projects')
-      .push({ id: nanoid(12), name: projectName, works: [] })
+      .push({
+        id: nanoid(12),
+        name: projectName,
+        createdDate: new Date().toISOString(),
+        works: {},
+      })
       .write();
 
     setUpdated(true);

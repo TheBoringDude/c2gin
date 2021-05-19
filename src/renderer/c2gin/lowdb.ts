@@ -8,7 +8,8 @@ type AppSchema = {
 type ProjectPropsSchema = {
   id: string;
   name: string;
-  works?: ProjectWorkProps[];
+  createdDate?: string;
+  works?: ProjectWorkProps;
 };
 
 type ProjectWorkProps = {
