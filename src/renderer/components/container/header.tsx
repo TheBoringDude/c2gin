@@ -1,16 +1,28 @@
 import { Dialog } from '@headlessui/react';
-import React, { useRef, useState } from 'react';
+import React, { Dispatch, useRef, useState } from 'react';
+import { nanoid } from 'nanoid';
+
+import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
 import Modal from '../modals';
+import { ActionsGroup } from '../../reducers/workgroups';
 
 type ContainerHeaderProps = {
   name: string;
+  dispatch: Dispatch<ActionsGroup>;
+  handleSave: () => void;
 };
 
-const ContainerHeader = ({ name }: ContainerHeaderProps) => {
+const ContainerHeader = ({
+  name,
+  dispatch,
+  handleSave,
+}: ContainerHeaderProps) => {
   const [open, setOpen] = useState(false);
 
   const inputGroupNameRef = useRef<HTMLInputElement>(null);
   const inputGroupDescriptionRef = useRef<HTMLInputElement>(null);
+
+  const btnSaveRef = useRef<HTMLButtonElement>(null);
 
   const closeModal = () => {
     setOpen(false);
@@ -19,7 +31,31 @@ const ContainerHeader = ({ name }: ContainerHeaderProps) => {
     setOpen(true);
   };
 
-  const CreateNewWorkGroup = () => {};
+  const handleAddGroup = () => {
+    const group: ProjectWorkPropsContainer = {
+      id: nanoid(12),
+      title: inputGroupNameRef.current?.value || '',
+      description: inputGroupDescriptionRef.current?.value || '',
+      list: [],
+    };
+
+    dispatch({ type: 'add', id: group.id, group });
+
+    closeModal();
+  };
+
+  const handleSaveWrapper = () => {
+    if (!btnSaveRef.current) {
+      return;
+    }
+
+    btnSaveRef.current.innerHTML = 'saving...';
+    btnSaveRef.current.disabled = true;
+
+    handleSave();
+    btnSaveRef.current.disabled = false;
+    btnSaveRef.current.innerHTML = 'save';
+  };
 
   return (
     <>
@@ -27,13 +63,23 @@ const ContainerHeader = ({ name }: ContainerHeaderProps) => {
         <h2 className="text-xl font-bold text-indigo-600 tracking-wider">
           {name}
         </h2>
-        <button
-          onClick={openModal}
-          type="button"
-          className="bg-indigo-300 hover:bg-indigo-400 text-white px-2 py-1 rounded-lg text-sm"
-        >
-          new work group
-        </button>
+        <div>
+          <button
+            onClick={openModal}
+            type="button"
+            className="bg-indigo-300 hover:bg-indigo-400 text-white px-2 py-1 rounded-lg text-sm"
+          >
+            new work group
+          </button>
+          <button
+            ref={btnSaveRef}
+            type="button"
+            className="ml-2 border p-1 text-sm rounded-lg"
+            onClick={handleSaveWrapper}
+          >
+            save
+          </button>
+        </div>
       </div>
       <hr />
 
@@ -66,9 +112,9 @@ const ContainerHeader = ({ name }: ContainerHeaderProps) => {
           <button
             type="button"
             className="py-2 px-8 bg-indigo-400 hover:bg-indigo-500 text-white rounded-lg"
-            onClick={CreateNewWorkGroup}
+            onClick={handleAddGroup}
           >
-            Create Project
+            Create WorkGroup
           </button>
         </div>
       </Modal>

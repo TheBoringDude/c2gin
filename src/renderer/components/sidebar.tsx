@@ -37,9 +37,9 @@ const SideBar = () => {
   }, []);
 
   /* project selection */
-  const HandleSelectProject = (project: ProjectPropsSchema) => {
-    setSelected(project);
-  };
+  // const HandleSelectProject = (project: ProjectPropsSchema) => {
+  //   setSelected(project);
+  // };
 
   return (
     <div className="w-1/4 border-r fixed">
@@ -58,7 +58,7 @@ const SideBar = () => {
         {projects.map((project) => (
           <li key={project.id}>
             <button
-              onClick={() => HandleSelectProject(project)}
+              onClick={() => setSelected(project.id)}
               type="button"
               className={`p-3 border-b text-left w-full hover:bg-indigo-200 ${
                 selected?.id === project.id && 'bg-indigo-200'

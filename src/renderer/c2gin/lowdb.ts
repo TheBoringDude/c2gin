@@ -8,12 +8,18 @@ type AppSchema = {
 type ProjectPropsSchema = {
   id: string;
   name: string;
-  createdDate?: string;
-  works?: ProjectWorkProps;
+  createdDate: string;
+  works: ProjectWorkProps;
 };
 
 type ProjectWorkProps = {
-  [key: string]: ProjectWorkCategoryProps[];
+  [key: string]: ProjectWorkPropsContainer;
+};
+type ProjectWorkPropsContainer = {
+  id: string;
+  title: string;
+  description: string;
+  list: ProjectWorkCategoryProps[];
 };
 
 type ProjectWorkCategoryProps = {
@@ -27,6 +33,7 @@ const db = low(adapter);
 db.defaults({ projects: [] }).write();
 
 export {
+  ProjectWorkPropsContainer,
   ProjectPropsSchema,
   ProjectWorkCategoryProps,
   ProjectWorkProps,

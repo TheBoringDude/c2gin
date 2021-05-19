@@ -1,11 +1,5 @@
-import React, {
-  createContext,
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  useState,
-} from 'react';
-import { ProjectPropsSchema } from './lowdb';
+import React, { createContext, ReactNode, useState } from 'react';
+import db, { ProjectPropsSchema } from './lowdb';
 
 type C2GinProviderProps = {
   children: ReactNode;
@@ -13,7 +7,7 @@ type C2GinProviderProps = {
 
 type C2GinContextProps = {
   selected: ProjectPropsSchema | null;
-  setSelected: Dispatch<SetStateAction<ProjectPropsSchema>>;
+  setSelected: (id: string) => void;
 };
 
 const C2GinContext = createContext<C2GinContextProps>({
@@ -28,8 +22,12 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
     name: '',
   });
 
+  const handleSetSelected = (id: string) => {
+    setSelected(db.get('projects').find({ id }).value());
+  };
+
   return (
-    <C2GinContext.Provider value={{ selected, setSelected }}>
+    <C2GinContext.Provider value={{ selected, setSelected: handleSetSelected }}>
       {children}
     </C2GinContext.Provider>
   );
