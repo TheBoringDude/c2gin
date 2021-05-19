@@ -1685,6 +1685,18 @@
   dependencies:
     "@types/node" "*"
 
+"@types/lodash@*":
+  version "4.14.169"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.169.tgz#83c217688f07a4d9ef8f28a3ebd1d318f6ff4cbb"
+  integrity sha512-DvmZHoHTFJ8zhVYwCLWbQ7uAbYQEk52Ev2/ZiQ7Y7gQGeV9pjBqjnQpECMHfKS1rCYAhMI7LHVxwyZLZinJgdw==
+
+"@types/lowdb@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@types/lowdb/-/lowdb-1.0.10.tgz#6f9916d85fb535b3ed2dbf24c4347b3af9b11a72"
+  integrity sha512-DmmY+UZAAc2cs4pYnr7WOp9tFYrDeQ2cKSC5JuAQ2ai40IctBT/ef+Qm2ulLOfqR7POqR+5hnAouU7hojCoMCg==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
