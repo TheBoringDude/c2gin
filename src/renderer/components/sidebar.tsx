@@ -37,7 +37,7 @@ const SideBar = () => {
   };
 
   return (
-    <div className="w-1/4 border-r">
+    <div className="w-1/4 border-r fixed">
       <section className="p-4 flex flex-col">
         <HomeHeader />
 

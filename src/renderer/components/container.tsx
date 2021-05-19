@@ -10,7 +10,9 @@ const Container = ({ children }: ContainerProps) => {
     <div className="flex items-start justify-between">
       <SideBar />
 
-      <div className="w-full">{children}</div>
+      <div className="w-3/4 ml-auto h-screen overflow-y-auto p-4">
+        {children}
+      </div>
     </div>
   );
 };
