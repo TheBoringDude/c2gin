@@ -12,11 +12,14 @@ type C2GinProviderProps = {
 };
 
 type C2GinContextProps = {
-  selected?: ProjectPropsSchema;
-  setSelected?: Dispatch<SetStateAction<ProjectPropsSchema>>;
+  selected: ProjectPropsSchema | null;
+  setSelected: Dispatch<SetStateAction<ProjectPropsSchema>>;
 };
 
-const C2GinContext = createContext<C2GinContextProps>({});
+const C2GinContext = createContext<C2GinContextProps>({
+  selected: null,
+  setSelected: () => {},
+});
 
 /* PROVIDER */
 const C2GinProvider = ({ children }: C2GinProviderProps) => {

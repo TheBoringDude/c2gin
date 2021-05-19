@@ -5,8 +5,10 @@ import HomeHeader from './home-header';
 import NewProjectHandler from './new-project';
 
 import db, { ProjectPropsSchema } from '../c2gin/lowdb';
+import useCurrentProject from '../hooks/useCurrentProject';
 
 const SideBar = () => {
+  const { setSelected, selected } = useCurrentProject();
   const [projects, setProjects] = useState<ProjectPropsSchema[]>([]);
   const [updated, setUpdated] = useState(false);
 
@@ -16,6 +18,7 @@ const SideBar = () => {
     setProjects(db.get('projects').value());
   }, [updated]);
 
+  /* project creation */
   const HandleCreateProject = useCallback(() => {
     const projectName = inputProjectRef.current?.value || '';
 
@@ -27,6 +30,11 @@ const SideBar = () => {
 
     setUpdated(true);
   }, []);
+
+  /* project selection */
+  const HandleSelectProject = (project: ProjectPropsSchema) => {
+    setSelected(project);
+  };
 
   return (
     <div className="w-1/4 border-r">
@@ -45,8 +53,11 @@ const SideBar = () => {
         {projects.map((project) => (
           <li key={project.id}>
             <button
+              onClick={() => HandleSelectProject(project)}
               type="button"
-              className="p-3 border-b text-left w-full hover:bg-purple-200"
+              className={`p-3 border-b text-left w-full hover:bg-indigo-200 ${
+                selected?.id === project.id && 'bg-indigo-200'
+              }`}
             >
               {project.name}
             </button>
