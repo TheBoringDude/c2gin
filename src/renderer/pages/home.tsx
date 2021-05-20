@@ -1,10 +1,10 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect } from 'react';
 import db from '../c2gin/lowdb';
 import Container from '../components/container';
 import ContainerBody from '../components/container/body';
 import ContainerHeader from '../components/container/header';
 import useCurrentProject from '../hooks/useCurrentProject';
-import GroupReducer from '../reducers/workgroups';
+import useWorkGroupDispatch from '../hooks/useWorkgroupDispatch';
 
 const HomeWelcome = () => {
   return (
@@ -19,7 +19,7 @@ const HomeWelcome = () => {
 const Home = () => {
   const { selected } = useCurrentProject();
 
-  const [state, dispatch] = useReducer(GroupReducer, {});
+  const [state, dispatch] = useWorkGroupDispatch();
 
   useEffect(() => {
     if (selected?.id) {
@@ -32,7 +32,7 @@ const Home = () => {
             .value()?.works || {},
       });
     }
-  }, [selected]);
+  }, [selected, dispatch]);
 
   /* saving the project */
   const HandleSaveProject = () => {
@@ -50,7 +50,7 @@ const Home = () => {
         name={selected.name}
       />
 
-      <ContainerBody selected={selected} state={state} />
+      <ContainerBody dispatch={dispatch} selected={selected} state={state} />
     </Container>
   );
 };

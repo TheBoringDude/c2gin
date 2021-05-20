@@ -83,6 +83,7 @@ const ContainerHeader = ({
       </div>
       <hr />
 
+      {/* modal for creating a new workgroup */}
       <Modal open={open} onClose={closeModal} focusRef={inputGroupNameRef}>
         <Dialog.Title as="h3" className="text-lg font-bold text-gray-900">
           Add a new work category

@@ -1,9 +1,14 @@
-import { ProjectWorkProps, ProjectWorkPropsContainer } from '../c2gin/lowdb';
+import {
+  ProjectWorkCategoryProps,
+  ProjectWorkProps,
+  ProjectWorkPropsContainer,
+} from '../c2gin/lowdb';
 
 type ActionsGroup =
   | { type: 'add'; id: string; group: ProjectWorkPropsContainer }
   | { type: 'remove'; id: string }
-  | { type: 'set'; work: ProjectWorkProps };
+  | { type: 'set'; work: ProjectWorkProps }
+  | { type: 'add-list'; id: string; list: ProjectWorkCategoryProps[] };
 
 const GroupReducer = (state: ProjectWorkProps, action: ActionsGroup) => {
   switch (action.type) {
@@ -20,6 +25,15 @@ const GroupReducer = (state: ProjectWorkProps, action: ActionsGroup) => {
     case 'set':
       return {
         ...action.work,
+      };
+
+    case 'add-list':
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          list: action.list,
+        },
       };
 
     default:

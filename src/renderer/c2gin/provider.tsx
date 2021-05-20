@@ -20,6 +20,8 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
   const [selected, setSelected] = useState<ProjectPropsSchema>({
     id: '',
     name: '',
+    createdDate: '',
+    works: {},
   });
 
   const handleSetSelected = (id: string) => {

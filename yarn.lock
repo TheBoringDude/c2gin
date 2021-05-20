@@ -1184,6 +1184,11 @@
   resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.2.0.tgz#e48652bfce82ddf73d7f331faeb9db6526ee6874"
   integrity sha512-19DkLz8gDgbi+WvkoTzi9vs0NK9TJf94vbYhMzB4LYJo03Kili0gmvXT9CiKZoxXZ7YAvy/b1U1oQKEnjWrqxw==
 
+"@heroicons/react@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-1.0.1.tgz#66d25f6441920bd5c2146ea27fd33995885452dd"
+  integrity sha512-uikw2gKCmqnvjVxitecWfFLMOKyL9BTFcU4VM3hHj9OMwpkCr5Ke+MRMyY2/aQVmsYs4VTq7NCFX05MYwAHi3g==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -1406,10 +1411,10 @@
   dependencies:
     mkdirp "^1.0.4"
 
-"@ootiq/tailwind-blandcolors@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@ootiq/tailwind-blandcolors/-/tailwind-blandcolors-0.0.1.tgz#32608087223564c120fbe9c217262f903512da82"
-  integrity sha512-a/Acq205G6WLN+tttlNP3RiBy51/Y1+aXgisc+chd1Dp5op1egKol4whz+pK38+HsUX89JVovOwp8M9IxvEsuw==
+"@ootiq/tailwind-blandcolors@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@ootiq/tailwind-blandcolors/-/tailwind-blandcolors-0.0.2.tgz#f9150881e462bfeb082be8eac63297f15848896c"
+  integrity sha512-upAXTdrgjOFUdjLO1bWXe6wZIU5pYXrvBBdDLX3iM767G+YIZJU5IHi5gmjCUy3EVh8ibRS3tDeK3Y+xHK5svw==
 
 "@pmmmwh/react-refresh-webpack-plugin@^0.4.3":
   version "0.4.3"
