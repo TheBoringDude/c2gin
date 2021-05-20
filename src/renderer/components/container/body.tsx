@@ -1,26 +1,18 @@
-import React, { Dispatch } from 'react';
+import React from 'react';
 
-import { ProjectPropsSchema, ProjectWorkProps } from '../../c2gin/lowdb';
-import { ActionsGroup } from '../../reducers/workgroups';
+import useCurrentProject from '../../hooks/useCurrentProject';
+import useWorkGroup from '../../hooks/useWorkGroup';
 import ListGroup from './list-group';
 
-type ContainerBodyProps = {
-  dispatch: Dispatch<ActionsGroup>;
-  selected: ProjectPropsSchema;
-  state: ProjectWorkProps;
-};
+const ContainerBody = () => {
+  const { selected } = useCurrentProject();
+  const { state } = useWorkGroup();
 
-const ContainerBody = ({ selected, state, dispatch }: ContainerBodyProps) => {
   return (
     <div className="py-8 px-3">
       <ul className="grid grid-cols-3 gap-4">
         {Object.entries(state).map(([key, value]) => (
-          <ListGroup
-            dispatch={dispatch}
-            groupid={key}
-            works={value}
-            key={key}
-          />
+          <ListGroup groupid={key} works={value} key={key} />
         ))}
       </ul>
       <br />

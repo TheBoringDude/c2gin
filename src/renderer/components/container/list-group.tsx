@@ -1,18 +1,18 @@
-import React, { Dispatch, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { PlusCircleIcon, PlusIcon } from '@heroicons/react/solid';
 import { nanoid } from 'nanoid';
 
 import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
-import { ActionsGroup } from '../../reducers/workgroups';
+import useWorkGroup from '../../hooks/useWorkGroup';
 
 type ListGroupProps = {
-  dispatch: Dispatch<ActionsGroup>;
   groupid: string;
   works: ProjectWorkPropsContainer;
 };
-const ListGroup = ({ groupid, works, dispatch }: ListGroupProps) => {
+const ListGroup = ({ groupid, works }: ListGroupProps) => {
   const [open, setOpen] = useState(false);
-  // const dispatch = useWorkGroupDispatch()[1];
+
+  const { dispatch } = useWorkGroup();
 
   const inputWorkName = useRef<HTMLInputElement>(null);
 

@@ -6,23 +6,25 @@ type C2GinProviderProps = {
 };
 
 type C2GinContextProps = {
-  selected: ProjectPropsSchema | null;
+  selected: ProjectPropsSchema;
   setSelected: (id: string) => void;
 };
 
+const initContext = {
+  id: '',
+  name: '',
+  createdDate: '',
+  works: {},
+};
+
 const C2GinContext = createContext<C2GinContextProps>({
-  selected: null,
+  selected: initContext,
   setSelected: () => {},
 });
 
 /* PROVIDER */
 const C2GinProvider = ({ children }: C2GinProviderProps) => {
-  const [selected, setSelected] = useState<ProjectPropsSchema>({
-    id: '',
-    name: '',
-    createdDate: '',
-    works: {},
-  });
+  const [selected, setSelected] = useState<ProjectPropsSchema>(initContext);
 
   const handleSetSelected = (id: string) => {
     setSelected(db.get('projects').find({ id }).value());

@@ -1,28 +1,21 @@
 import { Dialog } from '@headlessui/react';
-import React, { Dispatch, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { nanoid } from 'nanoid';
 
 import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
 import Modal from '../modals';
-import { ActionsGroup } from '../../reducers/workgroups';
+import useWorkGroup from '../../hooks/useWorkGroup';
+import HeaderSaveButton from './header-save';
+import useCurrentProject from '../../hooks/useCurrentProject';
 
-type ContainerHeaderProps = {
-  name: string;
-  dispatch: Dispatch<ActionsGroup>;
-  handleSave: () => void;
-};
-
-const ContainerHeader = ({
-  name,
-  dispatch,
-  handleSave,
-}: ContainerHeaderProps) => {
+const ContainerHeader = () => {
   const [open, setOpen] = useState(false);
+
+  const { selected } = useCurrentProject();
+  const { dispatch } = useWorkGroup();
 
   const inputGroupNameRef = useRef<HTMLInputElement>(null);
   const inputGroupDescriptionRef = useRef<HTMLInputElement>(null);
-
-  const btnSaveRef = useRef<HTMLButtonElement>(null);
 
   const closeModal = () => {
     setOpen(false);
@@ -44,24 +37,11 @@ const ContainerHeader = ({
     closeModal();
   };
 
-  const handleSaveWrapper = () => {
-    if (!btnSaveRef.current) {
-      return;
-    }
-
-    btnSaveRef.current.innerHTML = 'saving...';
-    btnSaveRef.current.disabled = true;
-
-    handleSave();
-    btnSaveRef.current.disabled = false;
-    btnSaveRef.current.innerHTML = 'save';
-  };
-
   return (
     <>
       <div className="py-2 flex items-center justify-between">
         <h2 className="text-xl font-bold text-indigo-600 tracking-wider">
-          {name}
+          {selected.name}
         </h2>
         <div>
           <button
@@ -71,14 +51,7 @@ const ContainerHeader = ({
           >
             new work group
           </button>
-          <button
-            ref={btnSaveRef}
-            type="button"
-            className="ml-2 border p-1 text-sm rounded-lg"
-            onClick={handleSaveWrapper}
-          >
-            save
-          </button>
+          <HeaderSaveButton id={selected.id} />
         </div>
       </div>
       <hr />
