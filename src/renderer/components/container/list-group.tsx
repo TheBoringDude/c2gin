@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react';
+import { Droppable } from 'react-beautiful-dnd';
 import { PlusCircleIcon, PlusIcon } from '@heroicons/react/solid';
 import { nanoid } from 'nanoid';
 
 import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
 import useWorkGroup from '../../hooks/useWorkGroup';
+import WorkList from './work-list';
 
 type ListGroupProps = {
   groupid: string;
@@ -72,17 +74,24 @@ const ListGroup = ({ groupid, works }: ListGroupProps) => {
         </section>
       )}
 
-      <ul>
-        {works.list.length < 1 ? (
-          <br />
-        ) : (
-          works.list.map((list) => (
-            <li key={list.id} className="m-1 p-1 rounded-md border truncate">
-              {list.title}
-            </li>
-          ))
+      <Droppable droppableId={groupid}>
+        {(provided) => (
+          <ul ref={provided.innerRef}>
+            {works.list.length < 1 ? (
+              <br />
+            ) : (
+              works.list.map((list) => (
+                <WorkList
+                  key={list.id}
+                  list={list}
+                  index={works.list.indexOf(list)}
+                />
+              ))
+            )}
+            {provided.placeholder}
+          </ul>
         )}
-      </ul>
+      </Droppable>
     </li>
   );
 };
