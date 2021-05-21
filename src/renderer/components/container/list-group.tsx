@@ -76,7 +76,11 @@ const ListGroup = ({ groupid, works }: ListGroupProps) => {
         {works.list.length < 1 ? (
           <br />
         ) : (
-          works.list.map((list) => <li key={list.id}>{list.title}</li>)
+          works.list.map((list) => (
+            <li key={list.id} className="m-1 p-1 rounded-md border truncate">
+              {list.title}
+            </li>
+          ))
         )}
       </ul>
     </li>
