@@ -8,10 +8,11 @@ import db, { ProjectPropsSchema } from '../c2gin/lowdb';
 import useCurrentProject from '../hooks/useCurrentProject';
 import useWorkGroup from '../hooks/useWorkGroup';
 import useFindProjectId from '../hooks/useDB';
+import { handleProjectSave } from '../c2gin/queries';
 
 const SideBar = () => {
   const { setSelected, selected } = useCurrentProject();
-  const { dispatch } = useWorkGroup();
+  const { state, dispatch } = useWorkGroup();
   const [projects, setProjects] = useState<ProjectPropsSchema[]>([]);
   const [updated, setUpdated] = useState(false);
 
@@ -65,6 +66,7 @@ const SideBar = () => {
           <li key={project.id}>
             <button
               onClick={() => {
+                handleProjectSave(selected.id, state);
                 HandleSelectProject(project.id);
               }}
               type="button"

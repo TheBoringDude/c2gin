@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import db from '../../c2gin/lowdb';
+import { handleProjectSave } from '../../c2gin/queries';
 import useWorkGroup from '../../hooks/useWorkGroup';
 
 type HeaderSaveButtonProps = {
@@ -19,7 +19,8 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
     btnSaveRef.current.disabled = true;
 
     // NOTE: having issues using `.assign` or `.update`
-    db.get('projects').find({ id }).set('works', state).write();
+    handleProjectSave(id, state);
+
     btnSaveRef.current.disabled = false;
     btnSaveRef.current.innerHTML = 'save';
   };
