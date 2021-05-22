@@ -46,7 +46,12 @@ const ListGroup = ({ groupid, works }: ListGroupProps) => {
         >
           {works.title}
         </h4>
-        <button type="button" onClick={() => setOpen(!open)}>
+        <button
+          type="button"
+          onClick={() => {
+            setOpen(!open);
+          }}
+        >
           <PlusCircleIcon className="h-5 w-5" />
         </button>
       </div>
@@ -62,6 +67,11 @@ const ListGroup = ({ groupid, works }: ListGroupProps) => {
                   handleWorkAddList();
                 }
               }}
+              onBlur={() => {
+                setOpen(false);
+              }}
+              // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus
               ref={inputWorkName}
               type="text"
               placeholder="what to work?"
@@ -84,6 +94,7 @@ const ListGroup = ({ groupid, works }: ListGroupProps) => {
                 <WorkList
                   key={list.id}
                   list={list}
+                  groupid={groupid}
                   index={works.list.indexOf(list)}
                 />
               ))

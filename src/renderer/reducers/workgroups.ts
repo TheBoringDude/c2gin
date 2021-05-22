@@ -13,6 +13,17 @@ type ActionsGroup =
       type: 'handle-drag';
       source: { index: number; id: string };
       destination: { index: number; id: string };
+    }
+  | {
+      type: 'rename-list';
+      id: string;
+      list: ProjectWorkListProps;
+      index: number;
+    }
+  | {
+      type: 'remove-list';
+      id: string;
+      index: number;
     };
 
 const GroupReducer = (state: ProjectWorkProps, action: ActionsGroup) => {
@@ -40,6 +51,36 @@ const GroupReducer = (state: ProjectWorkProps, action: ActionsGroup) => {
           list: action.list,
         },
       };
+
+    case 'rename-list': {
+      const s = Array.from(state[action.id].list);
+
+      s.splice(action.index, 1);
+      s.splice(action.index, 0, action.list);
+
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          list: s,
+        },
+      };
+    }
+
+    case 'remove-list': {
+      const newlist = state[action.id].list.filter(
+        (_, index) => index !== action.index
+      );
+
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          list: newlist,
+        },
+      };
+    }
+
     case 'handle-drag': {
       // TODO: It might need re-factoring.
 
