@@ -15,12 +15,16 @@ type ProjectPropsSchema = {
 type ProjectWorkProps = {
   [key: string]: ProjectWorkPropsContainer;
 };
-type ProjectWorkPropsContainer = {
-  id: string;
+
+type ProjectWorkPropsContainerBase = {
   title: string;
   description: string;
-  list: ProjectWorkListProps[];
 };
+
+interface ProjectWorkPropsContainer extends ProjectWorkPropsContainerBase {
+  id: string;
+  list: ProjectWorkListProps[];
+}
 
 type ProjectWorkListProps = {
   id: string;
@@ -34,6 +38,7 @@ db.defaults({ projects: [] }).write();
 
 export {
   ProjectWorkPropsContainer,
+  ProjectWorkPropsContainerBase,
   ProjectPropsSchema,
   ProjectWorkListProps,
   ProjectWorkProps,

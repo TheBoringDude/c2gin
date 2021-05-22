@@ -2,11 +2,17 @@ import {
   ProjectWorkListProps,
   ProjectWorkProps,
   ProjectWorkPropsContainer,
+  ProjectWorkPropsContainerBase,
 } from '../c2gin/lowdb';
 
 type ActionsGroup =
   | { type: 'add'; id: string; group: ProjectWorkPropsContainer }
   | { type: 'remove'; id: string }
+  | {
+      type: 'edit';
+      id: string;
+      new: ProjectWorkPropsContainerBase;
+    }
   | { type: 'set'; work: ProjectWorkProps }
   | { type: 'add-list'; id: string; list: ProjectWorkListProps[] }
   | {
@@ -34,9 +40,29 @@ const GroupReducer = (state: ProjectWorkProps, action: ActionsGroup) => {
         [action.id]: action.group,
       };
 
-    case 'remove':
-      delete state[action.id];
-      return state;
+    case 'remove': {
+      // NOTE: delete is not working (needs better solution)
+
+      const vs = Object.keys(state).filter((key) => key !== action.id);
+      const s: ProjectWorkProps = {};
+
+      // eslint-disable-next-line array-callback-return
+      vs.map((k) => {
+        s[k] = state[k];
+      });
+
+      return s;
+    }
+
+    case 'edit':
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          title: action.new.title,
+          description: action.new.description,
+        },
+      };
 
     case 'set':
       return {

@@ -6,6 +6,8 @@ import { nanoid } from 'nanoid';
 import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import WorkList from './list-group-work';
+import RenameWorkGroupHandlerProps from '../modals/rename-work-group';
+import RemoveWorkGroup from '../modals/remove-work-group';
 
 type ListGroupProps = {
   groupid: string;
@@ -46,14 +48,18 @@ const ListGroup = ({ groupid, works }: ListGroupProps) => {
         >
           {works.title}
         </h4>
-        <button
-          type="button"
-          onClick={() => {
-            setOpen(!open);
-          }}
-        >
-          <PlusCircleIcon className="h-5 w-5" />
-        </button>
+        <div className="flex">
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(!open);
+            }}
+          >
+            <PlusCircleIcon className="h-5 w-5" />
+          </button>
+          <RenameWorkGroupHandlerProps work={works} />
+          <RemoveWorkGroup groupid={works.id} />
+        </div>
       </div>
 
       <hr />
