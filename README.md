@@ -2,6 +2,8 @@
 
 a simple app for managing projects
 
+![screenshot](./screenshot.png)
+
 ## Development
 
 ### Primary Used Libraries
