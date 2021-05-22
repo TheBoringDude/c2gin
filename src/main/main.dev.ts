@@ -11,7 +11,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, Menu, shell, Tray } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 // import MenuBuilder from './menu'; (reserved for future updates and additions)
@@ -25,6 +25,8 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+let tray: Tray | null = null;
+let isQuitting = false;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -37,6 +39,16 @@ if (
 ) {
   require('electron-debug')();
 }
+
+/* start assets */
+const RESOURCES_PATH = app.isPackaged
+  ? path.join(process.resourcesPath, 'assets')
+  : path.join(__dirname, '../../assets');
+
+const getAssetPath = (...paths: string[]): string => {
+  return path.join(RESOURCES_PATH, ...paths);
+};
+/* end assets */
 
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
@@ -58,14 +70,6 @@ const createWindow = async () => {
   ) {
     await installExtensions();
   }
-
-  const RESOURCES_PATH = app.isPackaged
-    ? path.join(process.resourcesPath, 'assets')
-    : path.join(__dirname, '../../assets');
-
-  const getAssetPath = (...paths: string[]): string => {
-    return path.join(RESOURCES_PATH, ...paths);
-  };
 
   mainWindow = new BrowserWindow({
     show: false,
@@ -98,6 +102,18 @@ const createWindow = async () => {
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+    tray = null;
+  });
+
+  /* hide only the window on close */
+  mainWindow.on('close', (e: Electron.Event) => {
+    if (!isQuitting) {
+      // prevent window from closing
+      e.preventDefault();
+      if (mainWindow) {
+        mainWindow.hide();
+      }
+    }
   });
 
   // const menuBuilder = new MenuBuilder(mainWindow);
@@ -115,9 +131,42 @@ const createWindow = async () => {
   new AppUpdater();
 };
 
+/* tray icon */
+const createTray = () => {
+  tray = new Tray(getAssetPath('icon.png'));
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Quit',
+      type: 'normal',
+      click: () => {
+        isQuitting = true;
+
+        mainWindow = null;
+        tray = null;
+
+        app.quit();
+      },
+    },
+  ]);
+  tray.setToolTip('c2gin');
+  tray.setContextMenu(contextMenu);
+
+  tray.on('click', () => {
+    if (mainWindow) {
+      mainWindow.show();
+    }
+  });
+};
+
 /**
  * Add event listeners...
  */
+
+app.on('before-quit', () => {
+  if (tray) {
+    tray.destroy();
+  }
+});
 
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
@@ -127,7 +176,7 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.whenReady().then(createWindow).catch(console.log);
+app.whenReady().then(createWindow).then(createTray).catch(console.log);
 
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
