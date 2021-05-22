@@ -96,7 +96,9 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
           <li key={project.id}>
             <button
               onClick={() => {
-                handleProjectSave(selected.id, state);
+                if (selected.id) {
+                  handleProjectSave(selected.id, state);
+                }
                 HandleSelectProject(project.id);
               }}
               type="button"
