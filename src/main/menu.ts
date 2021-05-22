@@ -1,3 +1,5 @@
+/* this menu bar is reserved for future updates and additions */
+
 import {
   app,
   Menu,
