@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import SideBar from './sidebar';
 
 type ContainerProps = {
@@ -6,11 +6,17 @@ type ContainerProps = {
 };
 
 const Container = ({ children }: ContainerProps) => {
+  const [open, setOpen] = useState(true);
+
   return (
     <div className="flex items-start justify-between">
-      <SideBar />
+      <SideBar open={open} setOpen={setOpen} />
 
-      <div className="w-3/4 ml-auto h-screen overflow-y-auto p-4">
+      <div
+        className={`${
+          open ? 'w-2/3 lg:w-3/4' : 'w-11/12'
+        } ml-auto h-screen overflow-y-auto p-4`}
+      >
         {children}
       </div>
     </div>

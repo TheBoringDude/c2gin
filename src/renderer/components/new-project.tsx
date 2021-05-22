@@ -1,8 +1,11 @@
 import React, { useState, MutableRefObject } from 'react';
 import { Dialog } from '@headlessui/react';
+import { DocumentAddIcon } from '@heroicons/react/outline';
+
 import Modal from './modals';
 
 interface NewProjectHandlerProps {
+  sideOpen: boolean;
   HandleCreateProject: () => void;
   inputProjectRef: MutableRefObject<HTMLInputElement | null>;
 }
@@ -10,6 +13,7 @@ interface NewProjectHandlerProps {
 const NewProjectHandler = ({
   HandleCreateProject,
   inputProjectRef,
+  sideOpen,
 }: NewProjectHandlerProps) => {
   const [open, setOpen] = useState(false);
 
@@ -30,9 +34,10 @@ const NewProjectHandler = ({
       <button
         type="button"
         onClick={openModal}
-        className="py-1 px-4 text-sm rounded-lg bg-indigo-400 hover:bg-indigo-500 text-white"
+        className="py-1 text-sm rounded-lg bg-indigo-400 hover:bg-indigo-500 text-white inline-flex items-center justify-center"
       >
-        New Project
+        <DocumentAddIcon className="h-5 w-5" />
+        {sideOpen && <span className="ml-1">New Project</span>}
       </button>
 
       <Modal open={open} onClose={closeModal} focusRef={inputProjectRef}>

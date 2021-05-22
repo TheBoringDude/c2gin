@@ -41,7 +41,7 @@ const ListGroup = ({ groupid, works }: ListGroupProps) => {
     <li className="border rounded-lg">
       <div className="py-2 px-4 flex items-center justify-between">
         <h4
-          className="text-lg font-bold tracking-wide"
+          className="text-lg font-bold tracking-wide truncate"
           title={works.description}
         >
           {works.title}
