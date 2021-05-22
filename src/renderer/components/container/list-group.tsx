@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 
 import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import WorkList from './work-list';
+import WorkList from './list-group-work';
 
 type ListGroupProps = {
   groupid: string;

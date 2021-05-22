@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { ProjectWorkCategoryProps } from '../../c2gin/lowdb';
+import { ProjectWorkListProps } from '../../c2gin/lowdb';
 
 type WorkListProps = {
-  list: ProjectWorkCategoryProps;
+  list: ProjectWorkListProps;
   index: number;
 };
 

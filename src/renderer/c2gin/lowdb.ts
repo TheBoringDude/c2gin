@@ -19,10 +19,10 @@ type ProjectWorkPropsContainer = {
   id: string;
   title: string;
   description: string;
-  list: ProjectWorkCategoryProps[];
+  list: ProjectWorkListProps[];
 };
 
-type ProjectWorkCategoryProps = {
+type ProjectWorkListProps = {
   id: string;
   title: string;
 };
@@ -35,7 +35,7 @@ db.defaults({ projects: [] }).write();
 export {
   ProjectWorkPropsContainer,
   ProjectPropsSchema,
-  ProjectWorkCategoryProps,
+  ProjectWorkListProps,
   ProjectWorkProps,
   AppSchema,
 };

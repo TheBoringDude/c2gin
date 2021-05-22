@@ -1,5 +1,5 @@
 import {
-  ProjectWorkCategoryProps,
+  ProjectWorkListProps,
   ProjectWorkProps,
   ProjectWorkPropsContainer,
 } from '../c2gin/lowdb';
@@ -8,7 +8,7 @@ type ActionsGroup =
   | { type: 'add'; id: string; group: ProjectWorkPropsContainer }
   | { type: 'remove'; id: string }
   | { type: 'set'; work: ProjectWorkProps }
-  | { type: 'add-list'; id: string; list: ProjectWorkCategoryProps[] }
+  | { type: 'add-list'; id: string; list: ProjectWorkListProps[] }
   | {
       type: 'handle-drag';
       source: { index: number; id: string };
