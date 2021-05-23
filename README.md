@@ -1,5 +1,7 @@
 # c2gin
 
+[![Actions Status](https://github.com/TheBoringDude/c2gin/workflows/Test/badge.svg)](https://github.com/TheBoringDude/c2gin/actions)
+
 a simple app for managing projects
 
 ![screenshot](./screenshot.png)
