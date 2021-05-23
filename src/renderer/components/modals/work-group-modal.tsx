@@ -1,5 +1,6 @@
 import { Dialog } from '@headlessui/react';
 import React, { MutableRefObject, ReactNode } from 'react';
+import { GroupColors } from '../../c2gin/colors';
 import Modal from '../modals';
 
 type WorkGroupModalProps = {
@@ -9,6 +10,9 @@ type WorkGroupModalProps = {
   inputGroupDescriptionRef: MutableRefObject<HTMLInputElement | null>;
   nameDefValue: string;
   descriptionDefValue: string;
+  selectThemeRef: MutableRefObject<HTMLSelectElement | null>;
+  selectThemeDefValue: string;
+
   children: ReactNode;
   dialogTitle: string;
 };
@@ -20,6 +24,8 @@ export default function WorkGroupModal({
   inputGroupNameRef,
   nameDefValue,
   descriptionDefValue,
+  selectThemeRef,
+  selectThemeDefValue,
   dialogTitle,
   children,
 }: WorkGroupModalProps) {
@@ -48,6 +54,20 @@ export default function WorkGroupModal({
             placeholder="A description for the group category"
             className="tracking-wide py-1 px-3 rounded-lg border-2 focus:outline-none hover:border-indigo-300 focus:border-indigo-300"
           />
+        </div>
+        <div className="flex flex-col my-1">
+          <p>Theme of the category</p>
+          <select
+            defaultValue={selectThemeDefValue}
+            ref={selectThemeRef}
+            className="bg-white py-1 px-3 border-2 rounded-lg"
+          >
+            {Object.entries(GroupColors).map(([key]) => (
+              <option key={key} value={key}>
+                {key}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 

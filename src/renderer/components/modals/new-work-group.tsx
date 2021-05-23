@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
 import WorkGroupModal from './work-group-modal';
+import { GroupColors } from '../../c2gin/colors';
 
 export default function NewWorkGroupHandler() {
   const [open, setOpen] = useState(false);
@@ -12,6 +13,7 @@ export default function NewWorkGroupHandler() {
 
   const inputGroupNameRef = useRef<HTMLInputElement>(null);
   const inputGroupDescriptionRef = useRef<HTMLInputElement>(null);
+  const inputSelectTheme = useRef<HTMLSelectElement>(null);
 
   const closeModal = () => {
     setOpen(false);
@@ -21,8 +23,14 @@ export default function NewWorkGroupHandler() {
   };
 
   const handleAddGroup = () => {
+    let color = inputSelectTheme.current?.value;
+    if (!color) {
+      color = 'default';
+    }
+
     const group: ProjectWorkPropsContainer = {
       id: nanoid(12),
+      color: GroupColors[color],
       title: inputGroupNameRef.current?.value || '',
       description: inputGroupDescriptionRef.current?.value || '',
       list: [],
@@ -49,6 +57,8 @@ export default function NewWorkGroupHandler() {
         inputGroupDescriptionRef={inputGroupDescriptionRef}
         nameDefValue=""
         descriptionDefValue=""
+        selectThemeRef={inputSelectTheme}
+        selectThemeDefValue="default"
         dialogTitle="Add a new work category"
       >
         <button

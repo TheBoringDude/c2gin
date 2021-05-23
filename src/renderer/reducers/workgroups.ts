@@ -61,6 +61,7 @@ const GroupReducer = (state: ProjectWorkProps, action: ActionsGroup) => {
           ...state[action.id],
           title: action.new.title,
           description: action.new.description,
+          color: action.new.color,
         },
       };
 

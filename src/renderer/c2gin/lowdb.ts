@@ -1,6 +1,16 @@
 import low from 'lowdb';
 import LocalStorage from 'lowdb/adapters/LocalStorage';
 
+type GroupColorProps = {
+  [key: string]: GroupColorColorsProps;
+};
+
+type GroupColorColorsProps = {
+  key: string;
+  bg: string;
+  border: string;
+};
+
 type AppSchema = {
   projects: ProjectPropsSchema[];
 };
@@ -19,6 +29,7 @@ type ProjectWorkProps = {
 type ProjectWorkPropsContainerBase = {
   title: string;
   description: string;
+  color: GroupColorColorsProps;
 };
 
 interface ProjectWorkPropsContainer extends ProjectWorkPropsContainerBase {
@@ -43,5 +54,6 @@ export {
   ProjectWorkListProps,
   ProjectWorkProps,
   AppSchema,
+  GroupColorProps,
 };
 export default db;

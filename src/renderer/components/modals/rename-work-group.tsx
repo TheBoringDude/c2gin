@@ -4,6 +4,7 @@ import { PencilAltIcon } from '@heroicons/react/solid';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
 import WorkGroupModal from './work-group-modal';
+import { GroupColors } from '../../c2gin/colors';
 
 type RenameWorkGroupHandlerProps = {
   work: ProjectWorkPropsContainer;
@@ -18,6 +19,7 @@ export default function RenameWorkGroupHandler({
 
   const inputGroupNameRef = useRef<HTMLInputElement>(null);
   const inputGroupDescriptionRef = useRef<HTMLInputElement>(null);
+  const inputSelectTheme = useRef<HTMLSelectElement>(null);
 
   const closeModal = () => {
     setOpen(false);
@@ -27,9 +29,12 @@ export default function RenameWorkGroupHandler({
   };
 
   const handleRenameGroup = () => {
+    const color = inputSelectTheme.current?.value || 'default';
+
     const group = {
       title: inputGroupNameRef.current?.value || '',
       description: inputGroupDescriptionRef.current?.value || '',
+      color: GroupColors[color],
     };
 
     dispatch({ type: 'edit', id: work.id, new: group });
@@ -49,6 +54,8 @@ export default function RenameWorkGroupHandler({
         inputGroupDescriptionRef={inputGroupDescriptionRef}
         nameDefValue={work.title}
         descriptionDefValue={work.description}
+        selectThemeRef={inputSelectTheme}
+        selectThemeDefValue={work.color?.key || 'default'}
         dialogTitle="Rename work category"
       >
         <button

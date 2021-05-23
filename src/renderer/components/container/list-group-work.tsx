@@ -53,7 +53,7 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
-            className="m-1 flex items-center justify-between"
+            className="m-1 flex items-center justify-between bg-white"
           >
             <input
               onKeyDown={(e) => {
@@ -81,7 +81,7 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            className="m-1 p-1 group rounded-md border flex items-center justify-between"
+            className="m-1 p-1 group rounded-md border flex items-center justify-between bg-white"
           >
             <p className="truncate">{list.title}</p>
             <div className="flex items-center">

@@ -40,8 +40,10 @@ const ListGroup = ({ groupid, works }: ListGroupProps) => {
   };
 
   return (
-    <li className="border rounded-lg">
-      <div className="py-2 px-4 flex items-center justify-between">
+    <li className={`border rounded-lg ${works.color?.border}`}>
+      <div
+        className={`py-2 rounded-t-lg px-4 flex items-center justify-between ${works.color?.bg}`}
+      >
         <h4
           className="text-lg font-bold tracking-wide truncate"
           title={works.description}
