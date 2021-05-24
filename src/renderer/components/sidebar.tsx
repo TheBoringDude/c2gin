@@ -63,7 +63,9 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
 
   return (
     <div
-      className={`${open ? 'w-1/3 lg:w-1/4' : 'w-1/12'} border-r fixed h-full`}
+      className={`${
+        open ? 'w-1/3 lg:w-1/4' : 'w-1/12'
+      } border-r fixed h-full z-50 bg-white`}
     >
       <div className="text-center m-1">
         <button

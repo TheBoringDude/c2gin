@@ -1,11 +1,13 @@
 import React from 'react';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
+import useCurrentProject from '../../hooks/useCurrentProject';
 
 import useWorkGroup from '../../hooks/useWorkGroup';
 import ListGroup from './list-group';
 
 const ContainerBody = () => {
   const { state, dispatch } = useWorkGroup();
+  const { selected } = useCurrentProject();
 
   const onDragEnd = (result: DropResult) => {
     const { destination: dest, source: src } = result;
@@ -14,29 +16,57 @@ const ContainerBody = () => {
     if (dest.droppableId === src.droppableId && dest.index === src.index)
       return;
 
+    if (result.type === 'group') {
+      dispatch({
+        type: 'handle-drag',
+        source: {
+          id: src.droppableId,
+          index: src.index,
+        },
+        destination: {
+          id: dest.droppableId,
+          index: dest.index,
+        },
+      });
+      return;
+    }
+
     dispatch({
-      type: 'handle-drag',
-      source: {
-        id: src.droppableId,
-        index: src.index,
-      },
-      destination: {
-        id: dest.droppableId,
-        index: dest.index,
-      },
+      type: 'drag-group',
+      sourceIdx: src.index,
+      destIdx: dest.index,
     });
   };
 
   return (
-    <div className="py-8 px-3">
-      <DragDropContext onDragEnd={onDragEnd}>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-          {Object.entries(state).map(([key, value]) => (
-            <ListGroup groupid={key} works={value} key={key} />
-          ))}
-        </ul>
-      </DragDropContext>
-    </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="py-8 px-3 relative z-40 w-full">
+        <Droppable
+          droppableId={selected.id}
+          type="container"
+          direction="horizontal"
+        >
+          {(provided) => (
+            <ul
+              ref={provided.innerRef}
+              className="absolute h-screen flex overflow-x-auto whitespace-nowrap"
+            >
+              {Object.entries(state).map(([key, value], index) => (
+                <div key={key} className="w-96 mx-1">
+                  <ListGroup
+                    groupid={key}
+                    works={value}
+                    key={key}
+                    idx={index}
+                  />
+                </div>
+              ))}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+      </div>
+    </DragDropContext>
   );
 };
 

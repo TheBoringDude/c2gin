@@ -5,7 +5,7 @@ const GroupColors: GroupColorProps = {
   default: {
     key: 'default',
     bg: 'bg-white text-black',
-    border: 'border-black',
+    border: '',
   },
   red: {
     key: 'red',

@@ -15,7 +15,7 @@ const Container = ({ children }: ContainerProps) => {
       <div
         className={`${
           open ? 'w-2/3 lg:w-3/4' : 'w-11/12'
-        } ml-auto h-screen overflow-y-auto p-4`}
+        } ml-auto h-screen p-4`}
       >
         {children}
       </div>

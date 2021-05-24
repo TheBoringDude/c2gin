@@ -8,7 +8,7 @@ const ContainerHeader = () => {
   const { selected } = useCurrentProject();
 
   return (
-    <>
+    <div className="">
       <div className="py-2 flex items-center justify-between">
         <h2 className="text-xl font-bold text-indigo-600 tracking-wider">
           {selected.name}
@@ -19,7 +19,7 @@ const ContainerHeader = () => {
         </div>
       </div>
       <hr />
-    </>
+    </div>
   );
 };
 

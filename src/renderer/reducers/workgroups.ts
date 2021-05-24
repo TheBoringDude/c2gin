@@ -21,6 +21,11 @@ type ActionsGroup =
       destination: { index: number; id: string };
     }
   | {
+      type: 'drag-group';
+      sourceIdx: number;
+      destIdx: number;
+    }
+  | {
       type: 'rename-list';
       id: string;
       list: ProjectWorkListProps;
@@ -106,6 +111,17 @@ const GroupReducer = (state: ProjectWorkProps, action: ActionsGroup) => {
           list: newlist,
         },
       };
+    }
+
+    case 'drag-group': {
+      const arr = Object.entries(state);
+
+      const group = arr[action.sourceIdx];
+
+      arr.splice(action.sourceIdx, 1);
+      arr.splice(action.destIdx, 0, group);
+
+      return Object.fromEntries(arr);
     }
 
     case 'handle-drag': {
