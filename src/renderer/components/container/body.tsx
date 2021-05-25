@@ -40,7 +40,7 @@ const ContainerBody = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="py-8 px-3 relative z-40 w-full">
+      <div className="py-8 px-3 pt-20 z-40 absolute">
         <Droppable
           droppableId={selected.id}
           type="container"
@@ -49,7 +49,7 @@ const ContainerBody = () => {
           {(provided) => (
             <ul
               ref={provided.innerRef}
-              className="absolute h-screen flex overflow-x-auto whitespace-nowrap"
+              className=" h-screen flex whitespace-nowrap"
             >
               {Object.entries(state).map(([key, value], index) => (
                 <div key={key} className="w-96 mx-1">
