@@ -8,7 +8,7 @@ const Home = () => {
   const { selected } = useCurrentProject();
 
   return (
-    <WorkProvider initialState={selected.works}>
+    <WorkProvider initialState={selected?.works || {}}>
       <Container />
     </WorkProvider>
   );

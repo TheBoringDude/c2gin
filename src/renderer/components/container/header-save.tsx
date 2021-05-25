@@ -29,7 +29,7 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
     <button
       ref={btnSaveRef}
       type="button"
-      className="ml-2 border p-1 text-sm rounded-lg"
+      className="mx-2 border p-1 text-sm rounded-lg"
       onClick={handleSaveWrapper}
     >
       save

@@ -29,7 +29,7 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
       type: 'add-list',
       id: groupid,
       list: [
-        ...works.list,
+        ...works?.list,
         {
           id: nanoid(15),
           title: v,

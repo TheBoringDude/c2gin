@@ -1,18 +1,11 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useRef } from 'react';
 import { nanoid } from 'nanoid';
 import { MenuIcon } from '@heroicons/react/outline';
 
 import HomeHeader from './home-header';
 import NewProjectHandler from './new-project';
 
-import db, { ProjectPropsSchema } from '../c2gin/lowdb';
+import db from '../c2gin/lowdb';
 import useCurrentProject from '../hooks/useCurrentProject';
 import useWorkGroup from '../hooks/useWorkGroup';
 import useFindProjectId from '../hooks/useDB';
@@ -24,16 +17,10 @@ type SideBarProps = {
 };
 
 const SideBar = ({ open, setOpen }: SideBarProps) => {
-  const { setSelected, selected } = useCurrentProject();
+  const { setSelected, selected, projects, handleReRead } = useCurrentProject();
   const { state, dispatch } = useWorkGroup();
-  const [projects, setProjects] = useState<ProjectPropsSchema[]>([]);
-  const [updated, setUpdated] = useState(false);
 
   const inputProjectRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    setProjects(db.get('projects').value());
-  }, [updated]);
 
   /* project creation */
   const HandleCreateProject = useCallback(() => {
@@ -41,17 +28,18 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
 
     if (!projectName) return;
 
-    db.get('projects')
-      .push({
-        id: nanoid(12),
-        name: projectName,
-        createdDate: new Date().toISOString(),
-        works: {},
-      })
-      .write();
+    const proj = {
+      id: nanoid(12),
+      name: projectName,
+      createdDate: new Date().toISOString(),
+      works: {},
+    };
 
-    setUpdated(true);
-  }, []);
+    db.get('projects').push(proj).write();
+
+    setSelected(proj.id);
+    handleReRead();
+  }, [setSelected, handleReRead]);
 
   /* project selection */
   const HandleSelectProject = (id: string) => {
@@ -65,7 +53,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     <div
       className={`${
         open ? 'w-1/3 lg:w-1/4' : 'w-1/12'
-      } border-r fixed h-full z-50 bg-white`}
+      } border-r fixed h-full z-40 bg-white`}
     >
       <div className="text-center m-1">
         <button
@@ -98,10 +86,10 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
           <li key={project.id}>
             <button
               onClick={() => {
-                if (selected.id) {
-                  handleProjectSave(selected.id, state);
+                if (selected?.id) {
+                  handleProjectSave(selected?.id, state);
                 }
-                HandleSelectProject(project.id);
+                HandleSelectProject(project?.id);
               }}
               type="button"
               className={`truncate p-3 border-b text-left w-full hover:bg-indigo-200 ${
