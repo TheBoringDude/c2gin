@@ -1,25 +1,16 @@
-import React, { ReactNode, useState } from 'react';
-import SideBar from './sidebar';
+import React from 'react';
 
-type ContainerProps = {
-  children: ReactNode;
-};
+import ContainerWrapper from './container/wrapper';
+import ContainerBody from './container/body';
+import ContainerHeader from './container/header';
 
-const Container = ({ children }: ContainerProps) => {
-  const [open, setOpen] = useState(true);
-
+const Container = () => {
   return (
-    <div className="flex items-start justify-between">
-      <SideBar open={open} setOpen={setOpen} />
+    <ContainerWrapper>
+      <ContainerHeader />
 
-      <div
-        className={`${
-          open ? 'w-2/3 lg:w-3/4' : 'w-11/12'
-        } ml-auto h-screen p-4`}
-      >
-        {children}
-      </div>
-    </div>
+      <ContainerBody />
+    </ContainerWrapper>
   );
 };
 
