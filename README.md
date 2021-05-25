@@ -8,6 +8,12 @@ a simple app for managing projects
 
 ## Development
 
+### TODO:
+
+- migrate to `@lowdb-v2`
+- improve ui design
+- make projects savable for future updates
+
 ### Primary Used Libraries
 
 - electron
