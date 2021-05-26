@@ -81,7 +81,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
 
       <hr />
 
-      <ul className="py-3 h-screen overflow-y-auto">
+      <ul className="pt-3 overflow-y-auto h-full pb-40">
         {projects.map((project) => (
           <li key={project.id}>
             <button

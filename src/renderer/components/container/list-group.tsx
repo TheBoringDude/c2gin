@@ -55,7 +55,7 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
             className={`py-2 rounded-t-lg px-4 flex items-center justify-between ${works.color?.bg}`}
           >
             <h4
-              className="text-lg font-bold tracking-wide truncate"
+              className="font-bold tracking-wide truncate"
               title={works.description}
             >
               {works.title}

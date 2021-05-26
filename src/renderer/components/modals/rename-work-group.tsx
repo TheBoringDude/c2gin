@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, KeyboardEvent } from 'react';
 import { PencilAltIcon } from '@heroicons/react/solid';
 
 import useWorkGroup from '../../hooks/useWorkGroup';
@@ -28,6 +28,7 @@ export default function RenameWorkGroupHandler({
     setOpen(true);
   };
 
+  /* remove group function handler */
   const handleRenameGroup = () => {
     const color = inputSelectTheme.current?.value || 'default';
 
@@ -41,6 +42,14 @@ export default function RenameWorkGroupHandler({
 
     closeModal();
   };
+
+  /* handling `Enter` key during input... */
+  const handleOnEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleRenameGroup();
+    }
+  };
+
   return (
     <>
       <button type="button" onClick={openModal}>
@@ -57,6 +66,7 @@ export default function RenameWorkGroupHandler({
         selectThemeRef={inputSelectTheme}
         selectThemeDefValue={work.color?.key || 'default'}
         dialogTitle="Rename work category"
+        handleOnEnter={handleOnEnter}
       >
         <button
           type="button"

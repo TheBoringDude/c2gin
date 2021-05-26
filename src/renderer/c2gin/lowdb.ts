@@ -55,5 +55,6 @@ export {
   ProjectWorkProps,
   AppSchema,
   GroupColorProps,
+  GroupColorColorsProps,
 };
 export default db;

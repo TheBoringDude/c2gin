@@ -40,17 +40,14 @@ const ContainerBody = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="py-8 px-3 pt-20 z-30 absolute">
+      <div className="pb-8 px-3 pt-20 z-30 absolute">
         <Droppable
           droppableId={selected.id}
           type="container"
           direction="horizontal"
         >
           {(provided) => (
-            <ul
-              ref={provided.innerRef}
-              className=" h-screen flex whitespace-nowrap"
-            >
+            <ul ref={provided.innerRef} className="flex whitespace-nowrap">
               {Object.entries(state).map(([key, value], index) => (
                 <div key={key} className="w-96 mx-1">
                   <ListGroup
