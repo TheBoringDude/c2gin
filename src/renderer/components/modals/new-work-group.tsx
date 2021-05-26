@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, KeyboardEvent } from 'react';
 import { nanoid } from 'nanoid';
 
 import useWorkGroup from '../../hooks/useWorkGroup';
@@ -22,6 +22,7 @@ export default function NewWorkGroupHandler() {
     setOpen(true);
   };
 
+  /* add group function handler */
   const handleAddGroup = () => {
     let color = inputSelectTheme.current?.value;
     if (!color) {
@@ -40,6 +41,14 @@ export default function NewWorkGroupHandler() {
 
     closeModal();
   };
+
+  /* handling `Enter` key during input... */
+  const handleOnEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleAddGroup();
+    }
+  };
+
   return (
     <>
       <button
@@ -60,6 +69,7 @@ export default function NewWorkGroupHandler() {
         selectThemeRef={inputSelectTheme}
         selectThemeDefValue="default"
         dialogTitle="Add a new work category"
+        handleOnEnter={handleOnEnter}
       >
         <button
           type="button"

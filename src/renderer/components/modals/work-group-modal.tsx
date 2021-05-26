@@ -1,5 +1,5 @@
+import React, { MutableRefObject, ReactNode, KeyboardEvent } from 'react';
 import { Dialog } from '@headlessui/react';
-import React, { MutableRefObject, ReactNode } from 'react';
 import { GroupColors } from '../../c2gin/colors';
 import Modal from '../modals';
 
@@ -12,9 +12,9 @@ type WorkGroupModalProps = {
   descriptionDefValue: string;
   selectThemeRef: MutableRefObject<HTMLSelectElement | null>;
   selectThemeDefValue: string;
-
   children: ReactNode;
   dialogTitle: string;
+  handleOnEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
 };
 
 export default function WorkGroupModal({
@@ -28,6 +28,7 @@ export default function WorkGroupModal({
   selectThemeDefValue,
   dialogTitle,
   children,
+  handleOnEnter,
 }: WorkGroupModalProps) {
   return (
     <Modal open={open} onClose={closeModal} focusRef={inputGroupNameRef}>
@@ -39,6 +40,7 @@ export default function WorkGroupModal({
           <p className="">Title of the Category</p>
           <input
             ref={inputGroupNameRef}
+            onKeyDown={(e) => handleOnEnter(e)}
             type="text"
             defaultValue={nameDefValue}
             placeholder="Input your project's new work category"
@@ -49,6 +51,7 @@ export default function WorkGroupModal({
           <p>Description for the category</p>
           <input
             ref={inputGroupDescriptionRef}
+            onKeyDown={(e) => handleOnEnter(e)}
             type="text"
             defaultValue={descriptionDefValue}
             placeholder="A description for the group category"

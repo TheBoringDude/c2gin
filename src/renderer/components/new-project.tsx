@@ -49,6 +49,11 @@ const NewProjectHandler = ({
             <p className="">What is your project&apos;s name?</p>
             <input
               ref={inputProjectRef}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handlerWrapper();
+                }
+              }}
               type="text"
               placeholder="Your project's name"
               className="tracking-wide py-2 px-3 rounded-lg border-2 focus:outline-none hover:border-indigo-300 focus:border-indigo-300"
