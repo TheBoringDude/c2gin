@@ -1,4 +1,10 @@
-import React, { Dispatch, SetStateAction, useCallback, useRef } from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useRef,
+  useState,
+} from 'react';
 import { nanoid } from 'nanoid';
 import { MenuIcon } from '@heroicons/react/outline';
 
@@ -10,6 +16,7 @@ import useCurrentProject from '../hooks/useCurrentProject';
 import useWorkGroup from '../hooks/useWorkGroup';
 import useFindProjectId from '../hooks/useDB';
 import { handleProjectSave } from '../c2gin/queries';
+import SideBarProjectsSearch from './search-sidebar';
 
 type SideBarProps = {
   open: boolean;
@@ -19,6 +26,9 @@ type SideBarProps = {
 const SideBar = ({ open, setOpen }: SideBarProps) => {
   const { setSelected, selected, projects, handleReRead } = useCurrentProject();
   const { state, dispatch } = useWorkGroup();
+
+  // create a clone of projects
+  const [listProjects, setListProjects] = useState(Array.from(projects));
 
   const inputProjectRef = useRef<HTMLInputElement>(null);
 
@@ -81,8 +91,14 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
 
       <hr />
 
+      <SideBarProjectsSearch
+        setListProjects={setListProjects}
+        open={open}
+        setOpen={setOpen}
+      />
+
       <ul className="pt-3 overflow-y-auto h-full pb-40">
-        {projects.map((project) => (
+        {listProjects.map((project) => (
           <li key={project.id}>
             <button
               onClick={() => {
