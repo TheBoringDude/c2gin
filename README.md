@@ -13,6 +13,7 @@ a simple app for managing projects
 - migrate to `@lowdb-v2`
 - improve ui design
 - make projects savable for future updates
+- fix github automatic release publish `actions` (`electron-builder`)
 
 ### Primary Used Libraries
 
