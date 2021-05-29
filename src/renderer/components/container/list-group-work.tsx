@@ -84,10 +84,11 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
             className="m-1 p-1 group rounded-md border border-gray-300 flex items-center justify-between bg-white"
           >
             <p className="truncate text-gray-800">{list.title}</p>
-            <div className="flex items-center">
+            <div className="flex items-center text-gray-600">
               <button
+                title={`Rename '${list.title}'`}
                 type="button"
-                className=""
+                className="hover:text-blue-500"
                 onClick={() => {
                   setEdit(true);
                 }}
@@ -95,8 +96,9 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
                 <PencilIcon className="h-4 w-4 hidden group-hover:block" />
               </button>
               <button
+                title={`Remove '${list.title}'`}
                 type="button"
-                className="ml-1"
+                className="ml-1 hover:text-red-500"
                 onClick={() => handleWorkRemoveList(index)}
               >
                 <TrashIcon className="h-4 w-4 hidden group-hover:block" />

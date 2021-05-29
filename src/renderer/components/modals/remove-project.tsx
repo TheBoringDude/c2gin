@@ -43,6 +43,7 @@ export default function RemoveProjectModal() {
       <button
         type="button"
         onClick={openModal}
+        title="Remove project"
         className="py-1 px-2 text-sm rounded-lg bg-red-200 hover:bg-red-400 text-white inline-flex items-center"
       >
         <TrashIcon className="h-5 w-5" />

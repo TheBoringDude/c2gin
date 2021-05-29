@@ -52,7 +52,7 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
           className={`w-full border rounded-lg ${works.color?.border}`}
         >
           <div
-            className={`py-2 rounded-t-lg px-4 flex items-center justify-between ${works.color?.bg}`}
+            className={`py-2 rounded-t-lg px-4 flex items-center justify-between ${works.color?.bg} border ${works.color.border}`}
           >
             <h4
               className="font-bold tracking-wide truncate"
@@ -62,6 +62,7 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
             </h4>
             <div className="flex">
               <button
+                title="Add a new work / todo"
                 type="button"
                 onClick={() => {
                   setOpen(!open);

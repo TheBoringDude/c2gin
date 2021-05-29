@@ -34,6 +34,7 @@ const NewProjectHandler = ({
       <button
         type="button"
         onClick={openModal}
+        title="Create a new project"
         className="py-1 text-sm rounded-lg bg-indigo-400 hover:bg-indigo-500 text-white inline-flex items-center justify-center"
       >
         <DocumentAddIcon className="h-5 w-5" />

@@ -112,6 +112,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
                 }
                 HandleSelectProject(project?.id);
               }}
+              title={`Select '${project.name}'`}
               type="button"
               className={`truncate p-3 border-b text-left w-full hover:bg-indigo-200 ${
                 selected?.id === project.id && 'bg-indigo-200'
