@@ -48,8 +48,13 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     db.get('projects').push(proj).write();
 
     setSelected(proj.id);
+
+    // re-read
     handleReRead();
-  }, [setSelected, handleReRead]);
+
+    // re-set the project
+    setListProjects(projects);
+  }, [setSelected, handleReRead, projects]);
 
   /* project selection */
   const HandleSelectProject = (id: string) => {
@@ -97,7 +102,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
         setOpen={setOpen}
       />
 
-      <ul className="pt-3 overflow-y-auto h-full pb-40">
+      <ul className="pt-3 overflow-y-auto h-full pb-56">
         {listProjects.map((project) => (
           <li key={project.id}>
             <button
