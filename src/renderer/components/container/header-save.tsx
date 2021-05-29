@@ -31,6 +31,7 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
       type="button"
       className="mx-2 border p-1 text-sm rounded-lg"
       onClick={handleSaveWrapper}
+      title="Save current project work"
     >
       save
     </button>

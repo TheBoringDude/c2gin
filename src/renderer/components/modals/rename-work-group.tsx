@@ -52,7 +52,7 @@ export default function RenameWorkGroupHandler({
 
   return (
     <>
-      <button type="button" onClick={openModal}>
+      <button type="button" onClick={openModal} title="Rename group">
         <PencilAltIcon className="h-5 w-5 ml-1" />
       </button>
 

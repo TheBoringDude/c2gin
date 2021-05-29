@@ -52,6 +52,7 @@ export default function NewWorkGroupHandler() {
   return (
     <>
       <button
+        title="Create a new work group"
         onClick={openModal}
         type="button"
         className="bg-indigo-300 hover:bg-indigo-400 text-white px-2 py-1 rounded-lg text-sm"

@@ -31,7 +31,7 @@ export default function RemoveWorkGroup({ groupid }: RemoveWorkGroupProps) {
 
   return (
     <>
-      <button type="button" onClick={openModal}>
+      <button type="button" onClick={openModal} title="Remove group">
         <TrashIcon className="h-5 w-5" />
       </button>
 

@@ -48,7 +48,7 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
   };
 
   const handleReRead = () => {
-    setProjects(getProjects);
+    setProjects(getProjects());
   };
 
   return (

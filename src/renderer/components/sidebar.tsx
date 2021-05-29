@@ -2,6 +2,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -48,8 +49,19 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     db.get('projects').push(proj).write();
 
     setSelected(proj.id);
+
+    // set the state works
+    dispatch({
+      type: 'set',
+      work: proj.works,
+    });
+
+    // re-read
     handleReRead();
-  }, [setSelected, handleReRead]);
+
+    // re-set the project
+    setListProjects(projects);
+  }, [setSelected, handleReRead, projects, dispatch]);
 
   /* project selection */
   const HandleSelectProject = (id: string) => {
@@ -58,6 +70,13 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     dispatch({ type: 'set', work: q });
     setSelected(id);
   };
+
+  /* make sure `listProjects` is updated */
+  useEffect(() => {
+    if (listProjects !== projects) {
+      setListProjects(projects);
+    }
+  }, [projects, listProjects]);
 
   return (
     <div
@@ -97,7 +116,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
         setOpen={setOpen}
       />
 
-      <ul className="pt-3 overflow-y-auto h-full pb-40">
+      <ul className="pt-3 overflow-y-auto h-full pb-56">
         {listProjects.map((project) => (
           <li key={project.id}>
             <button
@@ -107,6 +126,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
                 }
                 HandleSelectProject(project?.id);
               }}
+              title={`Select '${project.name}'`}
               type="button"
               className={`truncate p-3 border-b text-left w-full hover:bg-indigo-200 ${
                 selected?.id === project.id && 'bg-indigo-200'
