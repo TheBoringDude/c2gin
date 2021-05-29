@@ -38,6 +38,8 @@ const ContainerBody = () => {
     });
   };
 
+  const entries = Object.entries(state);
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="pb-8 px-3 pt-20 z-30 absolute">
@@ -48,16 +50,25 @@ const ContainerBody = () => {
         >
           {(provided) => (
             <ul ref={provided.innerRef} className="flex whitespace-nowrap">
-              {Object.entries(state).map(([key, value], index) => (
-                <div key={key} className="w-96 mx-1">
-                  <ListGroup
-                    groupid={key}
-                    works={value}
-                    key={key}
-                    idx={index}
-                  />
+              {entries.length < 1 ? (
+                <div>
+                  <p>
+                    You have not created a work group yet. Create one to start
+                    working.
+                  </p>
                 </div>
-              ))}
+              ) : (
+                entries.map(([key, value], index) => (
+                  <div key={key} className="w-96 mx-1">
+                    <ListGroup
+                      groupid={key}
+                      works={value}
+                      key={key}
+                      idx={index}
+                    />
+                  </div>
+                ))
+              )}
               {provided.placeholder}
             </ul>
           )}
