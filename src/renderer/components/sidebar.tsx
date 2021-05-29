@@ -2,6 +2,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -49,12 +50,18 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
 
     setSelected(proj.id);
 
+    // set the state works
+    dispatch({
+      type: 'set',
+      work: proj.works,
+    });
+
     // re-read
     handleReRead();
 
     // re-set the project
     setListProjects(projects);
-  }, [setSelected, handleReRead, projects]);
+  }, [setSelected, handleReRead, projects, dispatch]);
 
   /* project selection */
   const HandleSelectProject = (id: string) => {
@@ -63,6 +70,13 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     dispatch({ type: 'set', work: q });
     setSelected(id);
   };
+
+  /* make sure `listProjects` is updated */
+  useEffect(() => {
+    if (listProjects !== projects) {
+      setListProjects(projects);
+    }
+  }, [projects, listProjects]);
 
   return (
     <div
