@@ -37,7 +37,11 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
       ],
     });
 
-    setOpen(false);
+    // remove the current value, but do not close
+    if (inputWorkName.current) {
+      inputWorkName.current.value = '';
+    }
+    // setOpen(false);
   };
 
   return (
