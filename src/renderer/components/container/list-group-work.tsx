@@ -83,7 +83,15 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
             ref={provided.innerRef}
             className="m-1 p-1 group rounded-md border border-gray-300 flex items-center justify-between bg-white"
           >
-            <p className="truncate text-gray-800">{list.title}</p>
+            <p
+              className="truncate text-gray-800"
+              onDoubleClick={() => {
+                // if the item is double-clicked, it will trigger the rename
+                setEdit(true);
+              }}
+            >
+              {list.title}
+            </p>
             <div className="flex items-center text-gray-600">
               <button
                 title={`Rename '${list.title}'`}
