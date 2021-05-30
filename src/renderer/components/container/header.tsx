@@ -19,7 +19,10 @@ const ContainerHeader = ({ open }: ContainerHeaderProps) => {
       className={`bg-white fixed z-40 ${open ? 'w-2/3 lg:w-3/4' : 'w-11/12'}`}
     >
       <div className="p-4 flex items-center justify-between">
-        <h2 className="text-xl font-bold text-indigo-600 tracking-wider">
+        <h2
+          className="text-xl font-bold text-indigo-600 tracking-wider w-1/2 truncate"
+          title={selected.name}
+        >
           {/* show asterisk if updated and if selected != state */}
           {updated && selected.works !== state && '*'} {selected.name}
         </h2>

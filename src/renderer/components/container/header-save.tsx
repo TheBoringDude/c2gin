@@ -1,3 +1,4 @@
+import { SaveIcon } from '@heroicons/react/outline';
 import React, { useRef } from 'react';
 import { handleProjectSave } from '../../c2gin/queries';
 import useWorkGroup from '../../hooks/useWorkGroup';
@@ -32,11 +33,12 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
     <button
       ref={btnSaveRef}
       type="button"
-      className="mx-2 border p-1 text-sm rounded-lg"
+      className="mx-2 border p-1 text-sm rounded-lg inline-flex items-center"
       onClick={handleSaveWrapper}
       title="Save current project work"
     >
-      save
+      <SaveIcon className="h-4 w-4 sm:mr-1" />
+      <span className="hidden sm:block">save</span>
     </button>
   );
 }
