@@ -1406,10 +1406,10 @@
   dependencies:
     mkdirp "^1.0.4"
 
-"@ootiq/tailwind-blandcolors@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@ootiq/tailwind-blandcolors/-/tailwind-blandcolors-0.0.2.tgz#f9150881e462bfeb082be8eac63297f15848896c"
-  integrity sha512-upAXTdrgjOFUdjLO1bWXe6wZIU5pYXrvBBdDLX3iM767G+YIZJU5IHi5gmjCUy3EVh8ibRS3tDeK3Y+xHK5svw==
+"@ootiq/tailwind-blandcolors@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@ootiq/tailwind-blandcolors/-/tailwind-blandcolors-0.0.3.tgz#b83c0a673d1516c13430c5908c25a1ccd1121a63"
+  integrity sha512-Y/T/05mY/sRdOXD6yTxLUEUow5lbN8ZPKbMS5r3YxFuT2t7P6abPgc5mXw985J548yEPs/8MYkYY6Xg5pk13Ug==
 
 "@pmmmwh/react-refresh-webpack-plugin@^0.4.3":
   version "0.4.3"

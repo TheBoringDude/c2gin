@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+const bland = require('@ootiq/tailwind-blandcolors/colors');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
@@ -5,6 +7,10 @@ module.exports = {
   mode: 'jit',
   darkMode: false, // or 'media' or 'class'
   theme: {
+    colors: {
+      ...bland,
+      ...colors,
+    },
     fontFamily: {
       sans: ['Catamaran', ...defaultTheme.fontFamily.sans],
     },
@@ -13,5 +19,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require('@ootiq/tailwind-blandcolors')],
+  plugins: [],
 };
