@@ -7,7 +7,7 @@ type HeaderSaveButtonProps = {
 };
 
 export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
-  const { state } = useWorkGroup();
+  const { state, setUpdated } = useWorkGroup();
 
   const btnSaveRef = useRef<HTMLButtonElement>(null);
   const handleSaveWrapper = () => {
@@ -23,6 +23,9 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
 
     btnSaveRef.current.disabled = false;
     btnSaveRef.current.innerHTML = 'save';
+
+    // update
+    setUpdated(false);
   };
 
   return (

@@ -26,7 +26,7 @@ type SideBarProps = {
 
 const SideBar = ({ open, setOpen }: SideBarProps) => {
   const { setSelected, selected, projects, handleReRead } = useCurrentProject();
-  const { state, dispatch } = useWorkGroup();
+  const { state, dispatch, updated, setUpdated } = useWorkGroup();
 
   // create a clone of projects
   const [listProjects, setListProjects] = useState(Array.from(projects));
@@ -121,10 +121,14 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
           <li key={project.id}>
             <button
               onClick={() => {
-                if (selected?.id) {
+                // save only if updated and if id exists
+                if (selected?.id && updated) {
                   handleProjectSave(selected?.id, state);
                 }
                 HandleSelectProject(project?.id);
+
+                // make sure to make updated -> false
+                setUpdated(false);
               }}
               title={`Select '${project.name}'`}
               type="button"
