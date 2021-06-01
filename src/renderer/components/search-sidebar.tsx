@@ -35,14 +35,14 @@ export default function SideBarProjectsSearch({
   };
 
   return (
-    <div className="m-1 flex items-center bg-gray-50">
+    <div className="m-1 flex items-center justify-center bg-gray-50">
       {open && (
         <input
           ref={inputFindRef}
           type="text"
           placeholder="find project..."
           onChange={HandleFind}
-          className="py-1 px-2 rounded-md border border-indigo-300 focus:outline-none focus:border-indigo-500 text-sm w-full"
+          className="mr-1 py-1 px-2 rounded-md border border-indigo-300 focus:outline-none focus:border-indigo-500 text-sm w-full"
         />
       )}
       <button
@@ -52,7 +52,7 @@ export default function SideBarProjectsSearch({
           setOpen(true); // expand first the sidebar
           HandleFind();
         }}
-        className="ml-1 bg-indigo-400 hover:bg-indigo-500 text-white p-1 rounded-md"
+        className="bg-indigo-400 hover:bg-indigo-500 text-white p-1 rounded-md"
       >
         <SearchIcon className="h-4 w-4" />
       </button>

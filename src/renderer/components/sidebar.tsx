@@ -84,22 +84,23 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
         open ? 'w-1/3 lg:w-1/4' : 'w-1/12'
       } border-r fixed h-full z-40 bg-white`}
     >
-      <div className="text-center m-1">
-        <button
-          className={`p-1 border rounded-lg ${
-            open && 'absolute top-1 right-1'
-          }`}
-          type="button"
-          onClick={() => {
-            setOpen(!open);
-          }}
+      <section className={`${open ? 'p-4' : 'py-4 px-2'} flex flex-col`}>
+        <div
+          className={`mx-1 mt-1 mb-3 flex items-start ${
+            open ? 'justify-between' : 'justify-center'
+          } text-left`}
         >
-          <MenuIcon className="h-5 w-5" />
-        </button>
-      </div>
-
-      <section className={`${open ? 'p-4' : 'p-2'} flex flex-col`}>
-        {open && <HomeHeader />}
+          {open && <HomeHeader />}
+          <button
+            className="p-1 border rounded-lg"
+            type="button"
+            onClick={() => {
+              setOpen(!open);
+            }}
+          >
+            <MenuIcon className="h-5 w-5" />
+          </button>
+        </div>
 
         <NewProjectHandler
           sideOpen={open}
