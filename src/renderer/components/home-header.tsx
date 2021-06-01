@@ -3,7 +3,7 @@ import React from 'react';
 const HomeHeader = () => {
   return (
     <>
-      <div className="mb-2 w-full">
+      <div className="mb-2 w-5/6">
         <h1 className="text-2xl font-black tracking-wide text-indigo-500 truncate">
           c2gin
         </h1>

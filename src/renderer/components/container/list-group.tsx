@@ -14,6 +14,7 @@ type ListGroupProps = {
   works: ProjectWorkPropsContainer;
   idx: number;
 };
+
 const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
   const [open, setOpen] = useState(false);
 
@@ -109,7 +110,7 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
 
           <Droppable droppableId={groupid} type="group">
             {(provided) => (
-              <ul ref={provided.innerRef}>
+              <ul className="h-128 overflow-y-auto" ref={provided.innerRef}>
                 {works.list.length < 1 ? (
                   <br />
                 ) : (

@@ -14,9 +14,7 @@ const Container = () => {
     <div>
       <SideBar open={open} setOpen={setOpen} />
 
-      <div
-        className={`${open ? 'w-2/3 lg:w-3/4' : 'w-11/12'} ml-auto h-screen`}
-      >
+      <div className={`${open ? 'w-2/3 lg:w-3/4' : 'w-11/12'} ml-auto`}>
         {selected?.id && selected?.id !== '' ? (
           <>
             <ContainerHeader open={open} />
