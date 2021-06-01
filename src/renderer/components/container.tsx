@@ -4,6 +4,7 @@ import SideBar from './sidebar';
 import ContainerBody from './container/body';
 import ContainerHeader from './container/header';
 import useCurrentProject from '../hooks/useCurrentProject';
+import WelcomeMessage from './welcome';
 
 const Container = () => {
   const { selected } = useCurrentProject();
@@ -23,9 +24,7 @@ const Container = () => {
             <ContainerBody />
           </>
         ) : (
-          <div className="p-8 text-center">
-            <h3 className="text-4xl font-bold text-gray-600">Welcome back!</h3>
-          </div>
+          <WelcomeMessage />
         )}
       </div>
     </div>
