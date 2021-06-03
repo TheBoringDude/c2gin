@@ -54,7 +54,7 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
           {...groupProvided.draggableProps}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...groupProvided.dragHandleProps}
-          className={`w-full border rounded-lg ${works.color?.border}`}
+          className="w-full"
         >
           <div
             className={`py-2 rounded-t-lg px-4 flex items-center justify-between border ${works.color?.bg}`}
@@ -80,53 +80,57 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
             </div>
           </div>
 
-          <hr />
+          <hr className={`${works.color?.border}`} />
 
-          {open && (
-            <section>
-              <div className="m-1 flex items-center justify-between">
-                <input
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      handleWorkAddList();
-                    }
-                  }}
-                  onBlur={() => {
-                    setOpen(false);
-                  }}
-                  // eslint-disable-next-line jsx-a11y/no-autofocus
-                  autoFocus
-                  ref={inputWorkName}
-                  type="text"
-                  placeholder="what to work?"
-                  className="py-1 px-2 w-full border rounded-md"
-                />
-                <button type="button" onClick={handleWorkAddList}>
-                  <PlusIcon className="h-4 w-4" />
-                </button>
-              </div>
-            </section>
-          )}
-
-          <Droppable droppableId={groupid} type="group">
-            {(provided) => (
-              <ul className="h-128 overflow-y-auto" ref={provided.innerRef}>
-                {works.list.length < 1 ? (
-                  <br />
-                ) : (
-                  works.list.map((list) => (
-                    <WorkList
-                      key={list.id}
-                      list={list}
-                      groupid={groupid}
-                      index={works.list.indexOf(list)}
-                    />
-                  ))
-                )}
-                {provided.placeholder}
-              </ul>
+          <div
+            className={`border rounded-b-lg bg-white ${works.color?.border}`}
+          >
+            {open && (
+              <section>
+                <div className="m-1 flex items-center justify-between">
+                  <input
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleWorkAddList();
+                      }
+                    }}
+                    onBlur={() => {
+                      setOpen(false);
+                    }}
+                    // eslint-disable-next-line jsx-a11y/no-autofocus
+                    autoFocus
+                    ref={inputWorkName}
+                    type="text"
+                    placeholder="what to work?"
+                    className="py-1 px-2 w-full border rounded-md"
+                  />
+                  <button type="button" onClick={handleWorkAddList}>
+                    <PlusIcon className="h-4 w-4" />
+                  </button>
+                </div>
+              </section>
             )}
-          </Droppable>
+
+            <Droppable droppableId={groupid} type="group">
+              {(provided) => (
+                <ul className="h-128 overflow-y-auto" ref={provided.innerRef}>
+                  {works.list.length < 1 ? (
+                    <br />
+                  ) : (
+                    works.list.map((list) => (
+                      <WorkList
+                        key={list.id}
+                        list={list}
+                        groupid={groupid}
+                        index={works.list.indexOf(list)}
+                      />
+                    ))
+                  )}
+                  {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </div>
         </li>
       )}
     </Draggable>
