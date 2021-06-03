@@ -2,7 +2,6 @@ import React, {
   Dispatch,
   SetStateAction,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -76,13 +75,6 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     dispatch({ type: 'set', work: q });
     setSelected(id);
   };
-
-  /* make sure `listProjects` is updated */
-  useEffect(() => {
-    if (listProjects !== projects) {
-      setListProjects(projects);
-    }
-  }, [projects, listProjects]);
 
   return (
     <div
