@@ -4,7 +4,13 @@
 
 a simple app for managing projects
 
-![screenshot](./screenshot.png)
+## Screenshot
+
+- Light
+  ![screenshot (light-version)](./screenshot.png)
+
+- Dark
+  ![screenshot (dark-version)](./screenshot-dark.png)
 
 ## Development
 
