@@ -59,7 +59,7 @@ const ContainerBody = () => {
                 </div>
               ) : (
                 entries.map(([key, value], index) => (
-                  <div key={key} className="w-96 mx-1">
+                  <div key={key} className="w-96 mx-2">
                     <ListGroup
                       groupid={key}
                       works={value}

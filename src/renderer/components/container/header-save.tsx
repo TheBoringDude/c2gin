@@ -1,5 +1,7 @@
+import React, { useRef, useState } from 'react';
+
 import { SaveIcon } from '@heroicons/react/outline';
-import React, { useRef } from 'react';
+
 import { handleProjectSave } from '../../c2gin/queries';
 import useWorkGroup from '../../hooks/useWorkGroup';
 
@@ -8,6 +10,8 @@ type HeaderSaveButtonProps = {
 };
 
 export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
+  const [text, setText] = useState('save');
+
   const { state, setUpdated } = useWorkGroup();
 
   const btnSaveRef = useRef<HTMLButtonElement>(null);
@@ -16,24 +20,24 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
       return;
     }
 
-    btnSaveRef.current.innerHTML = 'saving...';
     btnSaveRef.current.disabled = true;
 
     // NOTE: having issues using `.assign` or `.update`
     handleProjectSave(id, state);
 
-    btnSaveRef.current.innerHTML = 'saved';
+    setText('saved');
+
+    // update
+    setUpdated(false);
 
     setTimeout(() => {
       if (!btnSaveRef.current) {
         return;
       }
-      btnSaveRef.current.disabled = false;
-      btnSaveRef.current.innerHTML = 'save';
 
-      // update
-      setUpdated(false);
-    }, 3000);
+      setText('save');
+      btnSaveRef.current.disabled = false;
+    }, 2000);
   };
 
   return (
@@ -45,7 +49,7 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
       title="Save current project work"
     >
       <SaveIcon className="h-4 w-4 sm:mr-1" />
-      <span className="hidden sm:block">save</span>
+      <span className="hidden sm:block">{text}</span>
     </button>
   );
 }
