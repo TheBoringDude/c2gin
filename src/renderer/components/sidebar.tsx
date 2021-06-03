@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react';
 import { nanoid } from 'nanoid';
-import { MenuIcon } from '@heroicons/react/outline';
+import { LightBulbIcon, MenuIcon } from '@heroicons/react/outline';
 
 import HomeHeader from './home-header';
 import NewProjectHandler from './new-project';
@@ -25,7 +25,13 @@ type SideBarProps = {
 };
 
 const SideBar = ({ open, setOpen }: SideBarProps) => {
-  const { setSelected, selected, projects, handleReRead } = useCurrentProject();
+  const {
+    setSelected,
+    selected,
+    projects,
+    handleReRead,
+    toggleMode,
+  } = useCurrentProject();
   const { state, dispatch, updated, setUpdated } = useWorkGroup();
 
   // create a clone of projects
@@ -82,7 +88,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     <div
       className={`${
         open ? 'w-1/3 lg:w-1/4' : 'w-1/12'
-      } border-r fixed h-full z-40 bg-white`}
+      } border-r fixed h-full z-40 bg-white dark:bg-gray-800 dark:border-gray-600`}
     >
       <section className="py-4 px-2 flex flex-col">
         <div
@@ -91,15 +97,26 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
           } text-left`}
         >
           {open && <HomeHeader />}
-          <button
-            className="p-1 border rounded-lg"
-            type="button"
-            onClick={() => {
-              setOpen(!open);
-            }}
-          >
-            <MenuIcon className="h-5 w-5" />
-          </button>
+          <div className="inline-flex">
+            <button
+              className="p-1 border rounded-lg mx-1"
+              type="button"
+              onClick={() => {
+                toggleMode();
+              }}
+            >
+              <LightBulbIcon className="h-5 w-5" />
+            </button>
+            <button
+              className="p-1 border rounded-lg mx-1"
+              type="button"
+              onClick={() => {
+                setOpen(!open);
+              }}
+            >
+              <MenuIcon className="h-5 w-5" />
+            </button>
+          </div>
         </div>
 
         <NewProjectHandler

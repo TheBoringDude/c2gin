@@ -3,9 +3,13 @@ const bland = require('@ootiq/tailwind-blandcolors/colors');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: ['./src/renderer/**/*.tsx', './src/renderer/c2gin/colors.ts'],
+  purge: [
+    './src/renderer/**/*.tsx',
+    './src/renderer/c2gin/colors.ts',
+    './src/renderer/index.html',
+  ],
   mode: 'jit',
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     colors: {
       ...bland,

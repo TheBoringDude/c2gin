@@ -1,12 +1,17 @@
 import React from 'react';
+import useCurrentProject from '../hooks/useCurrentProject';
 import manageImg from '../images/manager.svg';
 import todosImg from '../images/todo.svg';
 
 export default function WelcomeMessage() {
+  const { mode } = useCurrentProject();
+
   return (
     <div className="p-8 text-center">
       <div className="w-5/6 mx-auto">
-        <h3 className="text-4xl font-bold text-gray-600">Welcome back!</h3>
+        <h3 className="text-4xl font-bold text-gray-600">
+          Welcome back! {mode}
+        </h3>
 
         <div className="my-12">
           <div className="p-6 border rounded-lg my-4">
