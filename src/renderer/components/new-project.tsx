@@ -3,6 +3,9 @@ import { Dialog } from '@headlessui/react';
 import { DocumentAddIcon } from '@heroicons/react/outline';
 
 import Modal from './modals';
+import useCurrentProject from '../hooks/useCurrentProject';
+import useWorkGroup from '../hooks/useWorkGroup';
+import { handleProjectSave } from '../c2gin/queries';
 
 interface NewProjectHandlerProps {
   sideOpen: boolean;
@@ -17,6 +20,9 @@ const NewProjectHandler = ({
 }: NewProjectHandlerProps) => {
   const [open, setOpen] = useState(false);
 
+  const { selected } = useCurrentProject();
+  const { state } = useWorkGroup();
+
   const closeModal = () => {
     setOpen(false);
   };
@@ -26,6 +32,12 @@ const NewProjectHandler = ({
 
   const handlerWrapper = () => {
     HandleCreateProject();
+
+    // automatically save current selected project's progress
+    if (selected?.works !== state) {
+      handleProjectSave(selected?.id, state);
+    }
+
     closeModal();
   };
 
