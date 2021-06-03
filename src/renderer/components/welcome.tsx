@@ -36,6 +36,8 @@ export default function WelcomeMessage() {
             className="text-gray-600 hover:text-indigo-600 hover:underline"
             href="https://github.com/TheBoringDude/c2gin"
             title="Goto Github Repo"
+            target="_blank"
+            rel="noreferrer"
           >
             Github
           </a>
@@ -43,6 +45,8 @@ export default function WelcomeMessage() {
             className="text-gray-600 hover:text-indigo-600 hover:underline"
             href="https://github.com/TheBoringDude"
             title="Author"
+            target="_blank"
+            rel="noreferrer"
           >
             @TheBoringDude
           </a>
