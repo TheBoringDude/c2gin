@@ -52,7 +52,7 @@ const ContainerBody = () => {
             <ul ref={provided.innerRef} className="flex whitespace-nowrap">
               {entries.length < 1 ? (
                 <div>
-                  <p>
+                  <p className="dark:text-white">
                     You have not created a work group yet. Create one to start
                     working.
                   </p>

@@ -53,7 +53,7 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
-            className="mx-1 my-2 flex items-center justify-between bg-white"
+            className="mx-1 my-2 flex items-center justify-between"
           >
             <input
               onKeyDown={(e) => {
@@ -70,9 +70,13 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
               type="text"
               placeholder="what to work?"
               defaultValue={list.title}
-              className="py-1 px-2 w-full border rounded-md"
+              className="py-1 px-2 w-full border rounded-md bg-white dark:bg-warmGray-700 dark:text-gray-200"
             />
-            <button type="button" onClick={handleWorkEditList}>
+            <button
+              type="button"
+              onClick={handleWorkEditList}
+              className="dark:text-gray-200"
+            >
               <PencilIcon className="h-4 w-4" />
             </button>
           </li>
@@ -81,10 +85,10 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            className="m-1 p-1 group rounded-md border border-gray-300 flex items-center justify-between bg-white"
+            className="m-1 py-1 px-2 group rounded-md border border-gray-300 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-warmGray-700"
           >
             <p
-              className="truncate text-gray-800"
+              className="truncate text-gray-800 dark:text-gray-200"
               onDoubleClick={() => {
                 // if the item is double-clicked, it will trigger the rename
                 setEdit(true);
@@ -92,7 +96,7 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
             >
               {list.title}
             </p>
-            <div className="flex items-center text-gray-600">
+            <div className="flex items-center text-gray-600 dark:text-gray-300">
               <button
                 title={`Rename '${list.title}'`}
                 type="button"

@@ -44,7 +44,7 @@ export default function RemoveProjectModal() {
         type="button"
         onClick={openModal}
         title="Remove project"
-        className="py-1 px-2 text-sm rounded-lg bg-red-200 hover:bg-red-400 text-white inline-flex items-center"
+        className="py-1 px-2 text-sm rounded-lg bg-red-200 hover:bg-red-400 dark:bg-red-500 dark:hover:bg-red-600 text-white inline-flex items-center"
       >
         <TrashIcon className="h-4 w-4 sm:mr-1" />
         <span className="hidden sm:block">remove</span>

@@ -83,7 +83,7 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
           <hr className={`${works.color?.border}`} />
 
           <div
-            className={`border rounded-b-lg bg-white ${works.color?.border}`}
+            className={`border rounded-b-lg bg-white dark:bg-warmGray-900 ${works.color?.border} dark:border-gray-700`}
           >
             {open && (
               <section>
@@ -102,9 +102,13 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
                     ref={inputWorkName}
                     type="text"
                     placeholder="what to work?"
-                    className="py-1 px-2 w-full border rounded-md"
+                    className="py-1 px-2 w-full border rounded-md dark:bg-warmGray-700 dark:text-gray-200"
                   />
-                  <button type="button" onClick={handleWorkAddList}>
+                  <button
+                    type="button"
+                    onClick={handleWorkAddList}
+                    className="text-gray-700 dark:text-gray-200"
+                  >
                     <PlusIcon className="h-4 w-4" />
                   </button>
                 </div>

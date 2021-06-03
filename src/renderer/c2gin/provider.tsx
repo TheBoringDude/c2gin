@@ -68,11 +68,18 @@ const setClassTHeme = (t: string) => {
   window.localStorage.setItem('theme', t);
 };
 
+const handleTheme = () => {
+  const t = getInitTheme();
+  setClassTHeme(t);
+
+  return t;
+};
+
 /* PROVIDER */
 const C2GinProvider = ({ children }: C2GinProviderProps) => {
   const [selected, setSelected] = useState<ProjectPropsSchema>(initContext);
   const [projects, setProjects] = useState<ProjectPropsSchema[]>(getProjects());
-  const [mode, setMode] = useState<UIModes>(getInitTheme());
+  const [mode, setMode] = useState<UIModes>(handleTheme());
 
   /* handler for reading th specific project */
   const handleSetSelected = (id: string) => {

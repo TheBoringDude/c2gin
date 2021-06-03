@@ -44,7 +44,7 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
     <button
       ref={btnSaveRef}
       type="button"
-      className="mx-2 border p-1 text-sm rounded-lg inline-flex items-center opacity-60 hover:opacity-100"
+      className="mx-2 border p-1 text-sm rounded-lg inline-flex items-center opacity-60 hover:opacity-100 bg-white"
       onClick={handleSaveWrapper}
       title="Save current project work"
     >

@@ -88,7 +88,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     <div
       className={`${
         open ? 'w-1/3 lg:w-1/4' : 'w-1/12'
-      } border-r fixed h-full z-40 bg-white dark:bg-gray-800 dark:border-gray-600`}
+      } border-r fixed h-full z-40 bg-white dark:bg-warmGray-900 dark:border-gray-600`}
     >
       <section className="py-4 px-2 flex flex-col">
         <div
@@ -99,8 +99,9 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
           {open && <HomeHeader />}
           <div className="inline-flex">
             <button
-              className="p-1 border rounded-lg mx-1"
+              className="p-1 border rounded-lg mx-1 dark:border-gray-800 text-white bg-warmGray-500 dark:bg-warmGray-600 dark:text-white"
               type="button"
+              title="Toggle Dark Mode"
               onClick={() => {
                 toggleMode();
               }}
@@ -108,8 +109,9 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
               <LightBulbIcon className="h-5 w-5" />
             </button>
             <button
-              className="p-1 border rounded-lg mx-1"
+              className="p-1 border rounded-lg mx-1 dark:border-gray-800 bg-white dark:bg-warmGray-600 dark:text-white"
               type="button"
+              title="Toggle Menu"
               onClick={() => {
                 setOpen(!open);
               }}
@@ -150,8 +152,9 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
               }}
               title={`Select '${project.name}'`}
               type="button"
-              className={`truncate p-3 border-b text-left w-full hover:bg-indigo-200 ${
-                selected?.id === project.id && 'bg-indigo-200'
+              className={`tracking-wider truncate p-3 border-b dark:border-gray-800 text-left w-full hover:bg-indigo-200 dark:hover:bg-indigo-500 dark:text-gray-200 ${
+                selected?.id === project.id &&
+                'bg-indigo-200 dark:bg-indigo-500 dark:text-white'
               }`}
             >
               {project.name}
