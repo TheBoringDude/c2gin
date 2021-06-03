@@ -5,3 +5,14 @@
 body {
   @apply bg-white dark:bg-warmGray-800;
 }
+
+.list-scroll {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.list-scroll::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
+}

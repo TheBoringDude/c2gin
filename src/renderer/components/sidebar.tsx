@@ -120,7 +120,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
         />
       </section>
 
-      <hr />
+      <hr className="dark:border-gray-600" />
 
       <SideBarProjectsSearch
         setListProjects={setListProjects}
@@ -128,7 +128,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
         setOpen={setOpen}
       />
 
-      <ul className="pt-3 overflow-y-auto h-full pb-56">
+      <ul className="pt-3 h-full pb-56 list-scroll">
         {listProjects.map((project) => (
           <li key={project.id}>
             <button
