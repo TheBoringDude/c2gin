@@ -22,18 +22,25 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
     // NOTE: having issues using `.assign` or `.update`
     handleProjectSave(id, state);
 
-    btnSaveRef.current.disabled = false;
-    btnSaveRef.current.innerHTML = 'save';
+    btnSaveRef.current.innerHTML = 'saved';
 
-    // update
-    setUpdated(false);
+    setTimeout(() => {
+      if (!btnSaveRef.current) {
+        return;
+      }
+      btnSaveRef.current.disabled = false;
+      btnSaveRef.current.innerHTML = 'save';
+
+      // update
+      setUpdated(false);
+    }, 3000);
   };
 
   return (
     <button
       ref={btnSaveRef}
       type="button"
-      className="mx-2 border p-1 text-sm rounded-lg inline-flex items-center"
+      className="mx-2 border p-1 text-sm rounded-lg inline-flex items-center opacity-60 hover:opacity-100"
       onClick={handleSaveWrapper}
       title="Save current project work"
     >
