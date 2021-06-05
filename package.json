@@ -93,27 +93,6 @@
   },
   "repository": "TheBoringDude/c2gin",
   "license": "MIT",
-  "jest": {
-    "testURL": "http://localhost/",
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/.erb/mocks/fileMock.js",
-      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
-    },
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "ts",
-      "tsx",
-      "json"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src/node_modules"
-    ],
-    "setupFiles": [
-      "./.erb/scripts/CheckBuildsExist.js"
-    ]
-  },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
@@ -210,6 +189,7 @@
     "style-loader": "^2.0.0",
     "tailwindcss": "^2.1.2",
     "terser-webpack-plugin": "^5.0.3",
+    "ts-node": "^10.0.0",
     "typescript": "^4.0.5",
     "url-loader": "^4.1.0",
     "webpack": "^5.5.1",
