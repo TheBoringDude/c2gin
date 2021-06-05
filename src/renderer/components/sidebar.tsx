@@ -84,14 +84,18 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     >
       <section className="py-4 px-2 flex flex-col">
         <div
-          className={`mx-1 mt-1 mb-3 flex items-start ${
+          className={`mx-1 mt-1 mb-2 flex items-start ${
             open ? 'justify-between' : 'justify-center'
           } text-left`}
         >
           {open && <HomeHeader />}
-          <div className="inline-flex">
+          <div
+            className={`inline-flex ${
+              open ? 'flex-row' : 'flex-col'
+            } sm:flex-row`}
+          >
             <button
-              className="p-1 border rounded-lg mx-1 dark:border-gray-800 text-white bg-warmGray-500 dark:bg-warmGray-600 dark:text-white"
+              className="opacity-80 hover:opacity-100 p-1 border rounded-lg my-1 sm:my-0 sm:mr-1 dark:border-gray-800 text-white bg-warmGray-500 dark:bg-warmGray-600 dark:text-white"
               type="button"
               title="Toggle Dark Mode"
               onClick={() => {
@@ -101,7 +105,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
               <LightBulbIcon className="h-5 w-5" />
             </button>
             <button
-              className="p-1 border rounded-lg mx-1 dark:border-gray-800 bg-white dark:bg-warmGray-600 dark:text-white"
+              className="opacity-60 hover:opacity-100 p-1 border rounded-lg my-1 sm:my-0 dark:border-gray-800 bg-white dark:bg-warmGray-600 dark:text-white"
               type="button"
               title="Toggle Menu"
               onClick={() => {
