@@ -78,6 +78,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
 
   return (
     <div
+      id="sidebar"
       className={`${
         open ? 'w-1/3 lg:w-1/4' : 'w-1/12'
       } border-r fixed h-full z-40 bg-white dark:bg-warmGray-900 dark:border-gray-600`}
@@ -95,6 +96,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
             } sm:flex-row`}
           >
             <button
+              id="toggle-mode"
               className="opacity-80 hover:opacity-100 p-1 border rounded-lg my-1 sm:my-0 sm:mr-1 dark:border-gray-800 text-white bg-warmGray-500 dark:bg-warmGray-600 dark:text-white"
               type="button"
               title="Toggle Dark Mode"

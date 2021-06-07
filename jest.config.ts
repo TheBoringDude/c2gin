@@ -14,7 +14,7 @@ export default async (): Promise<Config.InitialOptions> => {
     moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
     moduleDirectories: ['node_modules', 'src/node_modules'],
     setupFiles: ['./.erb/scripts/CheckBuildsExist.js'],
-    setupFilesAfterEnv: ['./.erb/mocks/matchMedia.mock.js'],
+    setupFilesAfterEnv: ['./.erb/scripts/setupTests.js'],
     modulePathIgnorePatterns: ['__mocks__'],
   };
 };
