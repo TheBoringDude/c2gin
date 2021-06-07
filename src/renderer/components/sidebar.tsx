@@ -107,6 +107,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
               <LightBulbIcon className="h-5 w-5" />
             </button>
             <button
+              id="toggle-sidebar"
               className="opacity-60 hover:opacity-100 p-1 border rounded-lg my-1 sm:my-0 dark:border-gray-800 bg-white dark:bg-warmGray-600 dark:text-white"
               type="button"
               title="Toggle Menu"
