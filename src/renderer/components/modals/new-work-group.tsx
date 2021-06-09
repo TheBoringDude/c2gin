@@ -1,4 +1,5 @@
 import React, { useRef, useState, KeyboardEvent } from 'react';
+import { DocumentTextIcon } from '@heroicons/react/outline';
 import { nanoid } from 'nanoid';
 
 import useWorkGroup from '../../hooks/useWorkGroup';
@@ -55,9 +56,10 @@ export default function NewWorkGroupHandler() {
         title="Create a new work group"
         onClick={openModal}
         type="button"
-        className="bg-indigo-300 hover:bg-indigo-400 text-white px-2 py-1 rounded-lg text-sm"
+        className="bg-indigo-300 hover:bg-indigo-400 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white px-2 py-1 rounded-lg text-sm inline-flex items-center"
       >
-        new work group
+        <DocumentTextIcon className="h-4 w-4 sm:mr-1" />
+        <span className="hidden sm:block">new work group</span>
       </button>
 
       <WorkGroupModal

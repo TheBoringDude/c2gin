@@ -52,14 +52,14 @@ const ContainerBody = () => {
             <ul ref={provided.innerRef} className="flex whitespace-nowrap">
               {entries.length < 1 ? (
                 <div>
-                  <p>
+                  <p className="dark:text-white">
                     You have not created a work group yet. Create one to start
                     working.
                   </p>
                 </div>
               ) : (
                 entries.map(([key, value], index) => (
-                  <div key={key} className="w-96 mx-1">
+                  <div key={key} className="w-96 mx-2">
                     <ListGroup
                       groupid={key}
                       works={value}

@@ -2,7 +2,7 @@
   "name": "c2gin",
   "productName": "c2gin",
   "description": "a simple app for managing projects",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "./main/main.prod.js",
   "author": {
     "name": "Joshue Abance",

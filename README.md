@@ -4,9 +4,32 @@
 
 a simple app for managing projects
 
-![screenshot](./screenshot.png)
+## Screenshot
+
+- Light
+  ![screenshot (light-version)](./screenshot.png)
+
+- Dark
+  ![screenshot (dark-version)](./screenshot-dark.png)
+
+## Build
+
+```
+yarn package
+```
+
+- If you want to build for multiple os. Try running the following.
+  ```
+  yarn package-all
+  ```
 
 ## Development
+
+- After installing all dependencies, start the development setup.
+
+```
+yarn start
+```
 
 ### TODO:
 

@@ -2,12 +2,11 @@ import React, {
   Dispatch,
   SetStateAction,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from 'react';
 import { nanoid } from 'nanoid';
-import { MenuIcon } from '@heroicons/react/outline';
+import { LightBulbIcon, MenuIcon } from '@heroicons/react/outline';
 
 import HomeHeader from './home-header';
 import NewProjectHandler from './new-project';
@@ -25,8 +24,14 @@ type SideBarProps = {
 };
 
 const SideBar = ({ open, setOpen }: SideBarProps) => {
-  const { setSelected, selected, projects, handleReRead } = useCurrentProject();
-  const { state, dispatch } = useWorkGroup();
+  const {
+    setSelected,
+    selected,
+    projects,
+    handleReRead,
+    toggleMode,
+  } = useCurrentProject();
+  const { state, dispatch, updated, setUpdated } = useWorkGroup();
 
   // create a clone of projects
   const [listProjects, setListProjects] = useState(Array.from(projects));
@@ -71,35 +76,49 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     setSelected(id);
   };
 
-  /* make sure `listProjects` is updated */
-  useEffect(() => {
-    if (listProjects !== projects) {
-      setListProjects(projects);
-    }
-  }, [projects, listProjects]);
-
   return (
     <div
+      id="sidebar"
       className={`${
         open ? 'w-1/3 lg:w-1/4' : 'w-1/12'
-      } border-r fixed h-full z-40 bg-white`}
+      } border-r fixed h-full z-40 bg-white dark:bg-warmGray-900 dark:border-gray-600`}
     >
-      <div className="text-center m-1">
-        <button
-          className={`p-1 border rounded-lg ${
-            open && 'absolute top-1 right-1'
-          }`}
-          type="button"
-          onClick={() => {
-            setOpen(!open);
-          }}
+      <section className="py-4 px-2 flex flex-col">
+        <div
+          className={`mx-1 mt-1 mb-2 flex items-start ${
+            open ? 'justify-between' : 'justify-center'
+          } text-left`}
         >
-          <MenuIcon className="h-5 w-5" />
-        </button>
-      </div>
-
-      <section className={`${open ? 'p-4' : 'p-2'} flex flex-col`}>
-        {open && <HomeHeader />}
+          {open && <HomeHeader />}
+          <div
+            className={`inline-flex ${
+              open ? 'flex-row' : 'flex-col'
+            } sm:flex-row`}
+          >
+            <button
+              id="toggle-mode"
+              className="opacity-80 hover:opacity-100 p-1 border rounded-lg my-1 sm:my-0 sm:mr-1 dark:border-gray-800 text-white bg-warmGray-500 dark:bg-warmGray-600 dark:text-white"
+              type="button"
+              title="Toggle Dark Mode"
+              onClick={() => {
+                toggleMode();
+              }}
+            >
+              <LightBulbIcon className="h-5 w-5" />
+            </button>
+            <button
+              id="toggle-sidebar"
+              className="opacity-60 hover:opacity-100 p-1 border rounded-lg my-1 sm:my-0 dark:border-gray-800 bg-white dark:bg-warmGray-600 dark:text-white"
+              type="button"
+              title="Toggle Menu"
+              onClick={() => {
+                setOpen(!open);
+              }}
+            >
+              <MenuIcon className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
 
         <NewProjectHandler
           sideOpen={open}
@@ -108,7 +127,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
         />
       </section>
 
-      <hr />
+      <hr className="dark:border-gray-600" />
 
       <SideBarProjectsSearch
         setListProjects={setListProjects}
@@ -116,20 +135,25 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
         setOpen={setOpen}
       />
 
-      <ul className="pt-3 overflow-y-auto h-full pb-56">
+      <ul className="pt-3 h-full pb-56 list-scroll">
         {listProjects.map((project) => (
           <li key={project.id}>
             <button
               onClick={() => {
-                if (selected?.id) {
+                // save only if updated and if id exists
+                if (selected?.id && updated) {
                   handleProjectSave(selected?.id, state);
                 }
                 HandleSelectProject(project?.id);
+
+                // make sure to make updated -> false
+                setUpdated(false);
               }}
               title={`Select '${project.name}'`}
               type="button"
-              className={`truncate p-3 border-b text-left w-full hover:bg-indigo-200 ${
-                selected?.id === project.id && 'bg-indigo-200'
+              className={`tracking-wider truncate p-3 border-b dark:border-gray-800 text-left w-full hover:bg-indigo-200 dark:hover:bg-indigo-500 dark:text-gray-200 ${
+                selected?.id === project.id &&
+                'bg-indigo-200 dark:bg-indigo-500 dark:text-white'
               }`}
             >
               {project.name}
