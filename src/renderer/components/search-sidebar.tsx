@@ -52,7 +52,7 @@ export default function SideBarProjectsSearch({
           setOpen(true); // expand first the sidebar
           HandleFind();
         }}
-        className="bg-indigo-400 hover:bg-indigo-500 text-white p-1 rounded-md"
+        className="bg-indigo-400 hover:bg-indigo-500 text-white p-1 my-1 rounded-md"
       >
         <SearchIcon className="h-4 w-4" />
       </button>

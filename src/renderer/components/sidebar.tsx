@@ -85,7 +85,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     >
       <section className="py-4 px-2 flex flex-col">
         <div
-          className={`mx-1 mt-1 mb-2 flex items-start ${
+          className={`mx-1 mt-1 mb-2 flex items-center ${
             open ? 'justify-between' : 'justify-center'
           } text-left`}
         >
