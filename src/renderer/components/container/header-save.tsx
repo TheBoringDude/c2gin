@@ -57,7 +57,7 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
       title="Save current project work"
     >
       <SaveIcon className="h-4 w-4 sm:mr-1" />
-      <span className="hidden sm:block">{text}</span>
+      <span className="hidden md:block truncate">{text}</span>
     </button>
   );
 }

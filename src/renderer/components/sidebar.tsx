@@ -16,7 +16,7 @@ import db from '../c2gin/lowdb';
 import useCurrentProject from '../hooks/useCurrentProject';
 import useWorkGroup from '../hooks/useWorkGroup';
 import SideBarProjectsSearch from './search-sidebar';
-import ListProject from './container/list-project';
+import ListProject from './list-project';
 
 type SideBarProps = {
   open: boolean;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
-import { ProjectPropsSchema } from '../../c2gin/lowdb';
-import { handleProjectSave } from '../../c2gin/queries';
-import useCurrentProject from '../../hooks/useCurrentProject';
-import useFindProjectId from '../../hooks/useDB';
-import useWorkGroup from '../../hooks/useWorkGroup';
+import { ProjectPropsSchema } from '../c2gin/lowdb';
+import { handleProjectSave } from '../c2gin/queries';
+import useCurrentProject from '../hooks/useCurrentProject';
+import useFindProjectId from '../hooks/useDB';
+import useWorkGroup from '../hooks/useWorkGroup';
 
 type ListProjectProps = {
   project: ProjectPropsSchema;
@@ -51,9 +51,9 @@ const ListProject = ({ project, index }: ListProjectProps) => {
         onClick={handleClick}
         title={`Select '${project.name}'`}
         type="button"
-        className={`tracking-wider truncate p-3 border-b dark:border-gray-800 text-left w-full hover:bg-indigo-200 dark:hover:bg-indigo-500 dark:text-gray-200 ${
+        className={`tracking-wider truncate p-3 border-b dark:border-gray-800 text-left w-full hover:bg-indigo-200 dark:hover:bg-indigo-400 dark:text-gray-100 ${
           selected?.id === project.id &&
-          'bg-indigo-200 dark:bg-indigo-500 dark:text-white'
+          'bg-indigo-200 dark:bg-indigo-400 dark:text-white'
         }`}
       >
         {project.name}

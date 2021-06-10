@@ -55,7 +55,7 @@ export default function RemoveProjectModal() {
         className="py-1 px-2 text-sm rounded-lg bg-red-200 hover:bg-red-400 dark:bg-red-500 dark:hover:bg-red-600 text-white inline-flex items-center"
       >
         <TrashIcon className="h-4 w-4 sm:mr-1" />
-        <span className="hidden sm:block">remove</span>
+        <span className="hidden md:block truncate">remove</span>
       </button>
 
       <Modal open={open} onClose={closeModal} focusRef={btnCancelRef}>

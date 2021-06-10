@@ -69,7 +69,7 @@ export default function NewWorkGroupHandler() {
         className="bg-indigo-300 hover:bg-indigo-400 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white px-2 py-1 rounded-lg text-sm inline-flex items-center"
       >
         <DocumentTextIcon className="h-4 w-4 sm:mr-1" />
-        <span className="hidden sm:block">new work group</span>
+        <span className="hidden md:block truncate">new work</span>
       </button>
 
       <WorkGroupModal

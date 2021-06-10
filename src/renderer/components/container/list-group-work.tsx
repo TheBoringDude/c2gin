@@ -85,7 +85,7 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            className="m-1 py-1 px-2 group rounded-md border border-gray-300 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-warmGray-700"
+            className="m-1 py-1 px-2 group hover:bg-gray-100 dark:hover:bg-warmGray-600 rounded-md border border-gray-300 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-warmGray-700"
           >
             <p
               className="truncate text-gray-800 dark:text-gray-200"
