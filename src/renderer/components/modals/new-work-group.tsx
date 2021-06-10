@@ -1,15 +1,18 @@
 import React, { useRef, useState, KeyboardEvent } from 'react';
 import { DocumentTextIcon } from '@heroicons/react/outline';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { nanoid } from 'nanoid';
 
 import useWorkGroup from '../../hooks/useWorkGroup';
 import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
 import WorkGroupModal from './work-group-modal';
 import { GroupColors } from '../../c2gin/colors';
+import useCurrentProject from '../../hooks/useCurrentProject';
 
 export default function NewWorkGroupHandler() {
   const [open, setOpen] = useState(false);
 
+  const { selected } = useCurrentProject();
   const { dispatch } = useWorkGroup();
 
   const inputGroupNameRef = useRef<HTMLInputElement>(null);
@@ -49,6 +52,13 @@ export default function NewWorkGroupHandler() {
       handleAddGroup();
     }
   };
+
+  /* shortcut: for creating a new work group */
+  useHotkeys('ctrl+alt+p', () => {
+    if (selected) {
+      openModal();
+    }
+  });
 
   return (
     <>

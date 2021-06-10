@@ -1,6 +1,7 @@
+import React, { useRef, useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { TrashIcon } from '@heroicons/react/solid';
-import React, { useRef, useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import db from '../../c2gin/lowdb';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useWorkGroup from '../../hooks/useWorkGroup';
@@ -37,6 +38,13 @@ export default function RemoveProjectModal() {
     setSelected('');
     handleReRead();
   };
+
+  /* shortcut: for removing the project */
+  useHotkeys('ctrl+d', () => {
+    if (selected?.id) {
+      openModal();
+    }
+  });
 
   return (
     <>

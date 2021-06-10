@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useRef } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { SearchIcon } from '@heroicons/react/outline';
 import useCurrentProject from '../hooks/useCurrentProject';
 import { ProjectPropsSchema } from '../c2gin/lowdb';
@@ -33,6 +34,11 @@ export default function SideBarProjectsSearch({
 
     setListProjects(findProject);
   };
+
+  /* shortcut: for toggling the search bar */
+  useHotkeys('ctrl+f', () => {
+    setOpen(true);
+  });
 
   return (
     <div className="m-1 flex items-center justify-center bg-gray-50 dark:bg-warmGray-800">

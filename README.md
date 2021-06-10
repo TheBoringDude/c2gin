@@ -4,13 +4,25 @@
 
 a simple app for managing projects
 
-## Screenshot
+## Usage
+
+### Screenshot
 
 - Light
   ![screenshot (light-version)](./screenshot.png)
 
 - Dark
   ![screenshot (dark-version)](./screenshot-dark.png)
+
+### Implemented Shortcuts
+
+- **`ctrl + p`** - triggers `New Project Modal`
+- **`ctrl + alt + p`** - `New Work Group` (works only if there is a selected project)
+- **`ctrl + s`** - save the selected project
+- **`ctrl + d`** - remove the selected project
+- **`ctrl + b`** - toggles the sidebar
+- **`ctrl + f`** - shows the search input
+- **`alt + {project_number}`** - select a current project from the sidebar (starts at 1)
 
 ## Build
 

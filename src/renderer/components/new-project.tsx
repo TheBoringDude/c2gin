@@ -1,6 +1,7 @@
 import React, { useState, MutableRefObject } from 'react';
 import { Dialog } from '@headlessui/react';
 import { DocumentAddIcon } from '@heroicons/react/outline';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 import Modal from './modals';
 import useCurrentProject from '../hooks/useCurrentProject';
@@ -40,6 +41,11 @@ const NewProjectHandler = ({
 
     closeModal();
   };
+
+  /* shortcut: for creating a new project */
+  useHotkeys('ctrl+p', () => {
+    openModal();
+  });
 
   return (
     <>

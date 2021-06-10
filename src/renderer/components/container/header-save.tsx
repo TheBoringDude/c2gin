@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 
+import { useHotkeys } from 'react-hotkeys-hook';
 import { SaveIcon } from '@heroicons/react/outline';
 
 import { handleProjectSave } from '../../c2gin/queries';
@@ -12,7 +13,7 @@ type HeaderSaveButtonProps = {
 export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
   const [text, setText] = useState('save');
 
-  const { state, setUpdated } = useWorkGroup();
+  const { state, setUpdated, updated } = useWorkGroup();
 
   const btnSaveRef = useRef<HTMLButtonElement>(null);
   const handleSaveWrapper = () => {
@@ -39,6 +40,13 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
       btnSaveRef.current.disabled = false;
     }, 2000);
   };
+
+  /* shortcut: for saving the current project */
+  useHotkeys('ctrl+s', () => {
+    if (updated) {
+      handleSaveWrapper();
+    }
+  });
 
   return (
     <button

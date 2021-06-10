@@ -6,6 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { nanoid } from 'nanoid';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { LightBulbIcon, MenuIcon } from '@heroicons/react/outline';
 
 import HomeHeader from './home-header';
@@ -14,9 +15,8 @@ import NewProjectHandler from './new-project';
 import db from '../c2gin/lowdb';
 import useCurrentProject from '../hooks/useCurrentProject';
 import useWorkGroup from '../hooks/useWorkGroup';
-import useFindProjectId from '../hooks/useDB';
-import { handleProjectSave } from '../c2gin/queries';
 import SideBarProjectsSearch from './search-sidebar';
+import ListProject from './container/list-project';
 
 type SideBarProps = {
   open: boolean;
@@ -26,12 +26,11 @@ type SideBarProps = {
 const SideBar = ({ open, setOpen }: SideBarProps) => {
   const {
     setSelected,
-    selected,
     projects,
     handleReRead,
     toggleMode,
   } = useCurrentProject();
-  const { state, dispatch, updated, setUpdated } = useWorkGroup();
+  const { dispatch } = useWorkGroup();
 
   // create a clone of projects
   const [listProjects, setListProjects] = useState(Array.from(projects));
@@ -68,13 +67,14 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     setListProjects(projects);
   }, [setSelected, handleReRead, projects, dispatch]);
 
-  /* project selection */
-  const HandleSelectProject = (id: string) => {
-    const q = useFindProjectId(id).works;
-
-    dispatch({ type: 'set', work: q });
-    setSelected(id);
-  };
+  /* shortcut: for toggling sidebar */
+  useHotkeys(
+    'ctrl+b',
+    () => {
+      setOpen(!open);
+    },
+    [open]
+  );
 
   return (
     <div
@@ -136,29 +136,8 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
       />
 
       <ul className="pt-3 h-full pb-56 list-scroll">
-        {listProjects.map((project) => (
-          <li key={project.id}>
-            <button
-              onClick={() => {
-                // save only if updated and if id exists
-                if (selected?.id && updated) {
-                  handleProjectSave(selected?.id, state);
-                }
-                HandleSelectProject(project?.id);
-
-                // make sure to make updated -> false
-                setUpdated(false);
-              }}
-              title={`Select '${project.name}'`}
-              type="button"
-              className={`tracking-wider truncate p-3 border-b dark:border-gray-800 text-left w-full hover:bg-indigo-200 dark:hover:bg-indigo-500 dark:text-gray-200 ${
-                selected?.id === project.id &&
-                'bg-indigo-200 dark:bg-indigo-500 dark:text-white'
-              }`}
-            >
-              {project.name}
-            </button>
-          </li>
+        {listProjects.map((project, index) => (
+          <ListProject key={project.id} project={project} index={index} />
         ))}
       </ul>
     </div>
