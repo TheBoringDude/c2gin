@@ -1,10 +1,12 @@
-<div style="text-align:center">
-  <img src="./assets/icon.svg" height=200 width=200 />
+<div align="center">
+  <a href="https://github.com/TheBoringDude/c2gin"><img src="./assets/icon.svg" height=200 width=200 alt="Logo" /></a>
+  <br />
   <h1 style="color:#6366f1;font-weight:900;">c2gin</h1>
-
+  <br />
   <p>a simple app for managing projects</p>
-  
-  [![Actions Status](https://github.com/TheBoringDude/c2gin/workflows/Test/badge.svg)](https://github.com/TheBoringDude/c2gin/actions)
+
+<a href="https://github.com/TheBoringDude/c2gin/actions"><img src="https://github.com/TheBoringDude/c2gin/workflows/Test/badge.svg" alt="Test Status"/></a>
+
 </div>
 
 <div><strong>LOGO:</strong> Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
