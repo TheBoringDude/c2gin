@@ -83,9 +83,9 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
         open ? 'w-1/3 lg:w-1/4' : 'w-1/12'
       } border-r fixed h-full z-40 bg-white dark:bg-warmGray-900 dark:border-gray-600`}
     >
-      <section className="py-4 px-2 flex flex-col">
+      <section className="p-2 flex flex-col">
         <div
-          className={`mx-1 mt-1 mb-2 flex items-center ${
+          className={`mx-1 mt-1 mb-3 flex items-center ${
             open ? 'justify-between' : 'justify-center'
           } text-left`}
         >
