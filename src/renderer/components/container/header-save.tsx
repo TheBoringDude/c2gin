@@ -42,11 +42,15 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
   };
 
   /* shortcut: for saving the current project */
-  useHotkeys('ctrl+s', () => {
-    if (updated) {
-      handleSaveWrapper();
-    }
-  });
+  useHotkeys(
+    'ctrl+s',
+    () => {
+      if (updated) {
+        handleSaveWrapper();
+      }
+    },
+    [updated]
+  );
 
   return (
     <button
