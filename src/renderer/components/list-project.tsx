@@ -6,6 +6,7 @@ import { handleProjectSave } from '../c2gin/queries';
 import useCurrentProject from '../hooks/useCurrentProject';
 import useFindProjectId from '../hooks/useDB';
 import useWorkGroup from '../hooks/useWorkGroup';
+import ProjectAsterisk from './asterisk';
 
 type ListProjectProps = {
   project: ProjectPropsSchema;
@@ -56,6 +57,7 @@ const ListProject = ({ project, index }: ListProjectProps) => {
           'bg-indigo-200 dark:bg-indigo-400 dark:text-white'
         }`}
       >
+        <ProjectAsterisk name={project.name} />
         {project.name}
       </button>
     </li>

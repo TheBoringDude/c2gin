@@ -4,7 +4,7 @@ import HeaderSaveButton from './header-save';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import NewWorkGroupHandler from '../modals/new-work-group';
 import RemoveProjectModal from '../modals/remove-project';
-import useWorkGroup from '../../hooks/useWorkGroup';
+import ProjectAsterisk from '../asterisk';
 
 type ContainerHeaderProps = {
   open: boolean;
@@ -12,7 +12,6 @@ type ContainerHeaderProps = {
 
 const ContainerHeader = ({ open }: ContainerHeaderProps) => {
   const { selected } = useCurrentProject();
-  const { updated, state } = useWorkGroup();
 
   return (
     <div
@@ -25,8 +24,8 @@ const ContainerHeader = ({ open }: ContainerHeaderProps) => {
           className="text-xl font-bold text-indigo-600 dark:text-indigo-400 tracking-wider w-1/2 truncate"
           title={selected.name}
         >
-          {/* show asterisk if updated and if selected != state */}
-          {updated && selected.works !== state && '*'} {selected.name}
+          <ProjectAsterisk name={selected.name} />
+          {selected.name}
         </h2>
         <div className="flex">
           <NewWorkGroupHandler />
