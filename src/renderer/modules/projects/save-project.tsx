@@ -15,9 +15,9 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
 
   const btnSaveRef = useRef<HTMLButtonElement>(null);
   const handleSaveWrapper = () => {
-    if (!btnSaveRef.current) {
-      return;
-    }
+    if (!updated) return;
+
+    if (!btnSaveRef.current) return;
 
     btnSaveRef.current.disabled = true;
 
@@ -47,7 +47,7 @@ export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
         handleSaveWrapper();
       }
     },
-    [updated]
+    [updated, state]
   );
 
   return (
