@@ -1,10 +1,10 @@
 import React from 'react';
 
-import HeaderSaveButton from './header-save';
+import HeaderSaveButton from '../projects/save-project';
 import useCurrentProject from '../../hooks/useCurrentProject';
-import NewWorkGroupHandler from '../modals/new-group';
-import RemoveProjectModal from '../modals/remove-project';
-import ProjectAsterisk from '../asterisk';
+import NewWorkGroupHandler from '../group/new-group';
+import RemoveProjectModal from '../projects/remove-project';
+import ProjectAsterisk from '../../components/asterisk';
 
 type ContainerHeaderProps = {
   open: boolean;

@@ -3,10 +3,10 @@ import { Dialog } from '@headlessui/react';
 import { DocumentAddIcon } from '@heroicons/react/outline';
 import { useHotkeys } from 'react-hotkeys-hook';
 
-import Modal from './modals';
-import useCurrentProject from '../hooks/useCurrentProject';
-import useWorkGroup from '../hooks/useWorkGroup';
-import { handleProjectSave } from '../c2gin/queries';
+import Modal from '../../components/modals';
+import useCurrentProject from '../../hooks/useCurrentProject';
+import useWorkGroup from '../../hooks/useWorkGroup';
+import { handleProjectSave } from '../../c2gin/queries';
 
 interface NewProjectHandlerProps {
   sideOpen: boolean;

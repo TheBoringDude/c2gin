@@ -10,13 +10,13 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { LightBulbIcon, MenuIcon } from '@heroicons/react/outline';
 
 import HomeHeader from './home-header';
-import NewProjectHandler from './new-project';
+import NewProjectHandler from '../projects/new-project';
 
-import db from '../c2gin/lowdb';
-import useCurrentProject from '../hooks/useCurrentProject';
-import useWorkGroup from '../hooks/useWorkGroup';
+import db from '../../c2gin/lowdb';
+import useCurrentProject from '../../hooks/useCurrentProject';
+import useWorkGroup from '../../hooks/useWorkGroup';
 import SideBarProjectsSearch from './search-sidebar';
-import ListProject from './list-project';
+import ListProject from '../projects/list-project';
 
 type SideBarProps = {
   open: boolean;

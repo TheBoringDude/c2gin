@@ -3,7 +3,7 @@ import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import useCurrentProject from '../../hooks/useCurrentProject';
 
 import useWorkGroup from '../../hooks/useWorkGroup';
-import ListGroup from './list-group';
+import ListGroup from '../group/list-group';
 
 const ContainerBody = () => {
   const { state, dispatch } = useWorkGroup();

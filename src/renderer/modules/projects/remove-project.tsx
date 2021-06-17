@@ -5,7 +5,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import db from '../../c2gin/lowdb';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import Modal from '../modals';
+import Modal from '../../components/modals';
 
 export default function RemoveProjectModal() {
   const [open, setOpen] = useState(false);

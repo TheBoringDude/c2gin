@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import SideBar from './sidebar';
-import ContainerBody from './container/body';
-import ContainerHeader from './container/header';
-import useCurrentProject from '../hooks/useCurrentProject';
-import WelcomeMessage from './welcome';
+import SideBar from '../sidebar/sidebar';
+import ContainerBody from './body';
+import ContainerHeader from './header';
+import useCurrentProject from '../../hooks/useCurrentProject';
+import WelcomeMessage from '../../components/welcome';
 
 const Container = () => {
   const { selected } = useCurrentProject();

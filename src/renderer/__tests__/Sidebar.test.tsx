@@ -3,7 +3,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { shallow } from 'enzyme';
 
-import Sidebar from '../components/sidebar';
+import Sidebar from '../modules/sidebar/sidebar';
 
 const wrapper = shallow(<Sidebar open setOpen={() => {}} />);
 

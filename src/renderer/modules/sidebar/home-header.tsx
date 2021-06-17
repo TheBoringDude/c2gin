@@ -1,6 +1,6 @@
 import React from 'react';
 
-import icon from '../../../assets/icon.svg';
+import icon from '../../../../assets/icon.svg';
 
 const HomeHeader = () => {
   return (

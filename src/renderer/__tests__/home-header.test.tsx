@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 
 import { render } from 'enzyme';
 
-import HomeHeader from '../components/home-header';
+import HomeHeader from '../modules/sidebar/home-header';
 
 const wrapper = render(<HomeHeader />);
 

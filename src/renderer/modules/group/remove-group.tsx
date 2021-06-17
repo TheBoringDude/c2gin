@@ -2,7 +2,7 @@ import { Dialog } from '@headlessui/react';
 import { TrashIcon } from '@heroicons/react/solid';
 import React, { useRef, useState } from 'react';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import Modal from '../modals';
+import Modal from '../../components/modals';
 
 type RemoveWorkGroupProps = { groupid: string };
 

@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 
 import { C2GinContext } from '../c2gin/provider';
-import ContainerHeader from '../components/container/header';
+import ContainerHeader from '../modules/container/header';
 
 const Component = () => (
   <C2GinContext.Provider

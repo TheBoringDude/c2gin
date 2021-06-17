@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction, useRef } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { SearchIcon } from '@heroicons/react/outline';
-import useCurrentProject from '../hooks/useCurrentProject';
-import { ProjectPropsSchema } from '../c2gin/lowdb';
+import useCurrentProject from '../../hooks/useCurrentProject';
+import { ProjectPropsSchema } from '../../c2gin/lowdb';
 
 type SideBarProjectsSearchProps = {
   open: boolean;

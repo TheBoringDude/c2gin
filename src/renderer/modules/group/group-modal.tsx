@@ -1,7 +1,7 @@
 import React, { MutableRefObject, ReactNode, KeyboardEvent } from 'react';
 import { Dialog } from '@headlessui/react';
 import { GroupColors } from '../../c2gin/colors';
-import Modal from '../modals';
+import Modal from '../../components/modals';
 
 type WorkGroupModalProps = {
   open: boolean;
