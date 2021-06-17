@@ -3,7 +3,7 @@ import {
   ProjectWorkProps,
   ProjectWorkPropsContainer,
   ProjectWorkPropsContainerBase,
-} from '../c2gin/lowdb';
+} from '../lib/lowdb';
 
 type ActionsGroup =
   | { type: 'add'; id: string; group: ProjectWorkPropsContainer }
