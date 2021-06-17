@@ -37,7 +37,7 @@ export default function RemoveWorkGroup({ groupid }: RemoveWorkGroupProps) {
 
       <Modal open={open} onClose={closeModal} focusRef={btnCloseModal}>
         <Dialog.Title as="h3" className="text-lg font-bold text-gray-900">
-          Are you sure you want to remove this work group?
+          Are you sure you want to remove this group?
         </Dialog.Title>
         <div className="mt-2">
           <p>This action is not ireverssible.</p>
@@ -49,7 +49,7 @@ export default function RemoveWorkGroup({ groupid }: RemoveWorkGroupProps) {
             className="mx-1 py-2 px-8 bg-indigo-400 hover:bg-indigo-500 text-white rounded-lg"
             onClick={handleRemoveGroup}
           >
-            Remove WorkGroup
+            Remove Group
           </button>
           <button
             type="button"

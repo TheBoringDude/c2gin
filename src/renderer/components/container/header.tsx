@@ -2,7 +2,7 @@ import React from 'react';
 
 import HeaderSaveButton from './header-save';
 import useCurrentProject from '../../hooks/useCurrentProject';
-import NewWorkGroupHandler from '../modals/new-work-group';
+import NewWorkGroupHandler from '../modals/new-group';
 import RemoveProjectModal from '../modals/remove-project';
 import ProjectAsterisk from '../asterisk';
 

@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 
 import useWorkGroup from '../../hooks/useWorkGroup';
 import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
-import WorkGroupModal from './work-group-modal';
+import WorkGroupModal from './group-modal';
 import { GroupColors } from '../../c2gin/colors';
 import useCurrentProject from '../../hooks/useCurrentProject';
 
@@ -63,13 +63,13 @@ export default function NewWorkGroupHandler() {
   return (
     <>
       <button
-        title="Create a new work group"
+        title="Create a new group"
         onClick={openModal}
         type="button"
         className="bg-indigo-300 hover:bg-indigo-400 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white px-2 py-1 rounded-lg text-sm inline-flex items-center"
       >
         <DocumentTextIcon className="h-4 w-4 sm:mr-1" />
-        <span className="hidden md:block truncate">new work</span>
+        <span className="hidden md:block truncate">new group</span>
       </button>
 
       <WorkGroupModal
@@ -81,7 +81,7 @@ export default function NewWorkGroupHandler() {
         descriptionDefValue=""
         selectThemeRef={inputSelectTheme}
         selectThemeDefValue="default"
-        dialogTitle="Add a new work category"
+        dialogTitle="Add a New Group"
         handleOnEnter={handleOnEnter}
       >
         <button
@@ -89,7 +89,7 @@ export default function NewWorkGroupHandler() {
           className="py-2 px-8 bg-indigo-400 hover:bg-indigo-500 text-white rounded-lg"
           onClick={handleAddGroup}
         >
-          Create WorkGroup
+          Create Group
         </button>
       </WorkGroupModal>
     </>

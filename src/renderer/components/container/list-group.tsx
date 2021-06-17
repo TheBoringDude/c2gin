@@ -7,7 +7,7 @@ import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import WorkList from './list-group-work';
 import RenameWorkGroupHandlerProps from '../modals/rename-work-group';
-import RemoveWorkGroup from '../modals/remove-work-group';
+import RemoveWorkGroup from '../modals/remove-group';
 
 type ListGroupProps = {
   groupid: string;
