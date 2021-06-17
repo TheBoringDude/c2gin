@@ -1,7 +1,7 @@
 {
   "name": "c2gin",
   "productName": "c2gin",
-  "description": "a simple app for managing projects",
+  "description": "a simple app for managing projects and collections",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",
     "build:main": "cross-env NODE_ENV=production webpack --config ./.erb/configs/webpack.config.main.prod.babel.js",

@@ -3,7 +3,7 @@
   <br />
   <h1 style="color:#6366f1;font-weight:900;">c2gin</h1>
   <br />
-  <p>a simple app for managing projects</p>
+  <p>a simple app for managing projects and collections</p>
 
 <a href="https://github.com/TheBoringDude/c2gin/actions"><img src="https://github.com/TheBoringDude/c2gin/workflows/Test/badge.svg" alt="Test Status"/></a>
 

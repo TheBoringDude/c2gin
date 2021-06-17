@@ -1,7 +1,7 @@
 {
   "name": "c2gin",
   "productName": "c2gin",
-  "description": "a simple app for managing projects",
+  "description": "a simple app for managing projects and collections",
   "version": "0.2.0",
   "main": "./main/main.prod.js",
   "author": {
