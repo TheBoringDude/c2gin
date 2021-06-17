@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { TrashIcon } from '@heroicons/react/solid';
 import { useHotkeys } from 'react-hotkeys-hook';
-import db from '../../c2gin/lowdb';
+import db from '../../lib/lowdb';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import Modal from '../../components/modals';

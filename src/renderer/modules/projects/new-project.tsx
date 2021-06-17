@@ -6,7 +6,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import { handleProjectSave } from '../../c2gin/queries';
+import { handleProjectSave } from '../../lib/queries';
 
 interface NewProjectHandlerProps {
   sideOpen: boolean;

@@ -5,7 +5,7 @@ import React, {
   SetStateAction,
   useState,
 } from 'react';
-import db, { ProjectPropsSchema } from './lowdb';
+import db, { ProjectPropsSchema } from '../lib/lowdb';
 
 type C2GinProviderProps = {
   children: ReactNode;

@@ -2,9 +2,9 @@ import React, { useRef, useState, KeyboardEvent } from 'react';
 import { PencilAltIcon } from '@heroicons/react/solid';
 
 import useWorkGroup from '../../hooks/useWorkGroup';
-import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
+import { ProjectWorkPropsContainer } from '../../lib/lowdb';
 import WorkGroupModal from './group-modal';
-import { GroupColors } from '../../c2gin/colors';
+import { GroupColors } from '../../lib/colors';
 
 type RenameWorkGroupHandlerProps = {
   work: ProjectWorkPropsContainer;

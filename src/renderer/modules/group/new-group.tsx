@@ -4,9 +4,9 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { nanoid } from 'nanoid';
 
 import useWorkGroup from '../../hooks/useWorkGroup';
-import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
+import { ProjectWorkPropsContainer } from '../../lib/lowdb';
 import WorkGroupModal from './group-modal';
-import { GroupColors } from '../../c2gin/colors';
+import { GroupColors } from '../../lib/colors';
 import useCurrentProject from '../../hooks/useCurrentProject';
 
 export default function NewWorkGroupHandler() {

@@ -1,5 +1,14 @@
 /* eslint-disable import/prefer-default-export */
-import { GroupColorProps } from './lowdb';
+
+type GroupColorProps = {
+  [key: string]: GroupColorColorsProps;
+};
+
+type GroupColorColorsProps = {
+  key: string;
+  bg: string;
+  border: string;
+};
 
 const GroupColors: GroupColorProps = {
   default: {
@@ -54,4 +63,4 @@ const GroupColors: GroupColorProps = {
   },
 };
 
-export { GroupColors };
+export { GroupColors, GroupColorColorsProps, GroupColorProps };

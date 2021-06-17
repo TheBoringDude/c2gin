@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 
-import { ProjectPropsSchema } from '../../c2gin/lowdb';
-import { handleProjectSave } from '../../c2gin/queries';
+import { ProjectPropsSchema } from '../../lib/lowdb';
+import { handleProjectSave } from '../../lib/queries';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useFindProjectId from '../../hooks/useDB';
 import useWorkGroup from '../../hooks/useWorkGroup';

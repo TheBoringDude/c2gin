@@ -1,4 +1,4 @@
-import db from '../c2gin/lowdb';
+import db from '../lib/lowdb';
 
 export default function useFindProjectId(id: string) {
   return db.get('projects').find({ id }).value();

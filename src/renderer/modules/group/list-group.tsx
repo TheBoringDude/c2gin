@@ -3,7 +3,7 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { PlusCircleIcon, PlusIcon } from '@heroicons/react/solid';
 import { nanoid } from 'nanoid';
 
-import { ProjectWorkPropsContainer } from '../../c2gin/lowdb';
+import { ProjectWorkPropsContainer } from '../../lib/lowdb';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import WorkList from '../item/list-items';
 import RenameWorkGroupHandlerProps from './rename-group';

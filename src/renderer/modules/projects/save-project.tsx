@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { SaveIcon } from '@heroicons/react/outline';
 
-import { handleProjectSave } from '../../c2gin/queries';
+import { handleProjectSave } from '../../lib/queries';
 import useWorkGroup from '../../hooks/useWorkGroup';
 
 type HeaderSaveButtonProps = {
