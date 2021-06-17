@@ -19,7 +19,10 @@ const ListProject = ({ project, index }: ListProjectProps) => {
 
   /* project selection */
   const HandleSelectProject = (id: string) => {
-    const q = useFindProjectId(id).works;
+    const p = useFindProjectId(id);
+    if (!p) return;
+
+    const q = p.works;
 
     dispatch({ type: 'set', work: q });
     setSelected(id);
@@ -57,7 +60,7 @@ const ListProject = ({ project, index }: ListProjectProps) => {
           'bg-indigo-200 dark:bg-indigo-400 dark:text-white'
         }`}
       >
-        <ProjectAsterisk name={project.name} />
+        <ProjectAsterisk projectid={project.id} />
         {project.name}
       </button>
     </li>

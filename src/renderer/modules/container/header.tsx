@@ -24,7 +24,7 @@ const ContainerHeader = ({ open }: ContainerHeaderProps) => {
           className="text-xl font-bold text-indigo-600 dark:text-indigo-400 tracking-wider w-1/2 truncate"
           title={selected.name}
         >
-          <ProjectAsterisk name={selected.name} />
+          <ProjectAsterisk projectid={selected.id} />
           {selected.name}
         </h2>
         <div className="flex">

@@ -2,6 +2,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -24,13 +25,14 @@ type SideBarProps = {
 };
 
 const SideBar = ({ open, setOpen }: SideBarProps) => {
+  // get states from workgroup
   const {
     setSelected,
     projects,
     handleReRead,
     toggleMode,
   } = useCurrentProject();
-  const { dispatch } = useWorkGroup();
+  const { dispatch, updated } = useWorkGroup();
 
   // create a clone of projects
   const [listProjects, setListProjects] = useState(Array.from(projects));
@@ -75,6 +77,14 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     },
     [open]
   );
+
+  // re-render sidebar if a projects is updated
+  useEffect(() => {
+    // needs to be updated to be re-rendered
+    if (projects !== listProjects && updated) {
+      setListProjects(projects);
+    }
+  }, [projects, listProjects, updated]);
 
   return (
     <div
