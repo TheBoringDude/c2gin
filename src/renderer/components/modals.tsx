@@ -1,6 +1,5 @@
-import React, { Fragment, MutableRefObject, ReactNode } from 'react';
-
 import { Dialog, Transition } from '@headlessui/react';
+import React, { Fragment, MutableRefObject, ReactNode } from 'react';
 
 type ModalProps = {
   children: ReactNode;

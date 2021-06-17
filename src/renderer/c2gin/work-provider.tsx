@@ -6,8 +6,8 @@ import React, {
   useReducer,
   useState,
 } from 'react';
-import GroupReducer, { ActionsGroup } from '../reducers/workgroups';
 import { ProjectWorkProps } from '../lib/lowdb';
+import GroupReducer, { ActionsGroup } from '../reducers/workgroups';
 
 type WorkProviderProps = {
   initialState: ProjectWorkProps;

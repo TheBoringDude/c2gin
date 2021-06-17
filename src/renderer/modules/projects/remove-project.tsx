@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { TrashIcon } from '@heroicons/react/solid';
+import React, { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import db from '../../lib/lowdb';
+import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import Modal from '../../components/modals';
+import db from '../../lib/lowdb';
 
 export default function RemoveProjectModal() {
   const [open, setOpen] = useState(false);

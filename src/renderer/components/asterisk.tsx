@@ -1,5 +1,4 @@
 import React from 'react';
-
 import useCurrentProject from '../hooks/useCurrentProject';
 import useWorkGroup from '../hooks/useWorkGroup';
 

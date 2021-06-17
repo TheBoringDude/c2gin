@@ -1,10 +1,9 @@
-import React, { useRef, useState, KeyboardEvent } from 'react';
 import { PencilAltIcon } from '@heroicons/react/solid';
-
+import React, { KeyboardEvent, useRef, useState } from 'react';
 import useWorkGroup from '../../hooks/useWorkGroup';
+import { GroupColors } from '../../lib/colors';
 import { ProjectWorkPropsContainer } from '../../lib/lowdb';
 import WorkGroupModal from './group-modal';
-import { GroupColors } from '../../lib/colors';
 
 type RenameWorkGroupHandlerProps = {
   work: ProjectWorkPropsContainer;

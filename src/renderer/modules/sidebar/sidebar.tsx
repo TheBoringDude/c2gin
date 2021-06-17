@@ -1,3 +1,5 @@
+import { LightBulbIcon, MenuIcon } from '@heroicons/react/outline';
+import { nanoid } from 'nanoid';
 import React, {
   Dispatch,
   SetStateAction,
@@ -6,18 +8,14 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { nanoid } from 'nanoid';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { LightBulbIcon, MenuIcon } from '@heroicons/react/outline';
-
-import HomeHeader from './home-header';
-import NewProjectHandler from '../projects/new-project';
-
-import db from '../../lib/lowdb';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import SideBarProjectsSearch from './search-sidebar';
+import db from '../../lib/lowdb';
 import ListProject from '../projects/list-project';
+import NewProjectHandler from '../projects/new-project';
+import HomeHeader from './home-header';
+import SideBarProjectsSearch from './search-sidebar';
 
 type SideBarProps = {
   open: boolean;

@@ -1,8 +1,8 @@
 import { Dialog } from '@headlessui/react';
 import { TrashIcon } from '@heroicons/react/solid';
 import React, { useRef, useState } from 'react';
-import useWorkGroup from '../../hooks/useWorkGroup';
 import Modal from '../../components/modals';
+import useWorkGroup from '../../hooks/useWorkGroup';
 
 type RemoveWorkGroupProps = { groupid: string };
 

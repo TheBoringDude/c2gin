@@ -1,8 +1,7 @@
-import React, { useState, MutableRefObject } from 'react';
 import { Dialog } from '@headlessui/react';
 import { DocumentAddIcon } from '@heroicons/react/outline';
+import React, { MutableRefObject, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-
 import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useWorkGroup from '../../hooks/useWorkGroup';

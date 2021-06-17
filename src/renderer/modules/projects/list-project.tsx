@@ -1,12 +1,11 @@
 import React from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-
-import { ProjectPropsSchema } from '../../lib/lowdb';
-import { handleProjectSave } from '../../lib/queries';
+import ProjectAsterisk from '../../components/asterisk';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useFindProjectId from '../../hooks/useDB';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import ProjectAsterisk from '../../components/asterisk';
+import { ProjectPropsSchema } from '../../lib/lowdb';
+import { handleProjectSave } from '../../lib/queries';
 
 type ListProjectProps = {
   project: ProjectPropsSchema;

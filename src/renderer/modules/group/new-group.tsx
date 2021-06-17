@@ -1,13 +1,12 @@
-import React, { useRef, useState, KeyboardEvent } from 'react';
 import { DocumentTextIcon } from '@heroicons/react/outline';
-import { useHotkeys } from 'react-hotkeys-hook';
 import { nanoid } from 'nanoid';
-
+import React, { KeyboardEvent, useRef, useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
+import useCurrentProject from '../../hooks/useCurrentProject';
 import useWorkGroup from '../../hooks/useWorkGroup';
+import { GroupColors } from '../../lib/colors';
 import { ProjectWorkPropsContainer } from '../../lib/lowdb';
 import WorkGroupModal from './group-modal';
-import { GroupColors } from '../../lib/colors';
-import useCurrentProject from '../../hooks/useCurrentProject';
 
 export default function NewWorkGroupHandler() {
   const [open, setOpen] = useState(false);

@@ -25,5 +25,8 @@
     "yarn.lock": true,
     "*.{css,sass,scss}.d.ts": true
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
 }

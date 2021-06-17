@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useRef, useState } from 'react';
+
 import { PencilIcon, TrashIcon } from '@heroicons/react/solid';
+import React, { useRef, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { ProjectWorkListProps } from '../../c2gin/lowdb';
 import useWorkGroup from '../../hooks/useWorkGroup';
+import { ProjectWorkListProps } from '../../lib/lowdb';
 
 type WorkListProps = {
   list: ProjectWorkListProps;

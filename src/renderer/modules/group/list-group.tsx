@@ -1,13 +1,12 @@
-import React, { useRef, useState } from 'react';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { PlusCircleIcon, PlusIcon } from '@heroicons/react/solid';
 import { nanoid } from 'nanoid';
-
-import { ProjectWorkPropsContainer } from '../../lib/lowdb';
+import React, { useRef, useState } from 'react';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import useWorkGroup from '../../hooks/useWorkGroup';
+import { ProjectWorkPropsContainer } from '../../lib/lowdb';
 import WorkList from '../item/list-items';
-import RenameWorkGroupHandlerProps from './rename-group';
 import RemoveWorkGroup from './remove-group';
+import RenameWorkGroupHandlerProps from './rename-group';
 
 type ListGroupProps = {
   groupid: string;
