@@ -5,7 +5,7 @@ import React, {
   SetStateAction,
   useState,
 } from 'react';
-import db, { ProjectPropsSchema } from '../lib/lowdb';
+import db, { ProjectPropsSchema, ProjectTagsSchema } from '../lib/lowdb';
 
 type C2GinProviderProps = {
   children: ReactNode;
@@ -16,6 +16,8 @@ type UIModes = 'dark' | 'light' | string;
 type C2GinContextProps = {
   projects: ProjectPropsSchema[];
   setProjects: Dispatch<SetStateAction<ProjectPropsSchema[]>>;
+  tags: ProjectTagsSchema[];
+  setTags: Dispatch<SetStateAction<ProjectTagsSchema[]>>;
   selected: ProjectPropsSchema;
   setSelected: (id: string) => void;
   handleReRead: () => void;
@@ -34,6 +36,8 @@ const initContext = {
 const C2GinContext = createContext<C2GinContextProps>({
   projects: [],
   setProjects: () => {},
+  tags: [],
+  setTags: () => {},
   selected: initContext,
   setSelected: () => {},
   handleReRead: () => {},
@@ -43,6 +47,10 @@ const C2GinContext = createContext<C2GinContextProps>({
 
 const getProjects = () => {
   return db.get('projects').value();
+};
+
+const getTags = () => {
+  return db.get('tags').value();
 };
 
 const getInitTheme = (): UIModes => {
@@ -79,6 +87,7 @@ const handleTheme = () => {
 const C2GinProvider = ({ children }: C2GinProviderProps) => {
   const [selected, setSelected] = useState<ProjectPropsSchema>(initContext);
   const [projects, setProjects] = useState<ProjectPropsSchema[]>(getProjects());
+  const [tags, setTags] = useState<ProjectTagsSchema[]>(getTags());
   const [mode, setMode] = useState<UIModes>(handleTheme());
 
   /* handler for reading th specific project */
@@ -107,6 +116,8 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
         setSelected: handleSetSelected,
         projects,
         setProjects,
+        tags,
+        setTags,
         handleReRead,
         mode,
         toggleMode,

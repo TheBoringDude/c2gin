@@ -14,6 +14,7 @@ import useWorkGroup from '../../hooks/useWorkGroup';
 import db from '../../lib/lowdb';
 import ListProject from '../projects/list-project';
 import NewProjectHandler from '../projects/new-project';
+import TagManager from '../tags/tag-manager';
 import HomeHeader from './home-header';
 import SideBarProjectsSearch from './search-sidebar';
 
@@ -128,11 +129,14 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
           </div>
         </div>
 
-        <NewProjectHandler
-          sideOpen={open}
-          HandleCreateProject={HandleCreateProject}
-          inputProjectRef={inputProjectRef}
-        />
+        <div className="flex flex-row">
+          <NewProjectHandler
+            sideOpen={open}
+            HandleCreateProject={HandleCreateProject}
+            inputProjectRef={inputProjectRef}
+          />
+          <TagManager />
+        </div>
       </section>
 
       <hr className="dark:border-gray-600" />
