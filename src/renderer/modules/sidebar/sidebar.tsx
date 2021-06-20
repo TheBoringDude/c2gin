@@ -129,13 +129,17 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
           </div>
         </div>
 
-        <div className="flex flex-row">
+        {/* buttons */}
+        <div>
           <NewProjectHandler
             sideOpen={open}
             HandleCreateProject={HandleCreateProject}
             inputProjectRef={inputProjectRef}
           />
-          <TagManager />
+
+          <div className="text-right mt-1 tracking-wide">
+            <TagManager sideOpen={open} />
+          </div>
         </div>
       </section>
 

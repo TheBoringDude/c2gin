@@ -1,5 +1,4 @@
 import React, { Dispatch } from 'react';
-import useCurrentProject from '../../hooks/useCurrentProject';
 import { ProjectTagsSchema } from '../../lib/lowdb';
 import { ActionsTags } from '../../reducers/tags';
 
@@ -9,12 +8,8 @@ type ListTagsProps = {
 };
 
 const ListTags = ({ tags, dispatch }: ListTagsProps) => {
-  const { setTags } = useCurrentProject();
-
   const handleRemoveTag = (id: string) => {
     dispatch({ type: 'remove', id });
-
-    setTags(tags);
   };
 
   return (

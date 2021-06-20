@@ -1,6 +1,6 @@
 import { Dialog } from '@headlessui/react';
 import { nanoid } from 'nanoid';
-import React, { useReducer, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import { ProjectTagsSchema } from '../../lib/lowdb';
@@ -8,10 +8,15 @@ import { handleTagsSave } from '../../lib/queries';
 import TagsReducer from '../../reducers/tags';
 import ListTags from './list-tags';
 
-export default function TagManager() {
+type TagManagerProps = {
+  sideOpen: boolean;
+};
+
+export default function TagManager({ sideOpen }: TagManagerProps) {
   const [open, setOpen] = useState(false);
 
   const cancelBtnRef = useRef<HTMLButtonElement>(null);
+  const saveBtnRef = useRef<HTMLButtonElement>(null);
   const inputTagRef = useRef<HTMLInputElement>(null);
 
   const { tags, setTags } = useCurrentProject();
@@ -39,16 +44,29 @@ export default function TagManager() {
     inputTagRef.current.value = '';
 
     dispatch({ type: 'add', tag: newTag });
-
-    setTags(state);
   };
+
+  useEffect(() => {
+    if (!saveBtnRef.current) return;
+
+    if (state === tags) {
+      saveBtnRef.current.disabled = true;
+    } else {
+      saveBtnRef.current.disabled = false;
+    }
+  }, [tags, state]);
 
   return (
     <>
-      <button type="button" onClick={openModal}>
+      <button
+        className="ml-2 border dark:border-gray-600 rounded-lg p-1 text-gray-600 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-200 text-sm inline-flex items-center"
+        type="button"
+        title="Open Tag Manager"
+        onClick={openModal}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
+          className={`h-4 w-4 ${sideOpen && 'mr-1'}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -60,6 +78,7 @@ export default function TagManager() {
             d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
           />
         </svg>
+        {sideOpen && 'tag manager'}
       </button>
 
       <Modal
@@ -119,16 +138,22 @@ export default function TagManager() {
             className="mr-1 border py-2 px-8 bg-gray-400 hover:bg-gray-500 text-white rounded-lg"
             ref={cancelBtnRef}
             type="button"
-            onClick={closeModal}
+            onClick={() => {
+              closeModal();
+
+              dispatch({ type: 'set', state: tags }); // reset the reducer data
+            }}
           >
             Cancel
           </button>
           <button
+            ref={saveBtnRef}
             type="button"
-            className="py-2 px-8 bg-indigo-400 hover:bg-indigo-500 text-white rounded-lg"
+            className="py-2 px-8 bg-indigo-400 hover:bg-indigo-500 text-white rounded-lg disabled:opacity-80 disabled:hover:bg-indigo-400"
             onClick={() => {
               if (tags !== state) {
                 handleTagsSave(state);
+                setTags(state);
               }
             }}
           >
