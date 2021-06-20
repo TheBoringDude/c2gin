@@ -49,18 +49,23 @@ const ListProject = ({ project, index }: ListProjectProps) => {
   );
 
   return (
-    <li key={project.id}>
+    <li
+      key={project.id}
+      className={`group relative flex items-center justify-between hover:bg-indigo-200 dark:hover:bg-indigo-400 border-b dark:border-gray-800 ${
+        selected?.id === project.id &&
+        'bg-indigo-200 dark:bg-indigo-400 dark:text-white'
+      }`}
+    >
       <button
         onClick={handleClick}
         title={`Select '${project.name}'`}
         type="button"
-        className={`tracking-wider truncate p-3 border-b dark:border-gray-800 text-left w-full hover:bg-indigo-200 dark:hover:bg-indigo-400 dark:text-gray-100 ${
-          selected?.id === project.id &&
-          'bg-indigo-200 dark:bg-indigo-400 dark:text-white'
-        }`}
+        className="p-3 tracking-wider truncate text-left w-full dark:text-gray-100 focus:outline-none"
       >
-        <ProjectAsterisk projectid={project.id} />
-        {project.name}
+        <span>
+          <ProjectAsterisk projectid={project.id} />
+          {project.name}
+        </span>
       </button>
     </li>
   );

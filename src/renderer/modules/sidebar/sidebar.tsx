@@ -137,7 +137,11 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
             inputProjectRef={inputProjectRef}
           />
 
-          <div className="text-right mt-1 tracking-wide">
+          <div
+            className={`${
+              open ? 'text-right mt-1' : 'text-center md:text-right'
+            }`}
+          >
             <TagManager sideOpen={open} />
           </div>
         </div>

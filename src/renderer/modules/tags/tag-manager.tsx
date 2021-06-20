@@ -59,7 +59,7 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
   return (
     <>
       <button
-        className="ml-2 border dark:border-gray-600 rounded-lg p-1 text-gray-600 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-200 text-sm inline-flex items-center"
+        className="border dark:border-gray-600 rounded-lg p-1 text-gray-600 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-200 text-sm inline-flex items-center"
         type="button"
         title="Open Tag Manager"
         onClick={openModal}

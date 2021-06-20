@@ -2,6 +2,7 @@ import React from 'react';
 import ProjectAsterisk from '../../components/asterisk';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import NewWorkGroupHandler from '../group/new-group';
+import EditProject from '../projects/edit-project';
 import RemoveProjectModal from '../projects/remove-project';
 import HeaderSaveButton from '../projects/save-project';
 
@@ -19,13 +20,17 @@ const ContainerHeader = ({ open }: ContainerHeaderProps) => {
       }`}
     >
       <div className="p-4 flex items-center justify-between">
-        <h2
-          className="text-xl font-bold text-indigo-600 dark:text-indigo-400 tracking-wider w-1/2 truncate"
-          title={selected.name}
-        >
-          <ProjectAsterisk projectid={selected.id} />
-          {selected.name}
-        </h2>
+        <div className="inline-flex w-1/2">
+          <h2
+            className="text-xl font-bold text-indigo-600 dark:text-indigo-400 tracking-wider truncate"
+            title={selected.name}
+          >
+            <ProjectAsterisk projectid={selected.id} />
+            {selected.name}
+          </h2>
+          <EditProject />
+        </div>
+
         <div className="flex">
           <NewWorkGroupHandler />
           <HeaderSaveButton id={selected.id} />
