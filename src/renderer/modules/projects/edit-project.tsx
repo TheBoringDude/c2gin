@@ -10,7 +10,7 @@ import EditProjectTags from './edit-project-tags';
 const EditProject = () => {
   const [open, setOpen] = useState(false);
 
-  const { selected, handleReRead } = useCurrentProject();
+  const { selected, handleReRead, setSelected } = useCurrentProject();
   const [tags, setTags] = useState<string[]>(
     selected?.tags ? selected?.tags : []
   );
@@ -29,6 +29,7 @@ const EditProject = () => {
     if (selected) {
       handleProjectTagsSave(selected.id, tags);
       handleReRead();
+      setSelected(selected?.id);
     }
 
     // automatically save current selected project's progress

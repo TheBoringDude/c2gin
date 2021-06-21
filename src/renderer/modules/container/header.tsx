@@ -11,7 +11,7 @@ type ContainerHeaderProps = {
 };
 
 const ContainerHeader = ({ open }: ContainerHeaderProps) => {
-  const { selected } = useCurrentProject();
+  const { selected, tags } = useCurrentProject();
 
   return (
     <div
@@ -20,15 +20,24 @@ const ContainerHeader = ({ open }: ContainerHeaderProps) => {
       }`}
     >
       <div className="p-4 flex items-center justify-between">
-        <div className="inline-flex w-1/2">
-          <h2
-            className="text-xl font-bold text-indigo-600 dark:text-indigo-400 tracking-wider truncate"
-            title={selected.name}
-          >
-            <ProjectAsterisk projectid={selected.id} />
-            {selected.name}
-          </h2>
-          <EditProject />
+        <div className="w-1/2 flex flex-col">
+          <div className="inline-flex">
+            <h2
+              className="text-xl font-bold text-indigo-600 dark:text-indigo-400 tracking-wider truncate"
+              title={selected.name}
+            >
+              <ProjectAsterisk projectid={selected.id} />
+              {selected.name}
+            </h2>
+            <EditProject />
+          </div>
+          <ul className="inline-flex overflow-y-auto mt-2">
+            {selected.tags?.map((tagid) => (
+              <li key={tagid} className="text-sm border rounded-full px-2 mr-1">
+                {tags[tagid]}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="flex">
