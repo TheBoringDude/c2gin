@@ -1,30 +1,31 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import useCurrentProject from '../../hooks/useCurrentProject';
-import { ProjectTagsSchema } from '../../lib/lowdb';
 
 type EditProjectTagsProps = {
-  tags: ProjectTagsSchema[];
-  setTags: Dispatch<SetStateAction<ProjectTagsSchema[]>>;
+  tags: string[];
+  setTags: Dispatch<SetStateAction<string[]>>;
 };
 
 const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
   const { tags: defaultTags } = useCurrentProject();
 
-  const [filterTags, setFilterTags] = useState<ProjectTagsSchema[]>([]);
+  const [filterTags, setFilterTags] = useState<[string, string][]>([]);
   const inputTagRef = useRef<HTMLInputElement>(null);
 
   const tagAdder = (value: string) => {
     if (!inputTagRef.current) return;
 
     // check if value already exists
-    const check = tags.filter((tag) => tag.name === value);
+    const check = tags.filter((tag) => tag === value);
     if (check.length > 0) {
       inputTagRef.current.value = ''; // clear current value
       return;
     }
 
     // add new tag
-    const t = defaultTags.filter((tag) => tag.name === value)[0];
+    const t = Object.keys(defaultTags).filter(
+      (key) => defaultTags[key] === value
+    )[0];
     if (!t) return;
 
     setTags([...tags, t]);
@@ -44,8 +45,8 @@ const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
     tagAdder(value);
   };
 
-  const handleRemoveTag = (tag: ProjectTagsSchema) => {
-    setTags(tags.filter((t) => t.id !== tag.id));
+  const handleRemoveTag = (tagid: string) => {
+    setTags(tags.filter((t) => t !== tagid));
   };
 
   const handleBackspaceRemoveTag = () => {
@@ -64,7 +65,9 @@ const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
       return;
     }
 
-    setFilterTags(defaultTags.filter((tag) => tag.name.includes(name)));
+    const fValues = Object.entries(defaultTags);
+
+    setFilterTags(fValues.filter(([, value]) => value.includes(name)));
   };
 
   return (
@@ -73,10 +76,10 @@ const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
       <div className="flex items-center border p-2 rounded-lg">
         {tags.map((tag) => (
           <p
-            key={tag.id}
+            key={defaultTags[tag]}
             className="text-sm mx-1 border p-1 inline-flex items-center rounded-lg"
           >
-            {tag.name}{' '}
+            {defaultTags[tag]}{' '}
             <button
               type="button"
               onClick={() => handleRemoveTag(tag)}
@@ -123,14 +126,14 @@ const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
       </div>
       {filterTags.length > 0 && (
         <ul className="w-full bg-gray-50 border -bottom-8 rounded-lg">
-          {filterTags.map((t) => (
-            <li key={t.id}>
+          {filterTags.map(([key, value]) => (
+            <li key={key}>
               <button
                 type="button"
                 className="w-full hover:bg-gray-100 p-1"
-                onClick={() => tagAdder(t.name)}
+                onClick={() => tagAdder(key)}
               >
-                {t.name}
+                {value}
               </button>
             </li>
           ))}

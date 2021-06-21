@@ -2,18 +2,30 @@ import { ProjectTagsSchema } from '../lib/lowdb';
 
 type ActionsTags =
   | { type: 'remove'; id: string }
-  | { type: 'add'; tag: ProjectTagsSchema }
-  | { type: 'set'; state: ProjectTagsSchema[] };
+  | { type: 'add'; id: string; name: string }
+  | { type: 'set'; state: ProjectTagsSchema };
 
-const TagsReducer = (state: ProjectTagsSchema[], action: ActionsTags) => {
+const TagsReducer = (state: ProjectTagsSchema, action: ActionsTags) => {
   switch (action.type) {
     // remove a tag
-    case 'remove':
-      return state.filter((tag) => tag.id !== action.id);
+    case 'remove': {
+      const vs = Object.keys(state).filter((key) => key !== action.id);
+      const s: ProjectTagsSchema = {};
+
+      // eslint-disable-next-line array-callback-return
+      vs.map((k) => {
+        s[k] = state[k];
+      });
+
+      return s;
+    }
 
     // add a new tag
     case 'add':
-      return [action.tag, ...state];
+      return {
+        [action.id]: action.name,
+        ...state,
+      };
 
     // set the state value
     case 'set':

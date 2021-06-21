@@ -4,12 +4,11 @@ import { GroupColorColorsProps } from './colors';
 
 type AppSchema = {
   projects: ProjectPropsSchema[];
-  tags: ProjectTagsSchema[];
+  tags: ProjectTagsSchema;
 };
 
 type ProjectTagsSchema = {
-  name: string;
-  id: string;
+  [key: string]: string;
 };
 
 type ProjectPropsSchema = {
@@ -17,7 +16,7 @@ type ProjectPropsSchema = {
   name: string;
   createdDate: string;
   works: ProjectWorkProps;
-  tags?: ProjectTagsSchema[];
+  tags?: string[];
 };
 
 type ProjectWorkProps = {
@@ -43,7 +42,7 @@ type ProjectWorkListProps = {
 const adapter = new LocalStorage<AppSchema>('db');
 const db = low(adapter);
 
-db.defaults({ projects: [], tags: [] }).write();
+db.defaults({ projects: [], tags: {} }).write();
 
 export {
   ProjectWorkPropsContainer,

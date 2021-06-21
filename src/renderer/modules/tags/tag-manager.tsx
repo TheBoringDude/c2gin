@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
-import { ProjectTagsSchema } from '../../lib/lowdb';
 import { handleTagsSave } from '../../lib/queries';
 import TagsReducer from '../../reducers/tags';
 import ListTags from './list-tags';
@@ -36,14 +35,9 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
     const tagName = inputTagRef.current?.value;
     if (!tagName) return;
 
-    const newTag: ProjectTagsSchema = {
-      name: tagName,
-      id: `tag-${nanoid(15)}`,
-    };
-
     inputTagRef.current.value = '';
 
-    dispatch({ type: 'add', tag: newTag });
+    dispatch({ type: 'add', id: `tag-${nanoid(15)}`, name: tagName });
   };
 
   useEffect(() => {
@@ -154,6 +148,7 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
               if (tags !== state) {
                 handleTagsSave(state);
                 setTags(state);
+                // handleUpdateProjectTags();
               }
             }}
           >

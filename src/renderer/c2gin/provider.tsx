@@ -16,11 +16,12 @@ type UIModes = 'dark' | 'light' | string;
 type C2GinContextProps = {
   projects: ProjectPropsSchema[];
   setProjects: Dispatch<SetStateAction<ProjectPropsSchema[]>>;
-  tags: ProjectTagsSchema[];
-  setTags: Dispatch<SetStateAction<ProjectTagsSchema[]>>;
+  tags: ProjectTagsSchema;
+  setTags: Dispatch<SetStateAction<ProjectTagsSchema>>;
   selected: ProjectPropsSchema;
   setSelected: (id: string) => void;
   handleReRead: () => void;
+  // handleUpdate: () => void;
   mode: UIModes;
   toggleMode: () => void;
 };
@@ -36,11 +37,12 @@ const initContext = {
 const C2GinContext = createContext<C2GinContextProps>({
   projects: [],
   setProjects: () => {},
-  tags: [],
+  tags: {},
   setTags: () => {},
   selected: initContext,
   setSelected: () => {},
   handleReRead: () => {},
+  // handleUpdate: () => {},
   mode: 'light',
   toggleMode: () => {},
 });
@@ -87,7 +89,7 @@ const handleTheme = () => {
 const C2GinProvider = ({ children }: C2GinProviderProps) => {
   const [selected, setSelected] = useState<ProjectPropsSchema>(initContext);
   const [projects, setProjects] = useState<ProjectPropsSchema[]>(getProjects());
-  const [tags, setTags] = useState<ProjectTagsSchema[]>(getTags());
+  const [tags, setTags] = useState<ProjectTagsSchema>(getTags());
   const [mode, setMode] = useState<UIModes>(handleTheme());
 
   /* handler for reading th specific project */

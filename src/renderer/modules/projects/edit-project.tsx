@@ -4,7 +4,6 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import { ProjectTagsSchema } from '../../lib/lowdb';
 import { handleProjectSave, handleProjectTagsSave } from '../../lib/queries';
 import EditProjectTags from './edit-project-tags';
 
@@ -12,7 +11,7 @@ const EditProject = () => {
   const [open, setOpen] = useState(false);
 
   const { selected, handleReRead } = useCurrentProject();
-  const [tags, setTags] = useState<ProjectTagsSchema[]>(
+  const [tags, setTags] = useState<string[]>(
     selected?.tags ? selected?.tags : []
   );
   const { state } = useWorkGroup();

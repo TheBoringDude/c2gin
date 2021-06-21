@@ -6,11 +6,11 @@ const handleProjectSave = (id: string, state: ProjectWorkProps) => {
   db.get('projects').find({ id }).set('works', state).write();
 };
 
-const handleProjectTagsSave = (id: string, tags: ProjectTagsSchema[]) => {
+const handleProjectTagsSave = (id: string, tags: string[]) => {
   db.get('projects').find({ id }).set('tags', tags).write();
 };
 
-const handleTagsSave = (state: ProjectTagsSchema[]) => {
+const handleTagsSave = (state: ProjectTagsSchema) => {
   db.set('tags', state).write();
 };
 
