@@ -3,9 +3,12 @@ import React, {
   Dispatch,
   ReactNode,
   SetStateAction,
+  useEffect,
+  useReducer,
   useState,
 } from 'react';
 import db, { ProjectPropsSchema, ProjectTagsSchema } from '../lib/lowdb';
+import ProjectsReducer from '../reducers/projects';
 
 type C2GinProviderProps = {
   children: ReactNode;
@@ -15,15 +18,17 @@ type UIModes = 'dark' | 'light' | string;
 
 type C2GinContextProps = {
   projects: ProjectPropsSchema[];
-  setProjects: Dispatch<SetStateAction<ProjectPropsSchema[]>>;
+  setProjects: Dispatch<ProjectPropsSchema[]>;
   tags: ProjectTagsSchema;
-  setTags: Dispatch<SetStateAction<ProjectTagsSchema>>;
+  setTags: Dispatch<ProjectTagsSchema>;
   selected: ProjectPropsSchema;
   setSelected: (id: string) => void;
   handleReRead: () => void;
   // handleUpdate: () => void;
   mode: UIModes;
   toggleMode: () => void;
+  modified: boolean;
+  setModified: Dispatch<SetStateAction<boolean>>;
 };
 
 const initContext = {
@@ -45,6 +50,8 @@ const C2GinContext = createContext<C2GinContextProps>({
   // handleUpdate: () => {},
   mode: 'light',
   toggleMode: () => {},
+  modified: false,
+  setModified: () => {},
 });
 
 const getProjects = () => {
@@ -88,9 +95,18 @@ const handleTheme = () => {
 /* PROVIDER */
 const C2GinProvider = ({ children }: C2GinProviderProps) => {
   const [selected, setSelected] = useState<ProjectPropsSchema>(initContext);
-  const [projects, setProjects] = useState<ProjectPropsSchema[]>(getProjects());
+  const [projects, dispatchProjects] = useReducer(
+    ProjectsReducer,
+    getProjects()
+  );
   const [tags, setTags] = useState<ProjectTagsSchema>(getTags());
   const [mode, setMode] = useState<UIModes>(handleTheme());
+  const [modified, setModified] = useState(false);
+
+  // wrapper for setter for ProjectsReducer
+  const setProjects = (ps: ProjectPropsSchema[]) => {
+    dispatchProjects({ type: 'set', projects: ps });
+  };
 
   /* handler for reading th specific project */
   const handleSetSelected = (id: string) => {
@@ -99,7 +115,7 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
 
   /* re-reading th projects */
   const handleReRead = () => {
-    setProjects(getProjects());
+    dispatchProjects({ type: 'set', projects: getProjects() });
   };
 
   /* mode toggline - dark / light */
@@ -110,6 +126,15 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
     setClassTHeme(t);
     setMode(t);
   };
+
+  useEffect(() => {
+    if (modified) {
+      handleReRead();
+      handleSetSelected(selected.id);
+
+      setModified(false);
+    }
+  }, [modified, selected]);
 
   return (
     <C2GinContext.Provider
@@ -123,6 +148,8 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
         handleReRead,
         mode,
         toggleMode,
+        modified,
+        setModified,
       }}
     >
       {children}

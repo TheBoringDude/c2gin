@@ -10,7 +10,7 @@ import EditProjectTags from './edit-project-tags';
 const EditProject = () => {
   const [open, setOpen] = useState(false);
 
-  const { selected, handleReRead, setSelected } = useCurrentProject();
+  const { selected, setModified } = useCurrentProject();
   const [tags, setTags] = useState<string[]>(
     selected?.tags ? selected?.tags : []
   );
@@ -26,22 +26,20 @@ const EditProject = () => {
   };
 
   const handlerWrapper = () => {
-    if (selected) {
-      handleProjectTagsSave(selected.id, tags);
-      handleReRead();
-      setSelected(selected?.id);
-    }
+    handleProjectTagsSave(selected.id, tags);
+
+    setModified(true);
 
     // automatically save current selected project's progress
-    if (selected?.works !== state) {
-      handleProjectSave(selected?.id, state);
-    }
+    handleProjectSave(selected?.id, state);
 
     closeModal();
   };
 
   useHotkeys('ctrl+t', () => {
-    openModal();
+    if (selected) {
+      openModal();
+    }
   });
 
   useEffect(() => {

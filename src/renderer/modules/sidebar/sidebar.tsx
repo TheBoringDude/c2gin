@@ -25,12 +25,7 @@ type SideBarProps = {
 
 const SideBar = ({ open, setOpen }: SideBarProps) => {
   // get states from workgroup
-  const {
-    setSelected,
-    projects,
-    handleReRead,
-    toggleMode,
-  } = useCurrentProject();
+  const { setSelected, projects, modified, toggleMode } = useCurrentProject();
   const { dispatch, updated } = useWorkGroup();
 
   // create a clone of projects
@@ -62,11 +57,11 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     });
 
     // re-read
-    handleReRead();
+    // handleReRead();
 
     // re-set the project
     setListProjects(projects);
-  }, [setSelected, handleReRead, projects, dispatch]);
+  }, [setSelected, projects, dispatch]);
 
   /* shortcut: for toggling sidebar */
   useHotkeys(
@@ -83,7 +78,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     if (projects !== listProjects && updated) {
       setListProjects(projects);
     }
-  }, [projects, listProjects, updated]);
+  }, [projects, listProjects, modified, updated]);
 
   return (
     <div

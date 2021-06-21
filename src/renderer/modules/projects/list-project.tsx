@@ -56,7 +56,7 @@ const ListProject = ({ project, index }: ListProjectProps) => {
         'bg-indigo-200 dark:bg-indigo-400 dark:text-white'
       }`}
     >
-      <ul className="absolute top-1 right-1 text-xs">
+      <ul className="absolute top-1 right-1 text-xs inline-flex">
         {project.tags?.map((tagid) => (
           <li key={tagid} className="px-2 border-gray-800 border rounded-full">
             {tags[tagid]}
