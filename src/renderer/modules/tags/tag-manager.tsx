@@ -12,6 +12,7 @@ type TagManagerProps = {
 
 export default function TagManager({ sideOpen }: TagManagerProps) {
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const cancelBtnRef = useRef<HTMLButtonElement>(null);
   const saveBtnRef = useRef<HTMLButtonElement>(null);
@@ -32,12 +33,20 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
   const handleAddTag = () => {
     if (!inputTagRef.current) return;
 
-    const tagName = inputTagRef.current?.value;
+    const tagName = inputTagRef.current?.value.trim();
     if (!tagName) return;
+
+    // check if it exists already
+    const check = tags.filter((t) => t.name === tagName)[0];
+    if (check) {
+      setError('Tag already exists!');
+      return;
+    }
 
     inputTagRef.current.value = '';
 
     dispatch({ type: 'add', name: tagName });
+    setError(null);
   };
 
   /* handle for saving the tags */
@@ -105,6 +114,19 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
               className="w-full border mr-2 py-2 px-4 rounded-lg"
               placeholder="Input a new tag category"
               maxLength={15}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+
+                  handleAddTag();
+                  e.currentTarget.focus();
+                }
+
+                // prevent comma addition
+                if (e.key === ',') {
+                  e.preventDefault();
+                }
+              }}
             />
             <button
               title="Create a New Tag"
@@ -127,6 +149,11 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
               add
             </button>
           </div>
+
+          {/* a simple validation message */}
+          {error && (
+            <p className="mt-1 text-red-500 text-sm tracking-wide">{error}</p>
+          )}
 
           <hr className="my-2" />
 
