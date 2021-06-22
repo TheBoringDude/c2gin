@@ -1,27 +1,27 @@
 import React, { Dispatch } from 'react';
 import { ProjectTagsSchema } from '../../lib/lowdb';
-import { ActionsTags } from '../../reducers/tags';
+import { TagsManagerReducerActions } from '../../reducers/tags-manager';
 
 type ListTagsProps = {
-  tags: ProjectTagsSchema;
-  dispatch: Dispatch<ActionsTags>;
+  tags: ProjectTagsSchema[];
+  dispatch: Dispatch<TagsManagerReducerActions>;
 };
 
 const ListTags = ({ tags, dispatch }: ListTagsProps) => {
-  const handleRemoveTag = (id: string) => {
-    dispatch({ type: 'remove', id });
+  const handleRemoveTag = (name: string) => {
+    dispatch({ type: 'remove', name });
   };
 
   return (
     <ul className="my-2">
-      {Object.entries(tags).map(([id, name]) => (
+      {tags?.map(({ name }) => (
         <li
-          key={id}
+          key={name}
           className="group py-2 px-4 rounded-lg m-1 border border-indigo-300 flex items-center justify-between"
         >
           <p>{name}</p>
           <button
-            onClick={() => handleRemoveTag(id)}
+            onClick={() => handleRemoveTag(name)}
             title="Remove Tag"
             type="button"
             className="group-hover:block hidden text-gray-600 hover:text-red-500"

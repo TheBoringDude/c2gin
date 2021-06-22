@@ -1,31 +1,53 @@
 import { ProjectTagsSchema } from '../lib/lowdb';
 
-type ActionsTags =
-  | { type: 'remove'; id: string }
-  | { type: 'add'; id: string; name: string }
-  | { type: 'set'; state: ProjectTagsSchema };
+type TagsReducerActions =
+  | { type: 'remove'; name: string }
+  | { type: 'add'; name: string }
+  | { type: 'set'; state: ProjectTagsSchema[] }
+  | { type: 'add-project'; projectid: string; tagname: string }
+  | { type: 'remove-project'; projectid: string; tagname: string };
 
-const TagsReducer = (state: ProjectTagsSchema, action: ActionsTags) => {
+const TagsReducer = (
+  state: ProjectTagsSchema[],
+  action: TagsReducerActions
+) => {
   switch (action.type) {
     // remove a tag
     case 'remove': {
-      const vs = Object.keys(state).filter((key) => key !== action.id);
-      const s: ProjectTagsSchema = {};
-
-      // eslint-disable-next-line array-callback-return
-      vs.map((k) => {
-        s[k] = state[k];
-      });
+      const s = state.filter((tag) => tag.name !== action.name);
 
       return s;
     }
 
     // add a new tag
     case 'add':
-      return {
-        [action.id]: action.name,
+      return <ProjectTagsSchema[]>[
+        {
+          name: action.name,
+          project: [],
+        },
         ...state,
-      };
+      ];
+
+    case 'add-project':
+      return state.map((t) => {
+        if (t.name === action.tagname) {
+          const op = t.projects ? t.projects : []; // why is it undefined?
+          t.projects = [...op, action.projectid];
+        }
+
+        return t;
+      });
+
+    case 'remove-project':
+      return state.map((t) => {
+        if (t.name === action.tagname) {
+          if (t.projects) {
+            t.projects = t.projects.filter((p) => p !== action.projectid);
+          }
+        }
+        return t;
+      });
 
     // set the state value
     case 'set':
@@ -38,4 +60,4 @@ const TagsReducer = (state: ProjectTagsSchema, action: ActionsTags) => {
 };
 
 export default TagsReducer;
-export { ActionsTags };
+export { TagsReducerActions };

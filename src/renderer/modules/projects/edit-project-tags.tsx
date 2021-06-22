@@ -1,15 +1,16 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import { ProjectTagsSchema } from '../../lib/lowdb';
 
 type EditProjectTagsProps = {
-  tags: string[];
-  setTags: Dispatch<SetStateAction<string[]>>;
+  tags: ProjectTagsSchema[];
+  setTags: Dispatch<SetStateAction<ProjectTagsSchema[]>>;
 };
 
 const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
   const { tags: defaultTags } = useCurrentProject();
 
-  const [filterTags, setFilterTags] = useState<[string, string][]>([]);
+  const [filterTags, setFilterTags] = useState<ProjectTagsSchema[]>([]);
   const inputTagRef = useRef<HTMLInputElement>(null);
 
   const tagAdder = (value: string) => {
@@ -19,16 +20,14 @@ const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
     if (tags.length > 3) return;
 
     // check if value already exists
-    const check = tags.filter((tag) => tag === value);
+    const check = tags.filter((tag) => tag.name === value);
     if (check.length > 0) {
       inputTagRef.current.value = ''; // clear current value
       return;
     }
 
     // add new tag
-    const t = Object.keys(defaultTags).filter(
-      (key) => defaultTags[key] === value
-    )[0];
+    const t = defaultTags.filter((tag) => tag.name === value)[0];
     if (!t) return;
 
     setTags([...tags, t]);
@@ -48,8 +47,8 @@ const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
     tagAdder(value);
   };
 
-  const handleRemoveTag = (tagid: string) => {
-    setTags(tags.filter((t) => t !== tagid));
+  const handleRemoveTag = (tagname: string) => {
+    setTags(tags.filter((t) => t.name !== tagname));
   };
 
   const handleBackspaceRemoveTag = () => {
@@ -68,9 +67,7 @@ const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
       return;
     }
 
-    const fValues = Object.entries(defaultTags);
-
-    setFilterTags(fValues.filter(([, value]) => value.includes(name)));
+    setFilterTags(defaultTags.filter((value) => value.name.includes(name)));
   };
 
   return (
@@ -79,13 +76,13 @@ const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
       <div className="flex items-center border p-2 rounded-lg">
         {tags.map((tag) => (
           <p
-            key={defaultTags[tag]}
+            key={tag.name}
             className="text-sm mx-1 border p-1 inline-flex items-center rounded-lg"
           >
-            {defaultTags[tag]}{' '}
+            {tag.name}
             <button
               type="button"
-              onClick={() => handleRemoveTag(tag)}
+              onClick={() => handleRemoveTag(tag.name)}
               className="ml-1 p-1 border rounded-full"
             >
               <svg
@@ -129,14 +126,14 @@ const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
       </div>
       {filterTags.length > 0 && (
         <ul className="w-full bg-gray-50 border -bottom-8 rounded-lg">
-          {filterTags.map(([key, value]) => (
-            <li key={key}>
+          {filterTags.map((t) => (
+            <li key={t.name}>
               <button
                 type="button"
                 className="w-full hover:bg-gray-100 p-1"
-                onClick={() => tagAdder(value)}
+                onClick={() => tagAdder(t.name)}
               >
-                {value}
+                {t.name}
               </button>
             </li>
           ))}

@@ -8,7 +8,9 @@ import React, {
   useState,
 } from 'react';
 import db, { ProjectPropsSchema, ProjectTagsSchema } from '../lib/lowdb';
+import { handleTagsSave } from '../lib/queries';
 import ProjectsReducer from '../reducers/projects';
+import TagsReducer, { TagsReducerActions } from '../reducers/tags';
 
 type C2GinProviderProps = {
   children: ReactNode;
@@ -19,8 +21,8 @@ type UIModes = 'dark' | 'light' | string;
 type C2GinContextProps = {
   projects: ProjectPropsSchema[];
   setProjects: Dispatch<ProjectPropsSchema[]>;
-  tags: ProjectTagsSchema;
-  setTags: Dispatch<ProjectTagsSchema>;
+  tags: ProjectTagsSchema[];
+  dispatchTags: Dispatch<TagsReducerActions>;
   selected: ProjectPropsSchema;
   setSelected: (id: string) => void;
   handleReRead: () => void;
@@ -42,8 +44,8 @@ const initContext = {
 const C2GinContext = createContext<C2GinContextProps>({
   projects: [],
   setProjects: () => {},
-  tags: {},
-  setTags: () => {},
+  tags: [],
+  dispatchTags: () => {},
   selected: initContext,
   setSelected: () => {},
   handleReRead: () => {},
@@ -99,7 +101,7 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
     ProjectsReducer,
     getProjects()
   );
-  const [tags, setTags] = useState<ProjectTagsSchema>(getTags());
+  const [tags, dispatchTags] = useReducer(TagsReducer, getTags());
   const [mode, setMode] = useState<UIModes>(handleTheme());
   const [modified, setModified] = useState(false);
 
@@ -129,12 +131,11 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
 
   useEffect(() => {
     if (modified) {
-      handleReRead();
-      handleSetSelected(selected.id);
+      handleTagsSave(tags);
 
       setModified(false);
     }
-  }, [modified, selected]);
+  }, [modified, tags]);
 
   return (
     <C2GinContext.Provider
@@ -144,7 +145,7 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
         projects,
         setProjects,
         tags,
-        setTags,
+        dispatchTags,
         handleReRead,
         mode,
         toggleMode,

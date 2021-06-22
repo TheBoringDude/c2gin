@@ -3,6 +3,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import ProjectAsterisk from '../../components/asterisk';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useFindProjectId from '../../hooks/useDB';
+import useProjectTags from '../../hooks/useTags';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import { ProjectPropsSchema } from '../../lib/lowdb';
 import { handleProjectSave } from '../../lib/queries';
@@ -13,8 +14,9 @@ type ListProjectProps = {
 };
 
 const ListProject = ({ project, index }: ListProjectProps) => {
-  const { selected, setSelected, tags } = useCurrentProject();
+  const { selected, setSelected } = useCurrentProject();
   const { dispatch, state, updated, setUpdated } = useWorkGroup();
+  const projectTags = useProjectTags(project.id);
 
   /* project selection */
   const HandleSelectProject = (id: string) => {
@@ -57,9 +59,9 @@ const ListProject = ({ project, index }: ListProjectProps) => {
       }`}
     >
       <ul className="absolute top-1 right-1 text-xs inline-flex">
-        {project.tags?.map((tagid) => (
-          <li key={tagid} className="px-2 border-gray-800 border rounded-full">
-            {tags[tagid]}
+        {projectTags.map(({ name }) => (
+          <li key={name} className="px-2 border-gray-800 border rounded-full">
+            {name}
           </li>
         ))}
       </ul>

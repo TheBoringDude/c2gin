@@ -1,6 +1,7 @@
 import React from 'react';
 import ProjectAsterisk from '../../components/asterisk';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import useProjectTags from '../../hooks/useTags';
 import NewWorkGroupHandler from '../group/new-group';
 import EditProject from '../projects/edit-project';
 import RemoveProjectModal from '../projects/remove-project';
@@ -11,7 +12,8 @@ type ContainerHeaderProps = {
 };
 
 const ContainerHeader = ({ open }: ContainerHeaderProps) => {
-  const { selected, tags } = useCurrentProject();
+  const { selected } = useCurrentProject();
+  const projectTags = useProjectTags(selected.id);
 
   return (
     <div
@@ -32,9 +34,9 @@ const ContainerHeader = ({ open }: ContainerHeaderProps) => {
             <EditProject />
           </div>
           <ul className="inline-flex overflow-y-auto mt-2">
-            {selected.tags?.map((tagid) => (
-              <li key={tagid} className="text-sm border rounded-full px-2 mr-1">
-                {tags[tagid]}
+            {projectTags?.map(({ name }) => (
+              <li key={name} className="text-sm border rounded-full px-2 mr-1">
+                {name}
               </li>
             ))}
           </ul>

@@ -1,10 +1,9 @@
 import { Dialog } from '@headlessui/react';
-import { nanoid } from 'nanoid';
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import { handleTagsSave } from '../../lib/queries';
-import TagsReducer from '../../reducers/tags';
+import TagsManagerReducer from '../../reducers/tags-manager';
 import ListTags from './list-tags';
 
 type TagManagerProps = {
@@ -18,9 +17,9 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
   const saveBtnRef = useRef<HTMLButtonElement>(null);
   const inputTagRef = useRef<HTMLInputElement>(null);
 
-  const { tags, setTags } = useCurrentProject();
+  const { tags, dispatchTags } = useCurrentProject();
 
-  const [state, dispatch] = useReducer(TagsReducer, tags);
+  const [state, dispatch] = useReducer(TagsManagerReducer, tags);
 
   const closeModal = () => {
     setOpen(false);
@@ -38,13 +37,13 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
 
     inputTagRef.current.value = '';
 
-    dispatch({ type: 'add', id: `tag-${nanoid(15)}`, name: tagName });
+    dispatch({ type: 'add', name: tagName });
   };
 
   /* handle for saving the tags */
   const handleSaveTag = () => {
     handleTagsSave(state);
-    setTags(state);
+    dispatchTags({ type: 'set', state });
   };
 
   useEffect(() => {

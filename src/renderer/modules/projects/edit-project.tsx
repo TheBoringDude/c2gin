@@ -1,19 +1,25 @@
 import { Dialog } from '@headlessui/react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import useProjectTags from '../../hooks/useTags';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import { handleProjectSave, handleProjectTagsSave } from '../../lib/queries';
+import { ProjectTagsSchema } from '../../lib/lowdb';
+import { handleProjectSave } from '../../lib/queries';
 import EditProjectTags from './edit-project-tags';
 
 const EditProject = () => {
   const [open, setOpen] = useState(false);
 
-  const { selected, setModified } = useCurrentProject();
-  const [tags, setTags] = useState<string[]>(
-    selected?.tags ? selected?.tags : []
-  );
+  const {
+    selected,
+    dispatchTags,
+    // tags: defaultTags,
+    setModified,
+  } = useCurrentProject();
+  const projectTags = useProjectTags(selected.id);
+  const [tags, setTags] = useState<ProjectTagsSchema[]>(projectTags);
   const { state } = useWorkGroup();
 
   const inputProjectRef = useRef<HTMLInputElement>(null);
@@ -25,8 +31,30 @@ const EditProject = () => {
     setOpen(true);
   };
 
+  /* save button function wrapper */
   const handlerWrapper = () => {
-    handleProjectTagsSave(selected.id, tags);
+    // old project tags
+    const dt = projectTags.filter((t) => !tags.includes(t));
+    // new project tags
+    const nt = tags.filter((t) => !dt.includes(t));
+
+    // remove the project from the removed tags
+    dt.forEach((tag) => {
+      dispatchTags({
+        type: 'remove-project',
+        tagname: tag.name,
+        projectid: selected.id,
+      });
+    });
+
+    // add the project from the added tags
+    nt.forEach((tag) => {
+      dispatchTags({
+        type: 'add-project',
+        tagname: tag.name,
+        projectid: selected.id,
+      });
+    });
 
     setModified(true);
 
@@ -36,15 +64,18 @@ const EditProject = () => {
     closeModal();
   };
 
+  /* shortcut: for opening the edit project modal */
   useHotkeys('ctrl+t', () => {
     if (selected) {
       openModal();
     }
   });
 
-  useEffect(() => {
-    setTags(selected.tags ? selected.tags : []);
-  }, [selected]);
+  // useEffect(() => {
+  //   if (projectTags !== tags) {
+  //     setTags(projectTags);
+  //   }
+  // }, [projectTags, tags]);
 
   return (
     <>
