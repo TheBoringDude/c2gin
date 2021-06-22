@@ -15,6 +15,9 @@ const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
   const tagAdder = (value: string) => {
     if (!inputTagRef.current) return;
 
+    // check length (maximum of 3 tags only)
+    if (tags.length > 3) return;
+
     // check if value already exists
     const check = tags.filter((tag) => tag === value);
     if (check.length > 0) {
@@ -131,7 +134,7 @@ const EditProjectTags = ({ tags, setTags }: EditProjectTagsProps) => {
               <button
                 type="button"
                 className="w-full hover:bg-gray-100 p-1"
-                onClick={() => tagAdder(key)}
+                onClick={() => tagAdder(value)}
               >
                 {value}
               </button>

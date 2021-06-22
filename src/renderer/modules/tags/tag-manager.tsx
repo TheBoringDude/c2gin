@@ -29,6 +29,7 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
     setOpen(true);
   };
 
+  /* handler for adding a new tag */
   const handleAddTag = () => {
     if (!inputTagRef.current) return;
 
@@ -38,6 +39,12 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
     inputTagRef.current.value = '';
 
     dispatch({ type: 'add', id: `tag-${nanoid(15)}`, name: tagName });
+  };
+
+  /* handle for saving the tags */
+  const handleSaveTag = () => {
+    handleTagsSave(state);
+    setTags(state);
   };
 
   useEffect(() => {
@@ -146,9 +153,7 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
             className="py-2 px-8 bg-indigo-400 hover:bg-indigo-500 text-white rounded-lg disabled:opacity-80 disabled:hover:bg-indigo-400"
             onClick={() => {
               if (tags !== state) {
-                handleTagsSave(state);
-                setTags(state);
-                // handleUpdateProjectTags();
+                handleSaveTag();
               }
             }}
           >
