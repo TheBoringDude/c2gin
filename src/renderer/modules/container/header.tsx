@@ -35,7 +35,10 @@ const ContainerHeader = ({ open }: ContainerHeaderProps) => {
           </div>
           <ul className="inline-flex overflow-y-auto mt-2">
             {projectTags?.map(({ name }) => (
-              <li key={name} className="text-sm border rounded-full px-2 mr-1">
+              <li
+                key={name}
+                className="truncate text-sm rounded-full px-2 mr-1 bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
+              >
                 {name}
               </li>
             ))}

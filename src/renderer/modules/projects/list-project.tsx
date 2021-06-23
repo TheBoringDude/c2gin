@@ -58,9 +58,12 @@ const ListProject = ({ project, index }: ListProjectProps) => {
         'bg-indigo-200 dark:bg-indigo-400 dark:text-white'
       }`}
     >
-      <ul className="absolute top-1 right-1 text-xs inline-flex">
+      <ul className="absolute top-0.5 right-0.5 text-xs inline-flex">
         {projectTags.map(({ name }) => (
-          <li key={name} className="px-2 border-gray-800 border rounded-full">
+          <li
+            key={name}
+            className="px-2 ml-0.5 rounded-full w-8 md:w-12 lg:w-14 xl:w-16 text-center z-30 truncate bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
+          >
             {name}
           </li>
         ))}
@@ -69,7 +72,7 @@ const ListProject = ({ project, index }: ListProjectProps) => {
         onClick={handleClick}
         title={`Select '${project.name}'`}
         type="button"
-        className="p-3 tracking-wider truncate text-left w-full dark:text-gray-100 focus:outline-none"
+        className="px-3 py-4 tracking-wider truncate text-left w-full dark:text-gray-100 focus:outline-none z-40"
       >
         <span>
           <ProjectAsterisk projectid={project.id} />

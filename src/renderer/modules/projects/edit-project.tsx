@@ -25,9 +25,11 @@ const EditProject = () => {
   const inputProjectRef = useRef<HTMLInputElement>(null);
 
   const closeModal = () => {
+    setTags([]); // remove the current project tags from editor
     setOpen(false);
   };
   const openModal = () => {
+    setTags(projectTags); // set the tags to the editor
     setOpen(true);
   };
 
@@ -71,19 +73,13 @@ const EditProject = () => {
     }
   });
 
-  // useEffect(() => {
-  //   if (projectTags !== tags) {
-  //     setTags(projectTags);
-  //   }
-  // }, [projectTags, tags]);
-
   return (
     <>
       <button
         title="Edit Project"
         type="button"
         onClick={openModal}
-        className="ml-2"
+        className="ml-2 text-gray-700 dark:text-gray-400"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
