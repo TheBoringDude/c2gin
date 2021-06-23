@@ -14,6 +14,7 @@ import useWorkGroup from '../../hooks/useWorkGroup';
 import db from '../../lib/lowdb';
 import ListProject from '../projects/list-project';
 import NewProjectHandler from '../projects/new-project';
+import TagManager from '../tags/tag-manager';
 import HomeHeader from './home-header';
 import SideBarProjectsSearch from './search-sidebar';
 
@@ -24,12 +25,7 @@ type SideBarProps = {
 
 const SideBar = ({ open, setOpen }: SideBarProps) => {
   // get states from workgroup
-  const {
-    setSelected,
-    projects,
-    handleReRead,
-    toggleMode,
-  } = useCurrentProject();
+  const { setSelected, projects, modified, toggleMode } = useCurrentProject();
   const { dispatch, updated } = useWorkGroup();
 
   // create a clone of projects
@@ -61,11 +57,11 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     });
 
     // re-read
-    handleReRead();
+    // handleReRead();
 
     // re-set the project
     setListProjects(projects);
-  }, [setSelected, handleReRead, projects, dispatch]);
+  }, [setSelected, projects, dispatch]);
 
   /* shortcut: for toggling sidebar */
   useHotkeys(
@@ -82,7 +78,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     if (projects !== listProjects && updated) {
       setListProjects(projects);
     }
-  }, [projects, listProjects, updated]);
+  }, [projects, listProjects, modified, updated]);
 
   return (
     <div
@@ -128,11 +124,22 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
           </div>
         </div>
 
-        <NewProjectHandler
-          sideOpen={open}
-          HandleCreateProject={HandleCreateProject}
-          inputProjectRef={inputProjectRef}
-        />
+        {/* buttons */}
+        <div>
+          <NewProjectHandler
+            sideOpen={open}
+            HandleCreateProject={HandleCreateProject}
+            inputProjectRef={inputProjectRef}
+          />
+
+          <div
+            className={`${
+              open ? 'text-right mt-1' : 'text-center md:text-right'
+            }`}
+          >
+            <TagManager sideOpen={open} />
+          </div>
+        </div>
       </section>
 
       <hr className="dark:border-gray-600" />

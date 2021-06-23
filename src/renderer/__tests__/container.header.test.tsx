@@ -1,7 +1,6 @@
-import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-
+import React from 'react';
 import { C2GinContext } from '../c2gin/provider';
 import ContainerHeader from '../modules/container/header';
 
@@ -12,6 +11,7 @@ const Component = () => (
         id: '11rW45XjFLpb',
         name: 'phurma',
         createdDate: '2021-06-05T00:51:26.612Z',
+
         works: {
           FALR2xkJCgq6: {
             id: 'FALR2xkJCgq6',
@@ -28,6 +28,10 @@ const Component = () => (
       handleReRead: () => {},
       mode: 'light',
       toggleMode: () => {},
+      tags: [],
+      dispatchTags: () => {},
+      modified: false,
+      setModified: () => {},
     }}
   >
     <ContainerHeader open />

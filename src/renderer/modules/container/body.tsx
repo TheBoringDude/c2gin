@@ -41,7 +41,7 @@ const ContainerBody = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="pb-8 px-3 pt-20 z-30 absolute">
+      <div className="pb-8 px-3 pt-28 z-30 absolute">
         <Droppable
           droppableId={selected.id}
           type="container"
