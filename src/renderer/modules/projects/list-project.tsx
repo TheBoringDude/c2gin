@@ -3,6 +3,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import ProjectAsterisk from '../../components/asterisk';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useFindProjectId from '../../hooks/useDB';
+import useSideBar from '../../hooks/useSideBar';
 import useProjectTags from '../../hooks/useTags';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import { ProjectPropsSchema } from '../../lib/lowdb';
@@ -16,6 +17,7 @@ type ListProjectProps = {
 const ListProject = ({ project, index }: ListProjectProps) => {
   const { selected, setSelected } = useCurrentProject();
   const { dispatch, state, updated, setUpdated } = useWorkGroup();
+  const { sideOpen } = useSideBar();
   const projectTags = useProjectTags(project.id);
 
   /* project selection */
@@ -58,16 +60,18 @@ const ListProject = ({ project, index }: ListProjectProps) => {
         'bg-indigo-200 dark:bg-indigo-400 dark:text-white'
       }`}
     >
-      <ul className="absolute top-0.5 right-0.5 text-xs inline-flex">
-        {projectTags.map(({ name }) => (
-          <li
-            key={name}
-            className="px-2 ml-0.5 rounded-full w-8 md:w-12 lg:w-14 xl:w-16 text-center z-30 truncate bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
-          >
-            {name}
-          </li>
-        ))}
-      </ul>
+      {sideOpen && (
+        <ul className="absolute top-0.5 right-0.5 text-xs inline-flex">
+          {projectTags.map(({ name }) => (
+            <li
+              key={name}
+              className="px-2 ml-0.5 rounded-full w-8 md:w-12 lg:w-14 xl:w-16 text-center z-30 truncate bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
+            >
+              {name}
+            </li>
+          ))}
+        </ul>
+      )}
       <button
         onClick={handleClick}
         title={`Select '${project.name}'`}

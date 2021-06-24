@@ -1,29 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import WelcomeMessage from '../../components/welcome';
 import useCurrentProject from '../../hooks/useCurrentProject';
-import SideBar from '../sidebar/sidebar';
+import useSideBar from '../../hooks/useSideBar';
 import ContainerBody from './body';
 import ContainerHeader from './header';
 
 const Container = () => {
   const { selected } = useCurrentProject();
-  const [open, setOpen] = useState(true);
+  const { sideOpen } = useSideBar();
 
   return (
-    <div>
-      <SideBar open={open} setOpen={setOpen} />
+    <div className={`${sideOpen ? 'w-2/3 lg:w-3/4' : 'w-11/12'} ml-auto`}>
+      {selected?.id && selected?.id !== '' ? (
+        <>
+          <ContainerHeader />
 
-      <div className={`${open ? 'w-2/3 lg:w-3/4' : 'w-11/12'} ml-auto`}>
-        {selected?.id && selected?.id !== '' ? (
-          <>
-            <ContainerHeader open={open} />
-
-            <ContainerBody />
-          </>
-        ) : (
-          <WelcomeMessage />
-        )}
-      </div>
+          <ContainerBody />
+        </>
+      ) : (
+        <WelcomeMessage />
+      )}
     </div>
   );
 };

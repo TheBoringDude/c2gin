@@ -2,20 +2,18 @@ import { SearchIcon } from '@heroicons/react/outline';
 import React, { Dispatch, SetStateAction, useRef } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import useSideBar from '../../hooks/useSideBar';
 import { ProjectPropsSchema } from '../../lib/lowdb';
 
 type SideBarProjectsSearchProps = {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
   setListProjects: Dispatch<SetStateAction<ProjectPropsSchema[]>>;
 };
 
 export default function SideBarProjectsSearch({
-  open,
-  setOpen,
   setListProjects,
 }: SideBarProjectsSearchProps) {
   const { projects } = useCurrentProject();
+  const { sideOpen, setSideOpen } = useSideBar();
 
   const inputFindRef = useRef<HTMLInputElement>(null);
 
@@ -37,12 +35,12 @@ export default function SideBarProjectsSearch({
 
   /* shortcut: for toggling the search bar */
   useHotkeys('ctrl+f', () => {
-    setOpen(true);
+    setSideOpen(true);
   });
 
   return (
     <div className="m-1 flex items-center justify-center bg-gray-50 dark:bg-warmGray-800">
-      {open && (
+      {sideOpen && (
         <input
           ref={inputFindRef}
           type="text"
@@ -55,10 +53,10 @@ export default function SideBarProjectsSearch({
         type="button"
         title="Search Project"
         onClick={() => {
-          setOpen(true); // expand first the sidebar
+          setSideOpen(true); // expand first the sidebar
           HandleFind();
         }}
-        className="bg-indigo-400 hover:bg-indigo-500 text-white p-1 my-1 rounded-md"
+        className="bg-indigo-400 hover:bg-indigo-500 text-white p-1 my-1 rounded-md border"
       >
         <SearchIcon className="h-4 w-4" />
       </button>

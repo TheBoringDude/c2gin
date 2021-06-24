@@ -1,15 +1,9 @@
 import { LightBulbIcon, MenuIcon } from '@heroicons/react/outline';
 import { nanoid } from 'nanoid';
-import React, {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import useSideBar from '../../hooks/useSideBar';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import db from '../../lib/lowdb';
 import ListProject from '../projects/list-project';
@@ -18,15 +12,11 @@ import TagManager from '../tags/tag-manager';
 import HomeHeader from './home-header';
 import SideBarProjectsSearch from './search-sidebar';
 
-type SideBarProps = {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-};
-
-const SideBar = ({ open, setOpen }: SideBarProps) => {
+const SideBar = () => {
   // get states from workgroup
   const { setSelected, projects, modified, toggleMode } = useCurrentProject();
   const { dispatch, updated } = useWorkGroup();
+  const { sideOpen, setSideOpen } = useSideBar();
 
   // create a clone of projects
   const [listProjects, setListProjects] = useState(Array.from(projects));
@@ -67,9 +57,9 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
   useHotkeys(
     'ctrl+b',
     () => {
-      setOpen(!open);
+      setSideOpen(!sideOpen);
     },
-    [open]
+    [sideOpen]
   );
 
   // re-render sidebar if a projects is updated
@@ -84,19 +74,19 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
     <div
       id="sidebar"
       className={`${
-        open ? 'w-1/3 lg:w-1/4' : 'w-1/12'
+        sideOpen ? 'w-1/3 lg:w-1/4' : 'w-1/12'
       } border-r fixed h-full z-40 bg-white dark:bg-warmGray-900 dark:border-gray-600`}
     >
       <section className="p-2 flex flex-col">
         <div
           className={`mx-1 mt-1 mb-3 flex items-center ${
-            open ? 'justify-between' : 'justify-center'
+            sideOpen ? 'justify-between' : 'justify-center'
           } text-left`}
         >
-          {open && <HomeHeader />}
+          {sideOpen && <HomeHeader />}
           <div
             className={`inline-flex ${
-              open ? 'flex-row' : 'flex-col'
+              sideOpen ? 'flex-row' : 'flex-col'
             } sm:flex-row`}
           >
             <button
@@ -116,7 +106,7 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
               type="button"
               title="Toggle Menu"
               onClick={() => {
-                setOpen(!open);
+                setSideOpen(!sideOpen);
               }}
             >
               <MenuIcon className="h-5 w-5" />
@@ -127,28 +117,24 @@ const SideBar = ({ open, setOpen }: SideBarProps) => {
         {/* buttons */}
         <div>
           <NewProjectHandler
-            sideOpen={open}
+            sideOpen={sideOpen}
             HandleCreateProject={HandleCreateProject}
             inputProjectRef={inputProjectRef}
           />
 
           <div
             className={`${
-              open ? 'text-right mt-1' : 'text-center md:text-right'
+              sideOpen ? 'text-right mt-1' : 'text-center md:text-right'
             }`}
           >
-            <TagManager sideOpen={open} />
+            <TagManager sideOpen={sideOpen} />
           </div>
         </div>
       </section>
 
       <hr className="dark:border-gray-600" />
 
-      <SideBarProjectsSearch
-        setListProjects={setListProjects}
-        open={open}
-        setOpen={setOpen}
-      />
+      <SideBarProjectsSearch setListProjects={setListProjects} />
 
       <ul className="pt-3 h-full pb-56 list-scroll">
         {listProjects.map((project, index) => (

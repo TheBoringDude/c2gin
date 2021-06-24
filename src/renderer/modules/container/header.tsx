@@ -1,24 +1,22 @@
 import React from 'react';
 import ProjectAsterisk from '../../components/asterisk';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import useSideBar from '../../hooks/useSideBar';
 import useProjectTags from '../../hooks/useTags';
 import NewWorkGroupHandler from '../group/new-group';
 import EditProject from '../projects/edit-project';
 import RemoveProjectModal from '../projects/remove-project';
 import HeaderSaveButton from '../projects/save-project';
 
-type ContainerHeaderProps = {
-  open: boolean;
-};
-
-const ContainerHeader = ({ open }: ContainerHeaderProps) => {
+const ContainerHeader = () => {
   const { selected } = useCurrentProject();
+  const { sideOpen } = useSideBar();
   const projectTags = useProjectTags(selected.id);
 
   return (
     <div
       className={`bg-white dark:bg-warmGray-900 fixed z-40 ${
-        open ? 'w-2/3 lg:w-3/4' : 'w-11/12'
+        sideOpen ? 'w-2/3 lg:w-3/4' : 'w-11/12'
       }`}
     >
       <div className="p-4 flex items-center justify-between">
