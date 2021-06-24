@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { C2GinContext } from '../c2gin/provider';
-import ContainerHeader from '../modules/container/header';
+import { C2GinContext } from '../../../c2gin/provider';
+import ContainerHeader from '../../../modules/container/header';
 
 const Component = () => (
   <C2GinContext.Provider
@@ -34,7 +34,7 @@ const Component = () => (
       setModified: () => {},
     }}
   >
-    <ContainerHeader open />
+    <ContainerHeader />
   </C2GinContext.Provider>
 );
 

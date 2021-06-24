@@ -1,9 +1,7 @@
-import React from 'react';
 import '@testing-library/jest-dom';
-
 import { render } from 'enzyme';
-
-import HomeHeader from '../modules/sidebar/home-header';
+import React from 'react';
+import HomeHeader from '../../../modules/sidebar/home-header';
 
 const wrapper = render(<HomeHeader />);
 
