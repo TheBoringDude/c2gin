@@ -31,15 +31,21 @@ const ContainerHeader = () => {
             </h2>
             <EditProject />
           </div>
-          <ul className="inline-flex overflow-y-auto mt-2">
-            {projectTags?.map(({ name }) => (
-              <li
-                key={name}
-                className="truncate text-sm rounded-full px-2 mr-1 bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
-              >
-                {name}
-              </li>
-            ))}
+          <ul className="inline-flex mt-2">
+            {projectTags.length > 0 ? (
+              projectTags.map(({ name }) => (
+                <li
+                  key={name}
+                  className="truncate text-sm rounded-full px-2 mr-1 bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
+                >
+                  {name}
+                </li>
+              ))
+            ) : (
+              <p className="text-sm text-gray-300 dark:text-gray-700">
+                (no tags)
+              </p>
+            )}
           </ul>
         </div>
 

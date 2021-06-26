@@ -13,7 +13,7 @@ export default function SideBarProjectsSearch({
   setListProjects,
 }: SideBarProjectsSearchProps) {
   const { projects } = useCurrentProject();
-  const { sideOpen, setSideOpen } = useSideBar();
+  const { setSideOpen } = useSideBar();
 
   const inputFindRef = useRef<HTMLInputElement>(null);
 
@@ -40,15 +40,13 @@ export default function SideBarProjectsSearch({
 
   return (
     <div className="m-1 flex items-center justify-center bg-gray-50 dark:bg-warmGray-800">
-      {sideOpen && (
-        <input
-          ref={inputFindRef}
-          type="text"
-          placeholder="find project..."
-          onChange={HandleFind}
-          className="mr-1 py-1 px-2 rounded-md border border-indigo-300 dark:border-indigo-400 dark:focus:border-indigo-500 focus:outline-none focus:border-indigo-500 text-sm w-full dark:bg-warmGray-700 dark:text-white"
-        />
-      )}
+      <input
+        ref={inputFindRef}
+        type="text"
+        placeholder="find project..."
+        onChange={HandleFind}
+        className="hidden md:block mr-1 py-1 px-2 rounded-md border border-indigo-300 dark:border-indigo-400 dark:focus:border-indigo-500 focus:outline-none focus:border-indigo-500 text-sm w-full dark:bg-warmGray-700 dark:text-white"
+      />
       <button
         type="button"
         title="Search Project"

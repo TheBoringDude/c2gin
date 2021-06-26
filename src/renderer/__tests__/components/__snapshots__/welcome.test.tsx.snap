@@ -10,14 +10,13 @@ exports[`Welcome Message should render 1`] = `
     <h3
       className="text-4xl font-bold text-gray-600 dark:text-gray-200"
     >
-      Welcome back! 
-      light
+      Welcome back!
     </h3>
     <div
       className="my-12"
     >
       <div
-        className="p-6 border rounded-lg my-4 dark:border-gray-700"
+        className="p-6 border rounded-lg my-4 dark:border-gray-700 bg-white dark:bg-warmGray-900"
       >
         <img
           alt="c2gin - Manage Projects"
@@ -28,20 +27,6 @@ exports[`Welcome Message should render 1`] = `
           className="text-xl text-gray-600 py-4 dark:text-gray-200"
         >
           Manage the things needed to do in your project
-        </p>
-      </div>
-      <div
-        className="p-6 border rounded-lg my-4 dark:border-gray-700"
-      >
-        <img
-          alt="c2gin - Manage Projects"
-          className="h-56 md:h-64 mx-auto"
-          src="test-file-stub"
-        />
-        <p
-          className="text-xl text-gray-600 py-4 dark:text-gray-200"
-        >
-          Organize your workflow, do what needs to be done
         </p>
       </div>
     </div>
