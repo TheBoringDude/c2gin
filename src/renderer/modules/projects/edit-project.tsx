@@ -4,7 +4,7 @@ import useCurrentProject from '../../hooks/useCurrentProject';
 import useProjectTags from '../../hooks/useTags';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import { ProjectTagsSchema } from '../../lib/lowdb';
-import { handleProjectSave } from '../../lib/queries';
+import { handleProjectSave, handleRenameProject } from '../../lib/queries';
 import ProjectModal from './project-modal';
 
 const EditProject = () => {
@@ -33,29 +33,40 @@ const EditProject = () => {
 
   /* save button function wrapper */
   const handlerWrapper = () => {
-    // old project tags
-    const dt = projectTags.filter((t) => !tags.includes(t));
-    // new project tags
-    const nt = tags.filter((t) => !dt.includes(t));
+    // save project
 
-    // remove the project from the removed tags
-    dt.forEach((tag) => {
-      dispatchTags({
-        type: 'remove-project',
-        tagname: tag.name,
-        projectid: selected.id,
-      });
-    });
+    /* rename project only if it is new and not blank */
+    const newProjectName = inputProjectRef.current?.value;
+    if (newProjectName && newProjectName !== selected.name) {
+      handleRenameProject(selected.id, newProjectName.trim());
+    }
 
-    // add the project from the added tags
-    nt.forEach((tag) => {
-      dispatchTags({
-        type: 'add-project',
-        tagname: tag.name,
-        projectid: selected.id,
+    /* update project tags only if it is not similar with the current projectTags */
+    if (tags !== projectTags) {
+      // old project tags
+      const dt = projectTags.filter((t) => !tags.includes(t));
+      // new project tags
+      const nt = tags.filter((t) => !dt.includes(t));
+
+      // remove the project from the removed tags
+      dt.forEach((tag) => {
+        dispatchTags({
+          type: 'remove-project',
+          tagname: tag.name,
+          projectid: selected.id,
+        });
       });
-    });
-    setModified(true);
+
+      // add the project from the added tags
+      nt.forEach((tag) => {
+        dispatchTags({
+          type: 'add-project',
+          tagname: tag.name,
+          projectid: selected.id,
+        });
+      });
+      setModified(true);
+    }
 
     // automatically save current selected project's progress
     handleProjectSave(selected?.id, state);

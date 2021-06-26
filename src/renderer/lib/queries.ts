@@ -14,4 +14,8 @@ const handleTagsSave = (state: ProjectTagsSchema[]) => {
   db.set('tags', state).write();
 };
 
-export { handleProjectSave, handleTagsSave };
+const handleRenameProject = (id: string, name: string) => {
+  db.get('projects').find({ id }).set('name', name).write();
+};
+
+export { handleProjectSave, handleTagsSave, handleRenameProject };
