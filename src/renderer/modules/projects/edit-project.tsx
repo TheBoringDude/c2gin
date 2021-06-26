@@ -55,7 +55,6 @@ const EditProject = () => {
         projectid: selected.id,
       });
     });
-
     setModified(true);
 
     // automatically save current selected project's progress

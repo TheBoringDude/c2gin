@@ -3,21 +3,24 @@ import { nanoid } from 'nanoid';
 import React, { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import useSideBar from '../../hooks/useSideBar';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import db, { ProjectTagsSchema } from '../../lib/lowdb';
 import { handleProjectSave } from '../../lib/queries';
 import ProjectModal from './project-modal';
 
-interface NewProjectHandlerProps {
-  sideOpen: boolean;
-}
-
-const NewProjectHandler = ({ sideOpen }: NewProjectHandlerProps) => {
+const NewProjectHandler = () => {
   const [open, setOpen] = useState(false);
   const [tags, setTags] = useState<ProjectTagsSchema[]>([]);
 
-  const { selected, dispatchTags, setSelected } = useCurrentProject();
+  const {
+    selected,
+    dispatchTags,
+    setSelected,
+    setModified,
+  } = useCurrentProject();
   const { state, dispatch } = useWorkGroup();
+  const { sideOpen } = useSideBar();
 
   const inputProjectRef = useRef<HTMLInputElement>(null);
 
@@ -33,6 +36,12 @@ const NewProjectHandler = ({ sideOpen }: NewProjectHandlerProps) => {
     const projectName = inputProjectRef.current?.value || '';
     if (!projectName) return;
 
+    // automatically save current selected project's progress
+    if (selected?.works !== state) {
+      handleProjectSave(selected?.id, state);
+    }
+
+    // new project
     const proj = {
       id: nanoid(12),
       name: projectName,
@@ -57,11 +66,7 @@ const NewProjectHandler = ({ sideOpen }: NewProjectHandlerProps) => {
         projectid: proj.id,
       });
     });
-
-    // automatically save current selected project's progress
-    if (selected?.works !== state) {
-      handleProjectSave(selected?.id, state);
-    }
+    setModified(true);
 
     closeModal();
   };

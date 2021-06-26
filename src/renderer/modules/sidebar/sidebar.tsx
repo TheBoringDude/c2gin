@@ -82,14 +82,14 @@ const SideBar = () => {
 
         {/* buttons */}
         <div>
-          <NewProjectHandler sideOpen={sideOpen} />
+          <NewProjectHandler />
 
           <div
             className={`${
               sideOpen ? 'text-right mt-1' : 'text-center md:text-right'
             }`}
           >
-            <TagManager sideOpen={sideOpen} />
+            <TagManager />
           </div>
         </div>
       </section>

@@ -2,15 +2,12 @@ import { Dialog } from '@headlessui/react';
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import useSideBar from '../../hooks/useSideBar';
 import { handleTagsSave } from '../../lib/queries';
 import TagsManagerReducer from '../../reducers/tags-manager';
 import ListTags from './list-tags';
 
-type TagManagerProps = {
-  sideOpen: boolean;
-};
-
-export default function TagManager({ sideOpen }: TagManagerProps) {
+export default function TagManager() {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,6 +16,7 @@ export default function TagManager({ sideOpen }: TagManagerProps) {
   const inputTagRef = useRef<HTMLInputElement>(null);
 
   const { tags, dispatchTags } = useCurrentProject();
+  const { sideOpen } = useSideBar();
 
   const [state, dispatch] = useReducer(TagsManagerReducer, tags);
 
