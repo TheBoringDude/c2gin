@@ -1,11 +1,9 @@
 import { LightBulbIcon, MenuIcon } from '@heroicons/react/outline';
-import { nanoid } from 'nanoid';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useSideBar from '../../hooks/useSideBar';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import db from '../../lib/lowdb';
 import ListProject from '../projects/list-project';
 import NewProjectHandler from '../projects/new-project';
 import TagManager from '../tags/tag-manager';
@@ -14,44 +12,12 @@ import SideBarProjectsSearch from './search-sidebar';
 
 const SideBar = () => {
   // get states from workgroup
-  const { setSelected, projects, modified, toggleMode } = useCurrentProject();
-  const { dispatch, updated } = useWorkGroup();
+  const { projects, modified, toggleMode } = useCurrentProject();
+  const { updated } = useWorkGroup();
   const { sideOpen, setSideOpen } = useSideBar();
 
   // create a clone of projects
   const [listProjects, setListProjects] = useState(Array.from(projects));
-
-  const inputProjectRef = useRef<HTMLInputElement>(null);
-
-  /* project creation */
-  const HandleCreateProject = useCallback(() => {
-    const projectName = inputProjectRef.current?.value || '';
-
-    if (!projectName) return;
-
-    const proj = {
-      id: nanoid(12),
-      name: projectName,
-      createdDate: new Date().toISOString(),
-      works: {},
-    };
-
-    db.get('projects').push(proj).write();
-
-    setSelected(proj.id);
-
-    // set the state works
-    dispatch({
-      type: 'set',
-      work: proj.works,
-    });
-
-    // re-read
-    // handleReRead();
-
-    // re-set the project
-    setListProjects(projects);
-  }, [setSelected, projects, dispatch]);
 
   /* shortcut: for toggling sidebar */
   useHotkeys(
@@ -116,11 +82,7 @@ const SideBar = () => {
 
         {/* buttons */}
         <div>
-          <NewProjectHandler
-            sideOpen={sideOpen}
-            HandleCreateProject={HandleCreateProject}
-            inputProjectRef={inputProjectRef}
-          />
+          <NewProjectHandler sideOpen={sideOpen} />
 
           <div
             className={`${

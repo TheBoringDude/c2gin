@@ -1,37 +1,62 @@
-import { Dialog } from '@headlessui/react';
 import { DocumentAddIcon } from '@heroicons/react/outline';
-import React, { MutableRefObject, useState } from 'react';
+import { nanoid } from 'nanoid';
+import React, { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useWorkGroup from '../../hooks/useWorkGroup';
+import db, { ProjectTagsSchema } from '../../lib/lowdb';
 import { handleProjectSave } from '../../lib/queries';
+import ProjectModal from './project-modal';
 
 interface NewProjectHandlerProps {
   sideOpen: boolean;
-  HandleCreateProject: () => void;
-  inputProjectRef: MutableRefObject<HTMLInputElement | null>;
 }
 
-const NewProjectHandler = ({
-  HandleCreateProject,
-  inputProjectRef,
-  sideOpen,
-}: NewProjectHandlerProps) => {
+const NewProjectHandler = ({ sideOpen }: NewProjectHandlerProps) => {
   const [open, setOpen] = useState(false);
+  const [tags, setTags] = useState<ProjectTagsSchema[]>([]);
 
-  const { selected } = useCurrentProject();
-  const { state } = useWorkGroup();
+  const { selected, dispatchTags, setSelected } = useCurrentProject();
+  const { state, dispatch } = useWorkGroup();
+
+  const inputProjectRef = useRef<HTMLInputElement>(null);
 
   const closeModal = () => {
     setOpen(false);
+    setTags([]);
   };
   const openModal = () => {
     setOpen(true);
   };
 
   const handlerWrapper = () => {
-    HandleCreateProject();
+    const projectName = inputProjectRef.current?.value || '';
+    if (!projectName) return;
+
+    const proj = {
+      id: nanoid(12),
+      name: projectName,
+      createdDate: new Date().toISOString(),
+      works: {},
+    };
+
+    db.get('projects').push(proj).write();
+
+    setSelected(proj.id);
+
+    // set the state works
+    dispatch({
+      type: 'set',
+      work: proj.works,
+    });
+
+    tags.forEach((tag) => {
+      dispatchTags({
+        type: 'add-project',
+        tagname: tag.name,
+        projectid: proj.id,
+      });
+    });
 
     // automatically save current selected project's progress
     if (selected?.works !== state) {
@@ -58,37 +83,23 @@ const NewProjectHandler = ({
         {sideOpen && <span className="ml-1">New Project</span>}
       </button>
 
-      <Modal open={open} onClose={closeModal} focusRef={inputProjectRef}>
-        <Dialog.Title as="h3" className="text-lg font-bold text-gray-900">
-          Create New Project
-        </Dialog.Title>
-        <div className="mt-2">
-          <div className="flex flex-col">
-            <p className="">What is your project&apos;s name?</p>
-            <input
-              ref={inputProjectRef}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  handlerWrapper();
-                }
-              }}
-              type="text"
-              placeholder="Your project's name"
-              className="tracking-wide py-2 px-3 rounded-lg border-2 focus:outline-none hover:border-indigo-300 focus:border-indigo-300"
-            />
-          </div>
-        </div>
-
-        <div className="mt-4">
-          <button
-            type="button"
-            className="py-2 px-8 bg-indigo-400 hover:bg-indigo-500 text-white rounded-lg"
-            onClick={handlerWrapper}
-          >
-            Create Project
-          </button>
-        </div>
-      </Modal>
+      <ProjectModal
+        title="Create New Project Project"
+        closeModal={closeModal}
+        handlerWrapper={handlerWrapper}
+        inputProjectRef={inputProjectRef}
+        open={open}
+        tags={tags}
+        setTags={setTags}
+      >
+        <button
+          type="button"
+          className="py-2 px-8 bg-indigo-400 hover:bg-indigo-500 text-white rounded-lg"
+          onClick={handlerWrapper}
+        >
+          Create Project
+        </button>
+      </ProjectModal>
     </>
   );
 };

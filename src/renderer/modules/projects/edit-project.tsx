@@ -1,13 +1,11 @@
-import { Dialog } from '@headlessui/react';
 import React, { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useProjectTags from '../../hooks/useTags';
 import useWorkGroup from '../../hooks/useWorkGroup';
 import { ProjectTagsSchema } from '../../lib/lowdb';
 import { handleProjectSave } from '../../lib/queries';
-import EditProjectTags from './edit-project-tags';
+import ProjectModal from './project-modal';
 
 const EditProject = () => {
   const [open, setOpen] = useState(false);
@@ -96,38 +94,24 @@ const EditProject = () => {
         </svg>
       </button>
 
-      <Modal open={open} onClose={closeModal} focusRef={inputProjectRef}>
-        <Dialog.Title as="h3" className="text-lg font-bold text-gray-900">
+      <ProjectModal
+        title="Edit Project"
+        closeModal={closeModal}
+        handlerWrapper={handlerWrapper}
+        inputProjectRef={inputProjectRef}
+        open={open}
+        tags={tags}
+        setTags={setTags}
+        defaultProjectName={selected?.name}
+      >
+        <button
+          type="button"
+          className="py-2 px-8 bg-indigo-400 hover:bg-indigo-500 text-white rounded-lg"
+          onClick={handlerWrapper}
+        >
           Edit Project
-        </Dialog.Title>
-        <div className="mt-2">
-          <div className="flex flex-col">
-            <p className="">What is your project&apos;s name?</p>
-            <input
-              ref={inputProjectRef}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  handlerWrapper();
-                }
-              }}
-              type="text"
-              placeholder="Your project's name"
-              defaultValue={selected.name}
-              className="tracking-wide py-2 px-3 rounded-lg border-2 focus:outline-none hover:border-indigo-300 focus:border-indigo-300"
-            />
-          </div>
-        </div>
-        <EditProjectTags tags={tags} setTags={setTags} />
-        <div className="mt-4">
-          <button
-            type="button"
-            className="py-2 px-8 bg-indigo-400 hover:bg-indigo-500 text-white rounded-lg"
-            onClick={handlerWrapper}
-          >
-            Edit Project
-          </button>
-        </div>
-      </Modal>
+        </button>
+      </ProjectModal>
     </>
   );
 };
