@@ -9,12 +9,18 @@
  * `./src/main.prod.js` using webpack. This gives us some performance wins.
  */
 import 'core-js/stable';
-import 'regenerator-runtime/runtime';
-import path from 'path';
 import { app, BrowserWindow, Menu, shell, Tray } from 'electron';
-import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import { autoUpdater } from 'electron-updater';
+import path from 'path';
+import 'regenerator-runtime/runtime';
 // import MenuBuilder from './menu'; (reserved for future updates and additions)
+
+// single instance lock
+const lock = app.requestSingleInstanceLock();
+
+// let trayHiden
+let trayHidden: boolean;
 
 export default class AppUpdater {
   constructor() {
@@ -112,6 +118,7 @@ const createWindow = async () => {
       e.preventDefault();
       if (mainWindow) {
         mainWindow.hide();
+        trayHidden = true;
       }
     }
   });
@@ -143,6 +150,7 @@ const createTray = () => {
 
         mainWindow = null;
         tray = null;
+        trayHidden = false;
 
         app.quit();
       },
@@ -176,10 +184,23 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.whenReady().then(createWindow).then(createTray).catch(console.log);
-
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
 });
+
+if (!lock) {
+  app.quit();
+} else {
+  app.on('second-instance', () => {
+    // Someone tried to run a second instance, we should focus our window.
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      if (trayHidden) mainWindow.show();
+      mainWindow.focus();
+    }
+  });
+
+  app.whenReady().then(createWindow).then(createTray).catch(console.log);
+}
