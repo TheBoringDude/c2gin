@@ -4,7 +4,7 @@ import React, { KeyboardEvent, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import { GroupColors } from '../../lib/colors';
+import GroupColors from '../../lib/colors';
 import { ProjectWorkPropsContainer } from '../../lib/lowdb';
 import WorkGroupModal from './group-modal';
 
@@ -34,7 +34,7 @@ export default function NewWorkGroupHandler() {
 
     const group: ProjectWorkPropsContainer = {
       id: nanoid(12),
-      color: GroupColors[color],
+      color: GroupColors[color].key,
       title: inputGroupNameRef.current?.value || '',
       description: inputGroupDescriptionRef.current?.value || '',
       list: [],

@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import React, { useRef, useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import useWorkGroup from '../../hooks/useWorkGroup';
+import GroupColors from '../../lib/colors';
 import { ProjectWorkPropsContainer } from '../../lib/lowdb';
 import WorkList from '../item/list-items';
 import RemoveWorkGroup from './remove-group';
@@ -55,8 +56,12 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
           {...groupProvided.dragHandleProps}
           className="w-full"
         >
+          {GroupColors[works.color].bg}
+
           <div
-            className={`py-2 rounded-t-lg px-4 flex items-center justify-between border ${works.color?.bg}`}
+            className={`py-2 rounded-t-lg px-4 flex items-center justify-between border ${
+              GroupColors[works.color].bg
+            }`}
           >
             <h4
               className="font-bold tracking-wide truncate"
@@ -79,10 +84,12 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
             </div>
           </div>
 
-          <hr className={`${works.color?.border}`} />
+          <hr className={`${GroupColors[works.color].border}`} />
 
           <div
-            className={`border rounded-b-lg bg-white dark:bg-warmGray-900 ${works.color?.border} dark:border-gray-700`}
+            className={`border rounded-b-lg bg-white dark:bg-warmGray-900 ${
+              GroupColors[works.color].border
+            } dark:border-gray-700`}
           >
             {open && (
               <section>

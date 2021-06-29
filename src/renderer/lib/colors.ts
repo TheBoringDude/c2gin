@@ -1,11 +1,24 @@
 /* eslint-disable import/prefer-default-export */
 
+type Colors =
+  | 'default'
+  | 'red'
+  | 'blue'
+  | 'green'
+  | 'yellow'
+  | 'orange'
+  | 'gray'
+  | 'teal'
+  | 'amber'
+  | 'purple'
+  | string;
+
 type GroupColorProps = {
-  [key: string]: GroupColorColorsProps;
+  [key in Colors]: GroupColorColorsProps;
 };
 
 type GroupColorColorsProps = {
-  key: string;
+  key: Colors;
   bg: string;
   border: string;
 };
@@ -63,4 +76,5 @@ const GroupColors: GroupColorProps = {
   },
 };
 
-export { GroupColors, GroupColorColorsProps, GroupColorProps };
+export { GroupColorColorsProps, GroupColorProps, Colors };
+export default GroupColors;

@@ -1,7 +1,7 @@
 import { PencilAltIcon } from '@heroicons/react/solid';
 import React, { KeyboardEvent, useRef, useState } from 'react';
 import useWorkGroup from '../../hooks/useWorkGroup';
-import { GroupColors } from '../../lib/colors';
+import GroupColors from '../../lib/colors';
 import { ProjectWorkPropsContainer } from '../../lib/lowdb';
 import WorkGroupModal from './group-modal';
 
@@ -34,7 +34,7 @@ export default function RenameWorkGroupHandler({
     const group = {
       title: inputGroupNameRef.current?.value || '',
       description: inputGroupDescriptionRef.current?.value || '',
-      color: GroupColors[color],
+      color: GroupColors[color].key,
     };
 
     dispatch({ type: 'edit', id: work.id, new: group });
@@ -63,7 +63,7 @@ export default function RenameWorkGroupHandler({
         nameDefValue={work.title}
         descriptionDefValue={work.description}
         selectThemeRef={inputSelectTheme}
-        selectThemeDefValue={work.color?.key || 'default'}
+        selectThemeDefValue={work.color || 'default'}
         dialogTitle="Rename Group"
         handleOnEnter={handleOnEnter}
       >
