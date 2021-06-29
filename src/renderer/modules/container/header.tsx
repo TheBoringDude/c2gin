@@ -42,7 +42,7 @@ const ContainerHeader = () => {
                 </li>
               ))
             ) : (
-              <p className="text-sm text-gray-300 dark:text-gray-700">
+              <p className="text-sm text-gray-400 dark:text-gray-500">
                 (no tags)
               </p>
             )}

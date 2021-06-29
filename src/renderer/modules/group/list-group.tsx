@@ -42,7 +42,6 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
     if (inputWorkName.current) {
       inputWorkName.current.value = '';
     }
-    // setOpen(false);
   };
 
   return (
@@ -56,8 +55,6 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
           {...groupProvided.dragHandleProps}
           className="w-full"
         >
-          {GroupColors[works.color].bg}
-
           <div
             className={`py-2 rounded-t-lg px-4 flex items-center justify-between border ${
               GroupColors[works.color].bg
@@ -91,6 +88,7 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
               GroupColors[works.color].border
             } dark:border-gray-700`}
           >
+            {/* add new item input */}
             {open && (
               <section>
                 <div className="m-1 flex items-center justify-between">
@@ -121,6 +119,7 @@ const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
               </section>
             )}
 
+            {/* list items */}
             <Droppable droppableId={groupid} type="group">
               {(provided) => (
                 <ul className="h-128 overflow-y-auto" ref={provided.innerRef}>
