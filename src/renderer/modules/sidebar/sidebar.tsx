@@ -45,39 +45,25 @@ const SideBar = () => {
     >
       <section className="p-2 flex flex-col">
         <div
-          className={`mx-1 mt-1 mb-3 flex items-center ${
-            sideOpen ? 'justify-between' : 'justify-center'
-          } text-left`}
+          className={`mt-1 mb-3 flex items-center ${
+            sideOpen
+              ? 'flex-row justify-between'
+              : 'flex-col justify-center md:flex-row md:justify-between'
+          } text-center`}
         >
-          {sideOpen && <HomeHeader />}
-          <div
-            className={`inline-flex ${
-              sideOpen ? 'flex-row' : 'flex-col'
-            } sm:flex-row`}
+          <HomeHeader />
+
+          <button
+            id="toggle-sidebar"
+            className="opacity-60 hover:opacity-100 p-1 border rounded-lg my-1 sm:my-0 dark:border-gray-800 bg-white dark:bg-warmGray-600 dark:text-white"
+            type="button"
+            title="Toggle Menu"
+            onClick={() => {
+              setSideOpen(!sideOpen);
+            }}
           >
-            <button
-              id="toggle-mode"
-              className="opacity-80 hover:opacity-100 p-1 border rounded-lg my-1 sm:my-0 sm:mr-1 dark:border-gray-800 text-white bg-warmGray-500 dark:bg-warmGray-600 dark:text-white"
-              type="button"
-              title="Toggle Dark Mode"
-              onClick={() => {
-                toggleMode();
-              }}
-            >
-              <LightBulbIcon className="h-5 w-5" />
-            </button>
-            <button
-              id="toggle-sidebar"
-              className="opacity-60 hover:opacity-100 p-1 border rounded-lg my-1 sm:my-0 dark:border-gray-800 bg-white dark:bg-warmGray-600 dark:text-white"
-              type="button"
-              title="Toggle Menu"
-              onClick={() => {
-                setSideOpen(!sideOpen);
-              }}
-            >
-              <MenuIcon className="h-5 w-5" />
-            </button>
-          </div>
+            <MenuIcon className="h-4 md:h-5 w-4 md:w-5" />
+          </button>
         </div>
 
         {/* buttons */}
@@ -85,10 +71,24 @@ const SideBar = () => {
           <NewProjectHandler />
 
           <div
-            className={`${
-              sideOpen ? 'text-right mt-1' : 'text-center md:text-right'
-            }`}
+            className={`text-center flex ${
+              sideOpen
+                ? 'flex-row justify-between'
+                : 'flex-col justify-center md:flex-row md:justify-between'
+            } items-center`}
           >
+            <button
+              id="toggle-mode"
+              className="opacity-80 hover:opacity-100 p-1 border rounded-lg my-1 sm:my-0 dark:border-gray-800 text-white bg-warmGray-500 dark:bg-warmGray-600 dark:text-white"
+              type="button"
+              title="Toggle Dark Mode"
+              onClick={() => {
+                toggleMode();
+              }}
+            >
+              <LightBulbIcon className="h-4 w-4" />
+            </button>
+
             <TagManager />
           </div>
         </div>
