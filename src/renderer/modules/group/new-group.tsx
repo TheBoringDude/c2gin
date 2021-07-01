@@ -3,16 +3,16 @@ import { nanoid } from 'nanoid';
 import React, { KeyboardEvent, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import useCurrentProject from '../../hooks/useCurrentProject';
-import useWorkGroup from '../../hooks/useWorkGroup';
+import useGroup from '../../hooks/useGroup';
 import GroupColors from '../../lib/colors';
-import { ProjectWorkPropsContainer } from '../../lib/lowdb';
+import { ProjectGroupPropsContainer } from '../../lib/lowdb';
 import WorkGroupModal from './group-modal';
 
 export default function NewWorkGroupHandler() {
   const [open, setOpen] = useState(false);
 
   const { selected } = useCurrentProject();
-  const { dispatch } = useWorkGroup();
+  const { dispatch } = useGroup();
 
   const inputGroupNameRef = useRef<HTMLInputElement>(null);
   const inputGroupDescriptionRef = useRef<HTMLInputElement>(null);
@@ -32,7 +32,7 @@ export default function NewWorkGroupHandler() {
       color = 'default';
     }
 
-    const group: ProjectWorkPropsContainer = {
+    const group: ProjectGroupPropsContainer = {
       id: nanoid(12),
       color: GroupColors[color].key,
       title: inputGroupNameRef.current?.value || '',

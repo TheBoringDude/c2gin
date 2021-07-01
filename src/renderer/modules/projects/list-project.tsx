@@ -3,9 +3,9 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import ProjectAsterisk from '../../components/asterisk';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useFindProjectId from '../../hooks/useDB';
+import useGroup from '../../hooks/useGroup';
 import useSideBar from '../../hooks/useSideBar';
 import useProjectTags from '../../hooks/useTags';
-import useWorkGroup from '../../hooks/useWorkGroup';
 import { ProjectPropsSchema } from '../../lib/lowdb';
 import { handleProjectSave } from '../../lib/queries';
 
@@ -16,7 +16,7 @@ type ListProjectProps = {
 
 const ListProject = ({ project, index }: ListProjectProps) => {
   const { selected, setSelected } = useCurrentProject();
-  const { dispatch, state, updated, setUpdated } = useWorkGroup();
+  const { dispatch, state, updated, setUpdated } = useGroup();
   const { sideOpen } = useSideBar();
   const projectTags = useProjectTags(project.id);
 

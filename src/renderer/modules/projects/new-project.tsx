@@ -3,8 +3,8 @@ import { nanoid } from 'nanoid';
 import React, { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import useGroup from '../../hooks/useGroup';
 import useSideBar from '../../hooks/useSideBar';
-import useWorkGroup from '../../hooks/useWorkGroup';
 import db, { ProjectTagsSchema } from '../../lib/lowdb';
 import { handleProjectSave } from '../../lib/queries';
 import ProjectModal from './project-modal';
@@ -19,7 +19,7 @@ const NewProjectHandler = () => {
     setSelected,
     setModified,
   } = useCurrentProject();
-  const { state, dispatch } = useWorkGroup();
+  const { state, dispatch } = useGroup();
   const { sideOpen } = useSideBar();
 
   const inputProjectRef = useRef<HTMLInputElement>(null);

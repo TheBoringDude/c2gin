@@ -1,12 +1,12 @@
 import { PencilAltIcon } from '@heroicons/react/solid';
 import React, { KeyboardEvent, useRef, useState } from 'react';
-import useWorkGroup from '../../hooks/useWorkGroup';
+import useGroup from '../../hooks/useGroup';
 import GroupColors from '../../lib/colors';
-import { ProjectWorkPropsContainer } from '../../lib/lowdb';
+import { ProjectGroupPropsContainer } from '../../lib/lowdb';
 import WorkGroupModal from './group-modal';
 
 type RenameWorkGroupHandlerProps = {
-  work: ProjectWorkPropsContainer;
+  work: ProjectGroupPropsContainer;
 };
 
 export default function RenameWorkGroupHandler({
@@ -14,7 +14,7 @@ export default function RenameWorkGroupHandler({
 }: RenameWorkGroupHandlerProps) {
   const [open, setOpen] = useState(false);
 
-  const { dispatch } = useWorkGroup();
+  const { dispatch } = useGroup();
 
   const inputGroupNameRef = useRef<HTMLInputElement>(null);
   const inputGroupDescriptionRef = useRef<HTMLInputElement>(null);

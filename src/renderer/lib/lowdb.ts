@@ -16,27 +16,27 @@ type ProjectPropsSchema = {
   id: string;
   name: string;
   createdDate: string;
-  works: ProjectWorkProps;
+  works: ProjectGroupProps;
 };
 
-type ProjectWorkProps = {
-  [key: string]: ProjectWorkPropsContainer;
+type ProjectGroupProps = {
+  [key: string]: ProjectGroupPropsContainer;
 };
 
-type ProjectWorkColors = Colors;
+type ProjectGroupColors = Colors;
 
-type ProjectWorkPropsContainerBase = {
+type ProjectGroupPropsContainerBase = {
   title: string;
   description: string;
-  color: ProjectWorkColors;
+  color: ProjectGroupColors;
 };
 
-interface ProjectWorkPropsContainer extends ProjectWorkPropsContainerBase {
+interface ProjectGroupPropsContainer extends ProjectGroupPropsContainerBase {
   id: string;
-  list: ProjectWorkListProps[];
+  list: ProjectGroupListProps[];
 }
 
-type ProjectWorkListProps = {
+type ProjectGroupListProps = {
   id: string;
   title: string;
 };
@@ -47,13 +47,13 @@ const db = low(adapter);
 db.defaults({ projects: [], tags: [] }).write();
 
 export {
-  ProjectWorkPropsContainer,
-  ProjectWorkPropsContainerBase,
+  ProjectGroupPropsContainer,
+  ProjectGroupPropsContainerBase,
   ProjectPropsSchema,
-  ProjectWorkListProps,
-  ProjectWorkProps,
+  ProjectGroupListProps,
+  ProjectGroupProps,
   ProjectTagsSchema,
-  ProjectWorkColors,
+  ProjectGroupColors,
   AppSchema,
 };
 export default db;

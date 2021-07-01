@@ -3,11 +3,11 @@
 import { PencilIcon, TrashIcon } from '@heroicons/react/solid';
 import React, { useRef, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import useWorkGroup from '../../hooks/useWorkGroup';
-import { ProjectWorkListProps } from '../../lib/lowdb';
+import useGroup from '../../hooks/useGroup';
+import { ProjectGroupListProps } from '../../lib/lowdb';
 
 type WorkListProps = {
-  list: ProjectWorkListProps;
+  list: ProjectGroupListProps;
   index: number;
   groupid: string;
 };
@@ -15,7 +15,7 @@ type WorkListProps = {
 export default function WorkList({ groupid, list, index }: WorkListProps) {
   const [edit, setEdit] = useState(false);
 
-  const { dispatch } = useWorkGroup();
+  const { dispatch } = useGroup();
 
   const inputEditWorkName = useRef<HTMLInputElement>(null);
 

@@ -1,20 +1,20 @@
 import {
-  ProjectWorkListProps,
-  ProjectWorkProps,
-  ProjectWorkPropsContainer,
-  ProjectWorkPropsContainerBase,
+  ProjectGroupListProps,
+  ProjectGroupProps,
+  ProjectGroupPropsContainer,
+  ProjectGroupPropsContainerBase,
 } from '../lib/lowdb';
 
 type ActionsGroup =
-  | { type: 'add'; id: string; group: ProjectWorkPropsContainer }
+  | { type: 'add'; id: string; group: ProjectGroupPropsContainer }
   | { type: 'remove'; id: string }
   | {
       type: 'edit';
       id: string;
-      new: ProjectWorkPropsContainerBase;
+      new: ProjectGroupPropsContainerBase;
     }
-  | { type: 'set'; work: ProjectWorkProps }
-  | { type: 'add-list'; id: string; list: ProjectWorkListProps[] }
+  | { type: 'set'; work: ProjectGroupProps }
+  | { type: 'add-list'; id: string; list: ProjectGroupListProps[] }
   | {
       type: 'handle-drag';
       source: { index: number; id: string };
@@ -28,7 +28,7 @@ type ActionsGroup =
   | {
       type: 'rename-list';
       id: string;
-      list: ProjectWorkListProps;
+      list: ProjectGroupListProps;
       index: number;
     }
   | {
@@ -37,10 +37,10 @@ type ActionsGroup =
       index: number;
     };
 
-const GroupReducer = (state: ProjectWorkProps, action: ActionsGroup) => {
+const GroupReducer = (state: ProjectGroupProps, action: ActionsGroup) => {
   switch (action.type) {
     case 'add':
-      return <ProjectWorkProps>{
+      return <ProjectGroupProps>{
         ...state,
         [action.id]: action.group,
       };
@@ -49,7 +49,7 @@ const GroupReducer = (state: ProjectWorkProps, action: ActionsGroup) => {
       // NOTE: delete is not working (needs better solution)
 
       const vs = Object.keys(state).filter((key) => key !== action.id);
-      const s: ProjectWorkProps = {};
+      const s: ProjectGroupProps = {};
 
       // eslint-disable-next-line array-callback-return
       vs.map((k) => {

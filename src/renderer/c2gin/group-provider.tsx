@@ -6,17 +6,17 @@ import React, {
   useReducer,
   useState,
 } from 'react';
-import { ProjectWorkProps } from '../lib/lowdb';
-import GroupReducer, { ActionsGroup } from '../reducers/workgroups';
+import { ProjectGroupProps } from '../lib/lowdb';
+import GroupReducer, { ActionsGroup } from '../reducers/group';
 
 type WorkProviderProps = {
-  initialState: ProjectWorkProps;
+  initialState: ProjectGroupProps;
   children: ReactNode;
 };
 type WorkProviderContextProps = {
   updated: boolean;
   setUpdated: Dispatch<SetStateAction<boolean>>;
-  state: ProjectWorkProps;
+  state: ProjectGroupProps;
   dispatch: Dispatch<ActionsGroup>;
 };
 

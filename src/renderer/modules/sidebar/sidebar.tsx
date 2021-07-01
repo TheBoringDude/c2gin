@@ -2,8 +2,8 @@ import { LightBulbIcon, MenuIcon } from '@heroicons/react/outline';
 import React, { useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import useGroup from '../../hooks/useGroup';
 import useSideBar from '../../hooks/useSideBar';
-import useWorkGroup from '../../hooks/useWorkGroup';
 import ListProject from '../projects/list-project';
 import NewProjectHandler from '../projects/new-project';
 import TagManager from '../tags/tag-manager';
@@ -13,7 +13,7 @@ import SideBarProjectsSearch from './search-sidebar';
 const SideBar = () => {
   // get states from workgroup
   const { projects, modified, toggleMode } = useCurrentProject();
-  const { updated } = useWorkGroup();
+  const { updated } = useGroup();
   const { sideOpen, setSideOpen } = useSideBar();
 
   // create a clone of projects

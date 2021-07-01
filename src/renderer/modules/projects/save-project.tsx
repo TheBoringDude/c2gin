@@ -1,7 +1,7 @@
 import { SaveIcon } from '@heroicons/react/outline';
 import React, { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
-import useWorkGroup from '../../hooks/useWorkGroup';
+import useGroup from '../../hooks/useGroup';
 import { handleProjectSave } from '../../lib/queries';
 
 type HeaderSaveButtonProps = {
@@ -11,7 +11,7 @@ type HeaderSaveButtonProps = {
 export default function HeaderSaveButton({ id }: HeaderSaveButtonProps) {
   const [text, setText] = useState('save');
 
-  const { state, setUpdated, updated } = useWorkGroup();
+  const { state, setUpdated, updated } = useGroup();
 
   const btnSaveRef = useRef<HTMLButtonElement>(null);
   const handleSaveWrapper = () => {

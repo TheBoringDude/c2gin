@@ -1,6 +1,6 @@
 import React from 'react';
 import useCurrentProject from '../hooks/useCurrentProject';
-import useWorkGroup from '../hooks/useWorkGroup';
+import useGroup from '../hooks/useGroup';
 
 type ProjectAsteriskProps = {
   projectid: string;
@@ -8,7 +8,7 @@ type ProjectAsteriskProps = {
 
 const ProjectAsterisk = ({ projectid }: ProjectAsteriskProps) => {
   const { selected } = useCurrentProject();
-  const { updated, state } = useWorkGroup();
+  const { updated, state } = useGroup();
 
   if (updated && selected?.id === projectid && selected?.works !== state)
     return <>* </>;

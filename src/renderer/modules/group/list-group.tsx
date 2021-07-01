@@ -2,23 +2,23 @@ import { PlusCircleIcon, PlusIcon } from '@heroicons/react/solid';
 import { nanoid } from 'nanoid';
 import React, { useRef, useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
-import useWorkGroup from '../../hooks/useWorkGroup';
+import useGroup from '../../hooks/useGroup';
 import GroupColors from '../../lib/colors';
-import { ProjectWorkPropsContainer } from '../../lib/lowdb';
+import { ProjectGroupPropsContainer } from '../../lib/lowdb';
 import WorkList from '../item/list-items';
 import RemoveWorkGroup from './remove-group';
 import RenameWorkGroupHandlerProps from './rename-group';
 
 type ListGroupProps = {
   groupid: string;
-  works: ProjectWorkPropsContainer;
+  works: ProjectGroupPropsContainer;
   idx: number;
 };
 
 const ListGroup = ({ groupid, works, idx }: ListGroupProps) => {
   const [open, setOpen] = useState(false);
 
-  const { dispatch } = useWorkGroup();
+  const { dispatch } = useGroup();
 
   const inputWorkName = useRef<HTMLInputElement>(null);
 

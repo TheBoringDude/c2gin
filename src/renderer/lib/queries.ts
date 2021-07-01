@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 
-import db, { ProjectTagsSchema, ProjectWorkProps } from './lowdb';
+import db, { ProjectGroupProps, ProjectTagsSchema } from './lowdb';
 
-const handleProjectSave = (id: string, state: ProjectWorkProps) => {
+const handleProjectSave = (id: string, state: ProjectGroupProps) => {
   db.get('projects').find({ id }).set('works', state).write();
 };
 

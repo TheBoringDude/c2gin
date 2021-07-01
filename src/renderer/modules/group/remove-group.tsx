@@ -2,14 +2,14 @@ import { Dialog } from '@headlessui/react';
 import { TrashIcon } from '@heroicons/react/solid';
 import React, { useRef, useState } from 'react';
 import Modal from '../../components/modals';
-import useWorkGroup from '../../hooks/useWorkGroup';
+import useGroup from '../../hooks/useGroup';
 
 type RemoveWorkGroupProps = { groupid: string };
 
 export default function RemoveWorkGroup({ groupid }: RemoveWorkGroupProps) {
   const [open, setOpen] = useState(false);
 
-  const { dispatch } = useWorkGroup();
+  const { dispatch } = useGroup();
 
   const btnCloseModal = useRef<HTMLButtonElement>(null);
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import useCurrentProject from '../../hooks/useCurrentProject';
-import useWorkGroup from '../../hooks/useWorkGroup';
+import useGroup from '../../hooks/useGroup';
 import ListGroup from '../group/list-group';
 
 const ContainerBody = () => {
-  const { state, dispatch } = useWorkGroup();
+  const { state, dispatch } = useGroup();
   const { selected } = useCurrentProject();
 
   const onDragEnd = (result: DropResult) => {

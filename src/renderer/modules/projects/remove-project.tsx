@@ -4,14 +4,14 @@ import React, { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import Modal from '../../components/modals';
 import useCurrentProject from '../../hooks/useCurrentProject';
-import useWorkGroup from '../../hooks/useWorkGroup';
+import useGroup from '../../hooks/useGroup';
 import db from '../../lib/lowdb';
 
 export default function RemoveProjectModal() {
   const [open, setOpen] = useState(false);
 
   const { handleReRead, selected, setSelected } = useCurrentProject();
-  const { dispatch } = useWorkGroup();
+  const { dispatch } = useGroup();
 
   const closeModal = () => {
     setOpen(false);

@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import useCurrentProject from '../../hooks/useCurrentProject';
+import useGroup from '../../hooks/useGroup';
 import useProjectTags from '../../hooks/useTags';
-import useWorkGroup from '../../hooks/useWorkGroup';
 import { ProjectTagsSchema } from '../../lib/lowdb';
 import { handleProjectSave, handleRenameProject } from '../../lib/queries';
 import ProjectModal from './project-modal';
@@ -18,7 +18,7 @@ const EditProject = () => {
   } = useCurrentProject();
   const projectTags = useProjectTags(selected.id);
   const [tags, setTags] = useState<ProjectTagsSchema[]>(projectTags);
-  const { state } = useWorkGroup();
+  const { state } = useGroup();
 
   const inputProjectRef = useRef<HTMLInputElement>(null);
 
