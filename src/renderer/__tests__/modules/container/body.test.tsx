@@ -33,8 +33,6 @@ describe('Container body', () => {
             projects: [],
             setProjects: () => {},
             handleReRead: () => {},
-            mode: 'light',
-            toggleMode: () => {},
             tags: [],
             dispatchTags: () => {},
             modified: false,

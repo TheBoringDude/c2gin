@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useGroup from '../../hooks/useGroup';
+import useMode from '../../hooks/useMode';
 import useSideBar from '../../hooks/useSideBar';
 import ListProject from '../projects/list-project';
 import NewProjectHandler from '../projects/new-project';
@@ -12,9 +13,10 @@ import SideBarProjectsSearch from './search-sidebar';
 
 const SideBar = () => {
   // get states from workgroup
-  const { projects, modified, toggleMode } = useCurrentProject();
+  const { projects, modified } = useCurrentProject();
   const { updated } = useGroup();
   const { sideOpen, setSideOpen } = useSideBar();
+  const { toggleMode } = useMode();
 
   // create a clone of projects
   const [listProjects, setListProjects] = useState(Array.from(projects));

@@ -16,8 +16,6 @@ type C2GinProviderProps = {
   children: ReactNode;
 };
 
-type UIModes = 'dark' | 'light' | string;
-
 type C2GinContextProps = {
   projects: ProjectPropsSchema[];
   setProjects: Dispatch<ProjectPropsSchema[]>;
@@ -27,8 +25,6 @@ type C2GinContextProps = {
   setSelected: (id: string) => void;
   handleReRead: () => void;
   // handleUpdate: () => void;
-  mode: UIModes;
-  toggleMode: () => void;
   modified: boolean;
   setModified: Dispatch<SetStateAction<boolean>>;
 };
@@ -38,7 +34,6 @@ const initContext = {
   name: '',
   createdDate: '',
   works: {},
-  mode: 'light',
 };
 
 const C2GinContext = createContext<C2GinContextProps>({
@@ -50,8 +45,6 @@ const C2GinContext = createContext<C2GinContextProps>({
   setSelected: () => {},
   handleReRead: () => {},
   // handleUpdate: () => {},
-  mode: 'light',
-  toggleMode: () => {},
   modified: false,
   setModified: () => {},
 });
@@ -64,36 +57,6 @@ const getTags = () => {
   return db.get('tags').value();
 };
 
-const getInitTheme = (): UIModes => {
-  if (typeof window !== 'undefined' && window.localStorage) {
-    const storedPrefs = window.localStorage.getItem('theme');
-    if (typeof storedPrefs === 'string') {
-      return storedPrefs;
-    }
-
-    const userMedia = window.matchMedia('(prefers-color-scheme: light)');
-    if (!userMedia.matches) {
-      return 'dark';
-    }
-  }
-
-  return 'light';
-};
-
-const setClassTHeme = (t: string) => {
-  const root = window.document.documentElement;
-  root.classList.remove(t === 'dark' ? 'light' : 'dark');
-  root.classList.add(t);
-  window.localStorage.setItem('theme', t);
-};
-
-const handleTheme = () => {
-  const t = getInitTheme();
-  setClassTHeme(t);
-
-  return t;
-};
-
 /* PROVIDER */
 const C2GinProvider = ({ children }: C2GinProviderProps) => {
   const [selected, setSelected] = useState<ProjectPropsSchema>(initContext);
@@ -102,7 +65,7 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
     getProjects()
   );
   const [tags, dispatchTags] = useReducer(TagsReducer, getTags());
-  const [mode, setMode] = useState<UIModes>(handleTheme());
+
   const [modified, setModified] = useState(false);
 
   // wrapper for setter for ProjectsReducer
@@ -118,15 +81,6 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
   /* re-reading th projects */
   const handleReRead = () => {
     dispatchProjects({ type: 'set', projects: getProjects() });
-  };
-
-  /* mode toggline - dark / light */
-  const toggleMode = () => {
-    const isDark = mode === 'dark';
-    const t = isDark ? 'light' : 'dark';
-
-    setClassTHeme(t);
-    setMode(t);
   };
 
   useEffect(() => {
@@ -147,8 +101,6 @@ const C2GinProvider = ({ children }: C2GinProviderProps) => {
         tags,
         dispatchTags,
         handleReRead,
-        mode,
-        toggleMode,
         modified,
         setModified,
       }}

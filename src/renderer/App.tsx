@@ -8,20 +8,23 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.global.css';
 import C2GinProvider from './c2gin/provider';
+import UIProvider from './c2gin/ui-provider';
 import Home from './pages/home';
 
 export default function App() {
   return (
-    <C2GinProvider>
-      <main className="antialiased">
-        <Router>
-          <Switch>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </Router>
-      </main>
-    </C2GinProvider>
+    <UIProvider>
+      <C2GinProvider>
+        <main className="antialiased">
+          <Router>
+            <Switch>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </Router>
+        </main>
+      </C2GinProvider>
+    </UIProvider>
   );
 }
