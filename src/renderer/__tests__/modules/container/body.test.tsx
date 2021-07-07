@@ -18,11 +18,7 @@ describe('Container body', () => {
               works: {
                 FALR2xkJCgq6: {
                   id: 'FALR2xkJCgq6',
-                  color: {
-                    key: 'default',
-                    bg: 'bg-white text-black',
-                    border: '',
-                  },
+                  color: 'default',
                   title: 'sample',
                   description: '',
                   list: [],
