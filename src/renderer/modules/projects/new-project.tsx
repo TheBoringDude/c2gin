@@ -85,7 +85,7 @@ const NewProjectHandler = () => {
         className="py-1 text-sm rounded-lg bg-indigo-400 hover:bg-indigo-500 text-white inline-flex items-center justify-center w-full"
       >
         <DocumentAddIcon className="h-5 w-5" />
-        {sideOpen && <span className="ml-1">New Project</span>}
+        {sideOpen && <span className="ml-1 lowercase">New Project</span>}
       </button>
 
       <ProjectModal

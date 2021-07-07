@@ -81,9 +81,9 @@ const SideBar = () => {
           >
             <button
               id="toggle-mode"
-              className="opacity-80 hover:opacity-100 p-1 border rounded-lg my-1 sm:my-0 dark:border-gray-800 text-white bg-warmGray-500 dark:bg-warmGray-600 dark:text-white"
+              className="opacity-80 hover:opacity-100 p-1.5 border rounded-lg my-1 sm:my-0 dark:border-gray-800 text-white bg-warmGray-500 dark:bg-warmGray-600 dark:text-white"
               type="button"
-              title="Toggle Dark Mode"
+              title="Toggle Mode"
               onClick={() => {
                 toggleMode();
               }}
