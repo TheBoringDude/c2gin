@@ -1,9 +1,9 @@
-import { LightBulbIcon, MenuIcon } from '@heroicons/react/outline';
+import { MenuIcon } from '@heroicons/react/outline';
 import React, { useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
+import ToggleMode from '../../components/toggle-mode';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useGroup from '../../hooks/useGroup';
-import useMode from '../../hooks/useMode';
 import useSideBar from '../../hooks/useSideBar';
 import ListProject from '../projects/list-project';
 import NewProjectHandler from '../projects/new-project';
@@ -16,7 +16,6 @@ const SideBar = () => {
   const { projects, modified } = useCurrentProject();
   const { updated } = useGroup();
   const { sideOpen, setSideOpen } = useSideBar();
-  const { toggleMode } = useMode();
 
   // create a clone of projects
   const [listProjects, setListProjects] = useState(Array.from(projects));
@@ -79,17 +78,7 @@ const SideBar = () => {
                 : 'flex-col justify-center md:flex-row md:justify-between'
             } items-center`}
           >
-            <button
-              id="toggle-mode"
-              className="opacity-80 hover:opacity-100 p-1.5 border rounded-lg my-1 sm:my-0 dark:border-gray-800 text-white bg-warmGray-500 dark:bg-warmGray-600 dark:text-white"
-              type="button"
-              title="Toggle Mode"
-              onClick={() => {
-                toggleMode();
-              }}
-            >
-              <LightBulbIcon className="h-4 w-4" />
-            </button>
+            <ToggleMode />
 
             <TagManager />
           </div>
