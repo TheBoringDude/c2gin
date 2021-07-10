@@ -11,7 +11,7 @@ const ProjectAsterisk = ({ projectid }: ProjectAsteriskProps) => {
   const { updated, state } = useGroup();
 
   if (updated && selected?.id === projectid && selected?.works !== state)
-    return <>* </>;
+    return <span>* </span>;
 
   return <></>;
 };

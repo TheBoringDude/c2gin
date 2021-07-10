@@ -3,14 +3,14 @@ import React from 'react';
 import useMode from '../hooks/useMode';
 
 const ToggleMode = () => {
-  const { toggleMode } = useMode();
+  const { toggleMode, mode } = useMode();
 
   return (
     <button
       id="toggle-mode"
       className="opacity-80 hover:opacity-100 p-1.5 border rounded-lg my-1 sm:my-0 dark:border-gray-800 bg-warmGray-200 dark:bg-warmGray-600 text-warmGray-600 dark:text-white"
       type="button"
-      title="Toggle Mode"
+      title={`Toggle ${mode === 'light' ? 'Dark' : 'Light'} Mode`}
       onClick={() => {
         toggleMode();
       }}
