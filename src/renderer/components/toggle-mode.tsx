@@ -1,9 +1,19 @@
 import { LightBulbIcon } from '@heroicons/react/solid';
 import React from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import useMode from '../hooks/useMode';
 
 const ToggleMode = () => {
   const { toggleMode, mode } = useMode();
+
+  /* shortcut: for toggling the dark and light mode */
+  useHotkeys(
+    'ctrl+k',
+    () => {
+      toggleMode();
+    },
+    [mode]
+  );
 
   return (
     <button

@@ -30,6 +30,7 @@
 - **`ctrl + b`** - toggles the sidebar
 - **`ctrl + f`** - shows the search input
 - **`alt + {project_number}`** - select a current project from the sidebar (starts at 1)
+- **`ctrl + k`** - toggle the dark and light mode
 
 ## Build
 
