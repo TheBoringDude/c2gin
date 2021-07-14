@@ -25,7 +25,7 @@ const initSideContext: SideContextProps = {
 const SideContext = createContext<SideContextProps>(initSideContext);
 
 const SideContextProvider = ({ children }: SideContextProviderProps) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <SideContext.Provider value={{ sideOpen: open, setSideOpen: setOpen }}>

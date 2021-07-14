@@ -24,7 +24,7 @@ describe('Sidebar', () => {
 
     button.simulate('click');
 
-    expect(sidebar.hasClass('w-1/3 lg:w-1/4')).toBe(false);
-    expect(sidebar.hasClass('w-1/12')).toBe(true);
+    expect(sidebar.hasClass('w-1/3 lg:w-1/4')).toBe(true);
+    expect(sidebar.hasClass('w-1/12')).toBe(false);
   });
 });
