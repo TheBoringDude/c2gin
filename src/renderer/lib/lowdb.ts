@@ -34,6 +34,7 @@ type ProjectGroupPropsContainerBase = {
 interface ProjectGroupPropsContainer extends ProjectGroupPropsContainerBase {
   id: string;
   list: ProjectGroupListProps[];
+  moveTo?: string; // id where the item will be moved once checked as done or like that?
 }
 
 type ProjectGroupListProps = {

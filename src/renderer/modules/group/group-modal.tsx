@@ -30,6 +30,10 @@ export default function WorkGroupModal({
   children,
   handleOnEnter,
 }: WorkGroupModalProps) {
+  // TODO:
+  // const { state } = useGroup();
+  // const entries = Object.entries(state);
+
   return (
     <Modal open={open} onClose={closeModal} focusRef={inputGroupNameRef}>
       <Dialog.Title as="h3" className="text-lg font-bold text-gray-900">
@@ -60,6 +64,23 @@ export default function WorkGroupModal({
         </div>
         <div className="flex flex-col my-1">
           <p>Theme of the category</p>
+          <select
+            defaultValue={selectThemeDefValue}
+            ref={selectThemeRef}
+            className="bg-white py-1 px-3 border-2 rounded-lg"
+          >
+            {Object.entries(GroupColors).map(([key]) => (
+              <option key={key} value={key}>
+                {key}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col my-1">
+          <p title="If an item is checked or marked as done, the item will be moved to this group.">
+            Move To
+          </p>
           <select
             defaultValue={selectThemeDefValue}
             ref={selectThemeRef}

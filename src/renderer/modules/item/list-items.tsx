@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import { PencilIcon, TrashIcon } from '@heroicons/react/solid';
+import { CheckCircleIcon, PencilIcon, TrashIcon } from '@heroicons/react/solid';
 import React, { useRef, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import useGroup from '../../hooks/useGroup';
@@ -99,9 +99,16 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
             </p>
             <div className="flex items-center text-gray-600 dark:text-gray-300">
               <button
+                title="Mark as done"
+                type="button"
+                className="hover:text-green-500"
+              >
+                <CheckCircleIcon className="h-4 w-4 hidden group-hover:block" />
+              </button>
+              <button
                 title={`Rename '${list.title}'`}
                 type="button"
-                className="hover:text-blue-500"
+                className="mx-1 hover:text-blue-500"
                 onClick={() => {
                   setEdit(true);
                 }}
@@ -111,7 +118,7 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
               <button
                 title={`Remove '${list.title}'`}
                 type="button"
-                className="ml-1 hover:text-red-500"
+                className="hover:text-red-500"
                 onClick={() => handleWorkRemoveList(index)}
               >
                 <TrashIcon className="h-4 w-4 hidden group-hover:block" />
