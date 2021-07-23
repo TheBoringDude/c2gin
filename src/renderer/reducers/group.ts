@@ -5,13 +5,17 @@ import {
   ProjectGroupPropsContainerBase,
 } from '../lib/lowdb';
 
+export interface ActionsGroupEditProps extends ProjectGroupPropsContainerBase {
+  moveTo?: string;
+}
+
 type ActionsGroup =
   | { type: 'add'; id: string; group: ProjectGroupPropsContainer }
   | { type: 'remove'; id: string }
   | {
       type: 'edit';
       id: string;
-      new: ProjectGroupPropsContainerBase;
+      new: ActionsGroupEditProps;
     }
   | { type: 'set'; work: ProjectGroupProps }
   | { type: 'add-list'; id: string; list: ProjectGroupListProps[] }
@@ -67,6 +71,7 @@ const GroupReducer = (state: ProjectGroupProps, action: ActionsGroup) => {
           title: action.new.title,
           description: action.new.description,
           color: action.new.color,
+          moveTo: action.new.moveTo,
         },
       };
 

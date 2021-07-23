@@ -15,7 +15,8 @@ type WorkListProps = {
 export default function WorkList({ groupid, list, index }: WorkListProps) {
   const [edit, setEdit] = useState(false);
 
-  const { dispatch } = useGroup();
+  const { dispatch, state } = useGroup();
+  const moveid = state[groupid].moveTo || '';
 
   const inputEditWorkName = useRef<HTMLInputElement>(null);
 
@@ -43,6 +44,24 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
       type: 'remove-list',
       id: groupid,
       index: i,
+    });
+  };
+
+  // for moving items
+  const handleMoveItem = () => {
+    if (!moveid) return;
+    if (!state[moveid]) return;
+
+    dispatch({
+      type: 'handle-drag',
+      source: {
+        id: groupid,
+        index,
+      },
+      destination: {
+        id: moveid,
+        index: state[moveid].list.length,
+      },
     });
   };
 
@@ -98,13 +117,16 @@ export default function WorkList({ groupid, list, index }: WorkListProps) {
               {list.title}
             </p>
             <div className="flex items-center text-gray-600 dark:text-gray-300">
-              <button
-                title="Mark as done"
-                type="button"
-                className="hover:text-green-500"
-              >
-                <CheckCircleIcon className="h-4 w-4 hidden group-hover:block" />
-              </button>
+              {state[moveid] && (
+                <button
+                  title="Mark as done"
+                  type="button"
+                  className="hover:text-green-500"
+                  onClick={handleMoveItem}
+                >
+                  <CheckCircleIcon className="h-4 w-4 hidden group-hover:block" />
+                </button>
+              )}
               <button
                 title={`Rename '${list.title}'`}
                 type="button"

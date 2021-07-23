@@ -3,6 +3,7 @@ import React, { KeyboardEvent, useRef, useState } from 'react';
 import useGroup from '../../hooks/useGroup';
 import GroupColors from '../../lib/colors';
 import { ProjectGroupPropsContainer } from '../../lib/lowdb';
+import { ActionsGroupEditProps } from '../../reducers/group';
 import WorkGroupModal from './group-modal';
 
 type RenameWorkGroupHandlerProps = {
@@ -19,6 +20,7 @@ export default function RenameWorkGroupHandler({
   const inputGroupNameRef = useRef<HTMLInputElement>(null);
   const inputGroupDescriptionRef = useRef<HTMLInputElement>(null);
   const inputSelectTheme = useRef<HTMLSelectElement>(null);
+  const inputMoveToRef = useRef<HTMLSelectElement>(null);
 
   const closeModal = () => {
     setOpen(false);
@@ -30,11 +32,13 @@ export default function RenameWorkGroupHandler({
   /* remove group function handler */
   const handleRenameGroup = () => {
     const color = inputSelectTheme.current?.value || 'default';
+    const moveId = inputMoveToRef.current?.value;
 
-    const group = {
+    const group: ActionsGroupEditProps = {
       title: inputGroupNameRef.current?.value || '',
       description: inputGroupDescriptionRef.current?.value || '',
       color: GroupColors[color].key,
+      moveTo: moveId,
     };
 
     dispatch({ type: 'edit', id: work.id, new: group });
@@ -57,6 +61,7 @@ export default function RenameWorkGroupHandler({
 
       <WorkGroupModal
         open={open}
+        groupId={work.id}
         closeModal={closeModal}
         inputGroupNameRef={inputGroupNameRef}
         inputGroupDescriptionRef={inputGroupDescriptionRef}
@@ -66,6 +71,8 @@ export default function RenameWorkGroupHandler({
         selectThemeDefValue={work.color || 'default'}
         dialogTitle="Rename Group"
         handleOnEnter={handleOnEnter}
+        moveToRef={inputMoveToRef}
+        moveToDefValue={work.moveTo || ''}
       >
         <button
           type="button"

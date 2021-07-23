@@ -17,6 +17,7 @@ export default function NewWorkGroupHandler() {
   const inputGroupNameRef = useRef<HTMLInputElement>(null);
   const inputGroupDescriptionRef = useRef<HTMLInputElement>(null);
   const inputSelectTheme = useRef<HTMLSelectElement>(null);
+  const inputMoveToRef = useRef<HTMLSelectElement>(null);
 
   const closeModal = () => {
     setOpen(false);
@@ -27,10 +28,8 @@ export default function NewWorkGroupHandler() {
 
   /* add group function handler */
   const handleAddGroup = () => {
-    let color = inputSelectTheme.current?.value;
-    if (!color) {
-      color = 'default';
-    }
+    const color = inputSelectTheme.current?.value || 'default';
+    const moveTo = inputMoveToRef.current?.value || '';
 
     const group: ProjectGroupPropsContainer = {
       id: nanoid(12),
@@ -38,6 +37,7 @@ export default function NewWorkGroupHandler() {
       title: inputGroupNameRef.current?.value || '',
       description: inputGroupDescriptionRef.current?.value || '',
       list: [],
+      moveTo,
     };
 
     dispatch({ type: 'add', id: group.id, group });
@@ -73,6 +73,7 @@ export default function NewWorkGroupHandler() {
 
       <WorkGroupModal
         open={open}
+        groupId={null}
         closeModal={closeModal}
         inputGroupNameRef={inputGroupNameRef}
         inputGroupDescriptionRef={inputGroupDescriptionRef}
@@ -82,6 +83,8 @@ export default function NewWorkGroupHandler() {
         selectThemeDefValue="default"
         dialogTitle="Add a New Group"
         handleOnEnter={handleOnEnter}
+        moveToRef={inputMoveToRef}
+        moveToDefValue=""
       >
         <button
           type="button"

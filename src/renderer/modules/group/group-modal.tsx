@@ -1,17 +1,21 @@
 import { Dialog } from '@headlessui/react';
 import React, { KeyboardEvent, MutableRefObject, ReactNode } from 'react';
 import Modal from '../../components/modals';
+import useGroup from '../../hooks/useGroup';
 import GroupColors from '../../lib/colors';
 
 type WorkGroupModalProps = {
   open: boolean;
   closeModal: () => void;
+  groupId: string | null;
   inputGroupNameRef: MutableRefObject<HTMLInputElement | null>;
   inputGroupDescriptionRef: MutableRefObject<HTMLInputElement | null>;
   nameDefValue: string;
   descriptionDefValue: string;
   selectThemeRef: MutableRefObject<HTMLSelectElement | null>;
   selectThemeDefValue: string;
+  moveToRef: MutableRefObject<HTMLSelectElement | null>;
+  moveToDefValue: string;
   children: ReactNode;
   dialogTitle: string;
   handleOnEnter: (e: KeyboardEvent<HTMLInputElement>) => void;
@@ -29,10 +33,17 @@ export default function WorkGroupModal({
   dialogTitle,
   children,
   handleOnEnter,
+  groupId,
+  moveToRef,
+  moveToDefValue,
 }: WorkGroupModalProps) {
   // TODO:
   // const { state } = useGroup();
   // const entries = Object.entries(state);
+  const { state: items } = useGroup();
+  const groups = Object.entries(items).filter(
+    ([, item]) => item.id !== groupId
+  );
 
   return (
     <Modal open={open} onClose={closeModal} focusRef={inputGroupNameRef}>
@@ -82,13 +93,14 @@ export default function WorkGroupModal({
             Move To
           </p>
           <select
-            defaultValue={selectThemeDefValue}
-            ref={selectThemeRef}
+            defaultValue={moveToDefValue}
+            ref={moveToRef}
             className="bg-white py-1 px-3 border-2 rounded-lg"
           >
-            {Object.entries(GroupColors).map(([key]) => (
-              <option key={key} value={key}>
-                {key}
+            <option value="">[none]</option>
+            {groups.map(([key, item]) => (
+              <option key={key} value={item.id}>
+                {item.title}
               </option>
             ))}
           </select>
