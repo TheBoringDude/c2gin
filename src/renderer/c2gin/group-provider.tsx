@@ -18,6 +18,8 @@ type WorkProviderContextProps = {
   setUpdated: Dispatch<SetStateAction<boolean>>;
   state: ProjectGroupProps;
   dispatch: Dispatch<ActionsGroup>;
+  openUnsaved: boolean;
+  setOpenUnsaved: Dispatch<SetStateAction<boolean>>;
 };
 
 export const WorkProviderContext = createContext<WorkProviderContextProps>({
@@ -25,6 +27,8 @@ export const WorkProviderContext = createContext<WorkProviderContextProps>({
   setUpdated: () => {},
   state: {},
   dispatch: () => {},
+  openUnsaved: false,
+  setOpenUnsaved: () => {},
 });
 
 export default function WorkProvider({
@@ -33,6 +37,7 @@ export default function WorkProvider({
 }: WorkProviderProps) {
   const [state, dispatch] = useReducer(GroupReducer, initialState);
   const [updated, setUpdated] = useState(false);
+  const [openUnsaved, setOpenUnsaved] = useState(false);
 
   // a custom wrapper to dispatch function from useReducer
   const dispatcher: Dispatch<ActionsGroup> = (a: ActionsGroup) => {
@@ -42,7 +47,14 @@ export default function WorkProvider({
 
   return (
     <WorkProviderContext.Provider
-      value={{ state, dispatch: dispatcher, updated, setUpdated }}
+      value={{
+        state,
+        dispatch: dispatcher,
+        updated,
+        setUpdated,
+        openUnsaved,
+        setOpenUnsaved,
+      }}
     >
       {children}
     </WorkProviderContext.Provider>

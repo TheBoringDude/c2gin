@@ -2,16 +2,17 @@ import { DocumentAddIcon } from '@heroicons/react/outline';
 import { nanoid } from 'nanoid';
 import React, { useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
+import UnsavedChangesModal from '../../components/unsaved-changes';
 import useCurrentProject from '../../hooks/useCurrentProject';
 import useGroup from '../../hooks/useGroup';
 import useSideBar from '../../hooks/useSideBar';
 import db, { ProjectTagsSchema } from '../../lib/lowdb';
-import { handleProjectSave } from '../../lib/queries';
 import ProjectModal from './project-modal';
 
 const NewProjectHandler = () => {
   const [open, setOpen] = useState(false);
   const [tags, setTags] = useState<ProjectTagsSchema[]>([]);
+  const [openUnsaved, setOpenUnsaved] = useState(false);
 
   const {
     selected,
@@ -19,7 +20,7 @@ const NewProjectHandler = () => {
     setSelected,
     setModified,
   } = useCurrentProject();
-  const { state, dispatch } = useGroup();
+  const { state, dispatch, updated } = useGroup();
   const { sideOpen } = useSideBar();
 
   const inputProjectRef = useRef<HTMLInputElement>(null);
@@ -28,7 +29,17 @@ const NewProjectHandler = () => {
     setOpen(false);
     setTags([]);
   };
+
   const openModal = () => {
+    setOpen(true);
+  };
+
+  const handleOpenModal = () => {
+    if (selected?.id && updated) {
+      setOpenUnsaved(true);
+      return;
+    }
+
     setOpen(true);
   };
 
@@ -37,9 +48,9 @@ const NewProjectHandler = () => {
     if (!projectName) return;
 
     // automatically save current selected project's progress
-    if (selected?.works !== state) {
-      handleProjectSave(selected?.id, state);
-    }
+    // if (selected?.works !== state) {
+    //   handleProjectSave(selected?.id, state);
+    // }
 
     // new project
     const proj = {
@@ -72,15 +83,27 @@ const NewProjectHandler = () => {
   };
 
   /* shortcut: for creating a new project */
-  useHotkeys('ctrl+p', () => {
-    openModal();
-  });
+  useHotkeys(
+    'ctrl+p',
+    () => {
+      handleOpenModal();
+    },
+    [updated, state]
+  );
 
   return (
     <>
+      <UnsavedChangesModal
+        open={openUnsaved}
+        onClose={() => {
+          setOpenUnsaved(false);
+        }}
+        f={openModal}
+      />
+
       <button
         type="button"
-        onClick={openModal}
+        onClick={handleOpenModal}
         title="Create a new project"
         className="py-1 text-sm rounded-lg bg-indigo-400 hover:bg-indigo-500 text-white inline-flex items-center justify-center w-full"
       >
